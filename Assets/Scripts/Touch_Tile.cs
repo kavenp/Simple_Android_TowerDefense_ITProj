@@ -15,7 +15,6 @@ public class Touch_Tile : MonoBehaviour
     //        onMouseDown ();
     //    }
 
-	//Boys remember to get your goddamn function names right or shit will not work
     void OnMouseDown ()
     {
 		Vector3 position = new Vector3 (this.transform.position.x,
