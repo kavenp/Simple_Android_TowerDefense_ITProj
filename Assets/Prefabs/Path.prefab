@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000010865046846}
   - 33: {fileID: 33000013019797530}
   - 23: {fileID: 23000013599819180}
+  - 114: {fileID: 114000010262903684}
   m_Layer: 0
   m_Name: Path
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011392108322}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114000010262903684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011392108322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb5966cc8e384b2f810b9ae059ae3d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 1000010761437714, guid: 1efec4dd1e2277046bb946c46bc521a0, type: 2}
+  rangeImage: {fileID: 1000010029401038, guid: 6df02baf690ac5344b1d6008d30c423d, type: 2}
