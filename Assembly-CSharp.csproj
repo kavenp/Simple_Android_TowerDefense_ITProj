@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\PauseTouched.cs" />
+     <Compile Include="Assets\Scripts\TouchTower.cs" />
      <Compile Include="Assets\Scripts\Touch_Tile.cs" />
      <None Include="Assets\ColorfulButtons\Credits.txt" />
  <Reference Include="UnityEngine.UI">
