@@ -90,4 +90,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 1000010761437714, guid: 1efec4dd1e2277046bb946c46bc521a0, type: 2}
-  rangeImage: {fileID: 1000010029401038, guid: 6df02baf690ac5344b1d6008d30c423d, type: 2}
