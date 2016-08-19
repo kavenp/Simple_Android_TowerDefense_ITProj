@@ -3041,6 +3041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1000010147284674, guid: 80643103ef9202648a9727e4aa5c7a38, type: 2}
+  pauseButton: {fileID: 1572093034}
   spawnValues: {x: 20, y: 0, z: 70}
   spawnWait: 0.5
   startWait: 0
@@ -4584,7 +4585,7 @@ GameObject:
   - 114: {fileID: 1572093035}
   m_Layer: 0
   m_Name: Pause_Button
-  m_TagString: Untagged
+  m_TagString: Pause
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,12 +6,15 @@ public class GameController : MonoBehaviour
     public GameObject enemy;
     public Vector3 spawnValues;
 
+    private bool isPaused;
+
     public float spawnWait;
     public float startWait;
     public float waveWait;
 
     void Start ()
     {
+        isPaused = false;
         StartCoroutine (SpawnWaves ());
     }
 
@@ -25,9 +28,19 @@ public class GameController : MonoBehaviour
             Quaternion spawnRotation = Quaternion.identity;
             Instantiate (enemy, spawnPosition, spawnRotation);
             yield return new WaitForSeconds (spawnWait);
+
         }
 
         yield return new WaitForSeconds (waveWait);
     }
-    
+
+    public bool isGamePaused ()
+    {
+        return this.isPaused == true;
+    }
+
+    public void setPauseFlag (bool flag)
+    {
+        this.isPaused = flag;
+    }
 }

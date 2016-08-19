@@ -4,7 +4,7 @@ using System.Collections;
 public class PauseTouched : MonoBehaviour
 {
     // State
-    bool isPaused = false;
+    public bool isPaused = false;
 
     // Sprites
     public Sprite pauseSprite;
@@ -13,10 +13,14 @@ public class PauseTouched : MonoBehaviour
     // Sprite renderer
     private SpriteRenderer rend;
 
+    // Game controller
+    private GameController gc;
+
     void Start ()
     {
         rend = GetComponent<SpriteRenderer> ();
         rend.enabled = true;
+        gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
     }
 
     void OnMouseDown ()
@@ -29,6 +33,7 @@ public class PauseTouched : MonoBehaviour
             Time.timeScale = 0;
             rend.sprite = resumeSprite;
             this.isPaused = true;
+            gc.setPauseFlag (true);
         }
         // Resume game
         else
@@ -38,6 +43,7 @@ public class PauseTouched : MonoBehaviour
             Time.timeScale = 1;
             rend.sprite = pauseSprite;
             this.isPaused = false;
+            gc.setPauseFlag (false);
         }
     }
 }
