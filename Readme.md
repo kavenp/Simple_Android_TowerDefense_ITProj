@@ -15,10 +15,10 @@ Build Instructions
    in the Project view
 4. Go to File -> Build Settings...
 
-Of steps 5 - 7, only two need to be performed.  
+Of the following three, only two need to be performed.  
 These are ordered from most to least time consuming to setup.
 
-5. To run on an Android emulator, select Android and press the Build button
+* To run on an Android emulator, select Android and press the Build button
     1. Open AVD Manager
     2. If no AVDs are available, press Create... and create an AVD
     3. Select an AVD and press Start..., then Launch
@@ -30,9 +30,9 @@ These are ordered from most to least time consuming to setup.
     8. After the terminal indicates success, navigate to the app menu
        on the AVD and open the itproject app
 
-6. To run on a desktop, select Standalone, choose the relevant
+* To run on a desktop, select Standalone, choose the relevant
     Target Platform for your computer
     1. Press Build And Run, save the file
     2. Set Graphics as desired, tick the Windowed option and press Play!
 
-7. In Unity, press the play button
+* In Unity, press the play button
