@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Chat : MonoBehaviour
 {
+    public bool disabled;
+
     private string chatname;
     private SimChat sc;
     private float rt = -3f;
@@ -14,13 +16,29 @@ public class Chat : MonoBehaviour
         (float)(Screen.height * 0.2));
     private Color c;
     private List<string> sendingMessages = new List<string>();
+    private int size;
+    private int defaultSize = 17;
 
     void Start ()
     {
+        if (disabled)
+        {
+            // No chat in single player
+            return;
+        }
+
         chatname = Guid.NewGuid().ToString("N");
-        sc = new SimChat("default", gameObject.GetComponent<MonoBehaviour>(), chatname);
+        sc = new SimChat("default",
+            gameObject.GetComponent<MonoBehaviour>(), chatname);
         sc.continueCheckMessages();
         sc.setReceiveFunction(ReceiveMessage);
+
+        size = (int)(Screen.dpi / 6.0f);
+        if (size < 0.1)
+        {
+            // Screen.dpi returns 0 if dpi cannot be determined
+            size = defaultSize;
+        }
     }
 
     void ReceiveMessage(SimpleMessage[] sm)
@@ -30,17 +48,24 @@ public class Chat : MonoBehaviour
 
     void OnGUI()
     {
+        if (disabled)
+        {
+            // No chat in single player
+            return;
+        }
+
         //display new message
         if (Time.time - rt < 3 &&
             sc.allMessages[sc.allMessages.Count - 1].sender != chatname)
         {
-            GUI.skin.label.fontSize = 17;
-            GUILayout.Label("Chat: " + sc.allMessages[sc.allMessages.Count - 1].message);
+            GUI.skin.label.fontSize = size;
+            GUILayout.Label("Chat: "
+                + sc.allMessages[sc.allMessages.Count - 1].message);
         }
 
         // Show input box
-        GUI.skin.textField.fontSize = 17;
-        GUI.skin.button.fontSize = 17;
+        GUI.skin.textField.fontSize = size;
+        GUI.skin.button.fontSize = size;
 
         GUILayout.BeginArea(chatRect);
         GUILayout.BeginVertical("box");
@@ -49,7 +74,8 @@ public class Chat : MonoBehaviour
 
         //send a new message
         sc.message = GUILayout.TextField(sc.message);
-        if (GUILayout.Button("Send") || (Event.current.isKey && Event.current.keyCode == KeyCode.Return))
+        if (GUILayout.Button("Send") ||
+            (Event.current.isKey && Event.current.keyCode == KeyCode.Return))
         {
             sc.sendMessage();
             sendingMessages.Add(sc.message);
