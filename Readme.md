@@ -22,6 +22,7 @@ These are ordered from most to least time consuming to setup.
     1. Select Android and press the Build button, save the apk file
     2. Open AVD Manager
     3. If no AVDs are available, press Create... and create an AVD
+       with a 16:9 aspect ratio
     4. Select an AVD and press Start..., then Launch
     5. Wait for the AVD to turn on
     6. Copy the apk file that Unity built into the platform-tools
