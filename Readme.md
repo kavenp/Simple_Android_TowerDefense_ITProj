@@ -16,20 +16,20 @@ Build Instructions
 4. Go to File -> Build Settings...
 
 5a. To run on an Android emulator, select Android and press the Build button
-  1. Open AVD Manager
-  2. If no AVDs are available, press Create... and create an AVD
-  3. Select an AVD and press Start..., then Launch
-  4. Wait for the AVD to turn on
-  5. Copy the apk file that Unity built into the platform-tools
-     directory in the Android sdk directory
-  6. Open a terminal and navigate to the platform-tools directory
-  7. Type into the terminal: adb install -r FileName.apk
-  8. After the terminal indicates success, navigate to the app menu
-     on the AVD and open the itproject app
+    1. Open AVD Manager
+    2. If no AVDs are available, press Create... and create an AVD
+    3. Select an AVD and press Start..., then Launch
+    4. Wait for the AVD to turn on
+    5. Copy the apk file that Unity built into the platform-tools
+       directory in the Android sdk directory
+    6. Open a terminal and navigate to the platform-tools directory
+    7. Type into the terminal: adb install -r FileName.apk
+    8. After the terminal indicates success, navigate to the app menu
+       on the AVD and open the itproject app
 
 5b. To run on a desktop, select Standalone, choose the relevant
     Target Platform for your computer
-  1. Press Build And Run, save the file
-  2. Set Graphics as desired, tick the Windowed option and press Play!
+    1. Press Build And Run, save the file
+    2. Set Graphics as desired, tick the Windowed option and press Play!
 
 6. In Unity, press the play button
