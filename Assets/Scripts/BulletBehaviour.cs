@@ -26,20 +26,17 @@ public class BulletBehaviour : MonoBehaviour {
 	void Update () {
 		float timeInt = Time.time - startTime;
 		//time interval from start to current frame
-		if(target != null) {
-			//if we have target selected
-			gameObject.transform.position = Vector3.Lerp (startpos, targetpos, timeInt * speed / distance);
-			//linearly interpolating from starting position to target considering speed
-			if (gameObject.transform.position.Equals (targetpos)) {
-				//if position reaches target
-				if (target != null) {
-					//check if target still exists
-					Destroy (target);
-					//if so destroy target
-				}
-				//otherwise target is already destroyed so just destroy bullet
-				Destroy (gameObject);
+		gameObject.transform.position = Vector3.Lerp (startpos, targetpos, timeInt * speed / distance);
+		//linearly interpolating from starting position to target considering speed
+		if (gameObject.transform.position.Equals (targetpos)) {
+			//if position reaches target
+			if (target != null) {
+				//check if target still exists
+				Destroy (target);
+				//if so destroy target
 			}
+			//otherwise target is already destroyed so just destroy bullet
+			Destroy (gameObject);
 		}
 	}
 }

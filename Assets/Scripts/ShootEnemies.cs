@@ -27,7 +27,7 @@ public class ShootEnemies : MonoBehaviour {
 		Vector3 startloc = gameObject.transform.position;
 		Vector3 targetloc = target.transform.position;
 		//get starting and target positions
-		GameObject newBullet = (GameObject)Instantiate (projectilePrefab);
+		GameObject newBullet = (GameObject)Instantiate (projectilePrefab,startloc,projectilePrefab.transform.rotation);
 		//instantiate the new bullet
 		BulletBehaviour behavior = (BulletBehaviour)newBullet.GetComponent("BulletBehaviour");
 		behavior.target = target;
@@ -63,15 +63,11 @@ public class ShootEnemies : MonoBehaviour {
 	void Update () {
 		GameObject target = null;
 		//initialize null target
-		float minDist = float.MaxValue;
-		foreach (GameObject enemy in inRange) {
-			float dist = Vector3.Distance (enemy.transform.position, gameObject.transform.position);
-			if (dist < minDist) {
-				target = enemy;
-				minDist = dist;
-			}
-			//target closest enemy to tower
+		//float minDist = float.MaxValue;
+		if (inRange.Count != 0) {
+			target = inRange[0];
 		}
+		//choose first enemy in list to be target if list is non-empty
 		if (target != null) {
 		//start shooting if target exists
 			if (Time.time - lastShotTime > fireRate) {
