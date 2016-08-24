@@ -5,20 +5,21 @@ public class TouchTower : MonoBehaviour
 
     private GameObject rangeCanvas;
 
-    void Start()
+    void Start ()
     {
-        rangeCanvas = gameObject.transform.Find("Range Canvas").gameObject;
-        rangeCanvas.SetActive(false);
+        rangeCanvas = gameObject.transform.Find ("Range Canvas").gameObject;
+        rangeCanvas.SetActive (false);
     }
 
-    void OnMouseDown()
+    void OnMouseDown ()
     {
-        rangeCanvas.SetActive(true);
+        Debug.Log ("Tower touched");
+        rangeCanvas.SetActive (true);
     }
 
-    void OnMouseUp()
+    void OnMouseUp ()
     {
-        rangeCanvas.SetActive(false);
+        rangeCanvas.SetActive (false);
     }
 
 }

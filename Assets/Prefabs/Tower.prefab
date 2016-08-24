@@ -24,8 +24,9 @@ GameObject:
   - 114: {fileID: 114000010946917340}
   - 65: {fileID: 65000012967546140}
   - 135: {fileID: 135000011262214020}
+  - 114: {fileID: 114000011147367360}
   - 114: {fileID: 114000010139930232}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,6 +171,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114000011147367360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010761437714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403baa141e3b20c41bad7f0ffe8102d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000012648684496
 MonoBehaviour:
   m_ObjectHideFlags: 1
