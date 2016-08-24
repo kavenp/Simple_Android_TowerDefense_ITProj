@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class BulletBehaviour : MonoBehaviour {
+	private int damage = 25;
+	//bullet damage;
 	public float speed = 10;
 	//bullets speed
 	public GameObject target = null;
@@ -11,6 +13,8 @@ public class BulletBehaviour : MonoBehaviour {
 	public Vector3 targetpos;
 	//bullets target position
 
+	private EnemyHealth enemyHP;
+	//enemy HP
 	private float distance;
 	//distance from target
 	private float startTime;
@@ -20,6 +24,14 @@ public class BulletBehaviour : MonoBehaviour {
 	void Start () {
 		startTime = Time.time;
 		distance = Vector3.Distance (startpos, targetpos);
+		//EnemyDestructionDelegate dele = target.gameObject.GetComponent<EnemyDestructionDelegate>();
+		//dele.enemyDelegate += OnEnemyDestroy;
+		enemyHP = (EnemyHealth)target.GetComponent("EnemyHealth");
+	}
+
+	// Self destructs once enemy is detected to be destroyed
+	void OnEnemyDestroy(GameObject target) {
+		Destroy (gameObject);
 	}
 	
 	// Update is called once per frame
@@ -32,8 +44,11 @@ public class BulletBehaviour : MonoBehaviour {
 			//if position reaches target
 			if (target != null) {
 				//check if target still exists
-				Destroy (target);
-				//if so destroy target
+				enemyHP.Hit(damage);
+				if(enemyHP.health <= 0) {
+					Destroy (target);
+					//destroyed if no health left
+				}
 			}
 			//otherwise target is already destroyed so just destroy bullet
 			Destroy (gameObject);
