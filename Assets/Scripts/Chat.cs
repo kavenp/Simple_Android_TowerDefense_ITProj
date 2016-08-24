@@ -19,7 +19,8 @@ public class Chat : MonoBehaviour
     private List<string> sendingMessages = new List<string> ();
     private int size;
     private int defaultSize = 17;
-
+  
+    //hi
     void Start ()
     {
         
@@ -32,8 +33,9 @@ public class Chat : MonoBehaviour
         chatname = names[0];
         sc = new SimChat ("default",
             gameObject.GetComponent<MonoBehaviour> (), chatname);
-        
-        //sc.continueCheckMessages ();
+
+
+        sc.continueCheckMessages ();
         sc.setReceiveFunction (ReceiveMessage);
         sc.allMessages.Clear ();
 
