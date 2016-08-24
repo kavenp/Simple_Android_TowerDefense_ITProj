@@ -62,6 +62,7 @@ GameObject:
   - 135: {fileID: 135000013624760024}
   - 114: {fileID: 114000010196331634}
   - 114: {fileID: 114000013332161000}
+  - 114: {fileID: 114000013330102478}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -196,6 +197,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114000013330102478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011181081994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de9d3ea3f525744d9e7203ce6e192ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currNode: {fileID: 0}
+  enemySpeed: 5
 --- !u!114 &114000013332161000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc2cf8930f23410883e1534a4ac3ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  healthBar: {fileID: 0}
 --- !u!114 &114000013469065546
 MonoBehaviour:
   m_ObjectHideFlags: 1
