@@ -1825,52 +1825,6 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 338687048}
-    - target: {fileID: 135000011262214020, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: m_Radius
-      value: 4.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010139930232, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 1000010526564576, guid: e154c9f604ff52d4493a3fbfc0c02691,
-        type: 2}
-    - target: {fileID: 114000010139930232, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 135000011262214020, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65000012967546140, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65000012967546140, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23000013375001194, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 135000011262214020, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135000011262214020, guid: 1efec4dd1e2277046bb946c46bc521a0,
-        type: 2}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1efec4dd1e2277046bb946c46bc521a0, type: 2}
   m_IsPrefabParent: 0
