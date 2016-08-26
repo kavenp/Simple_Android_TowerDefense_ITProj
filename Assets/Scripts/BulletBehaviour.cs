@@ -4,7 +4,7 @@ using System.Collections;
 public class BulletBehaviour : MonoBehaviour {
 	private int damage = 10;
 	//bullet damage;
-	public float speed = 7;
+	public float speed = 5;
 	//bullets speed
 	public GameObject target = null;
 	//bullets target (Enemy)
@@ -13,6 +13,8 @@ public class BulletBehaviour : MonoBehaviour {
 	public Vector3 targetpos;
 	//bullets target position
 
+	private GameController controller;
+	//game controller
 	private EnemyHealth enemyHP;
 	//enemy HP
 	private float distance;
@@ -26,6 +28,8 @@ public class BulletBehaviour : MonoBehaviour {
 		distance = Vector3.Distance (startpos, targetpos);
 		//EnemyDestructionDelegate dele = target.gameObject.GetComponent<EnemyDestructionDelegate>();
 		//dele.enemyDelegate += OnEnemyDestroy;
+		GameObject gc = GameObject.Find("Game Controller");
+		controller = (GameController)gc.GetComponent ("GameController");
 		enemyHP = (EnemyHealth)target.GetComponent("EnemyHealth");
 	}
 
@@ -38,14 +42,16 @@ public class BulletBehaviour : MonoBehaviour {
 	void Update () {
 		float timeInt = Time.time - startTime;
 		//time interval from start to current frame
-		gameObject.transform.position = Vector3.Lerp (startpos, targetpos, timeInt * speed / distance);
-		//linearly interpolating from starting position to target considering speed
-		startpos = gameObject.transform.position;
-		if (target != null) {
-			targetpos = target.transform.position;
-		} else {
-			Destroy (gameObject);
-			//target is null so destroy bullet;
+		if (!controller.isGamePaused ()) {
+			gameObject.transform.position = Vector3.Lerp (startpos, targetpos, timeInt * speed / distance);
+			//linearly interpolating from starting position to target considering speed
+			startpos = gameObject.transform.position;
+			if (target != null) {
+				targetpos = target.transform.position;
+			} else {
+				Destroy (gameObject);
+				//target is null so destroy bullet;
+			}
 		}
 //		if (gameObject.transform.position.Equals (targetpos)) {
 //			//if position reaches target
