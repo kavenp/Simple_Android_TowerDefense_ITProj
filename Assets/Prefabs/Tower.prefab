@@ -21,13 +21,28 @@ GameObject:
   - 4: {fileID: 4000014073367184}
   - 33: {fileID: 33000011843954090}
   - 23: {fileID: 23000013375001194}
-  - 114: {fileID: 114000010946917340}
   - 65: {fileID: 65000012967546140}
   - 135: {fileID: 135000011262214020}
-  - 114: {fileID: 114000011147367360}
   - 114: {fileID: 114000010139930232}
   m_Layer: 2
   m_Name: Tower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000011166142492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010707306446}
+  - 65: {fileID: 65000012838619468}
+  - 114: {fileID: 114000013466257176}
+  m_Layer: 0
+  m_Name: RangeTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,6 +83,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4000010707306446
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011166142492}
+  m_LocalRotation: {x: 0.46193978, y: 0.19134173, z: 0.19134173, w: 0.84462327}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 45}
+  m_Children: []
+  m_Father: {fileID: 4000014073367184}
+  m_RootOrder: 0
 --- !u!4 &4000014073367184
 Transform:
   m_ObjectHideFlags: 1
@@ -79,6 +107,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 45}
   m_Children:
+  - {fileID: 4000010707306446}
   - {fileID: 224000010103537252}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -118,6 +147,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010761437714}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65000012838619468
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011166142492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65000012967546140
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -144,17 +185,6 @@ MonoBehaviour:
   inRange: []
   projectilePrefab: {fileID: 1000010526564576, guid: e154c9f604ff52d4493a3fbfc0c02691,
     type: 2}
---- !u!114 &114000010946917340
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010761437714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403baa141e3b20c41bad7f0ffe8102d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000011119528280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,17 +201,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114000011147367360
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010761437714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 403baa141e3b20c41bad7f0ffe8102d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000012648684496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,6 +248,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114000013466257176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011166142492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403baa141e3b20c41bad7f0ffe8102d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135000011262214020
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -279,7 +309,7 @@ RectTransform:
   m_Children:
   - {fileID: 224000013263473136}
   m_Father: {fileID: 4000014073367184}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}

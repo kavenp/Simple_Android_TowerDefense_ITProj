@@ -4,7 +4,7 @@ using System.Collections;
 public class BulletBehaviour : MonoBehaviour {
 	private int damage = 10;
 	//bullet damage;
-	public float speed = 10;
+	public float speed = 7;
 	//bullets speed
 	public GameObject target = null;
 	//bullets target (Enemy)

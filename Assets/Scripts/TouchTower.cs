@@ -7,7 +7,8 @@ public class TouchTower : MonoBehaviour
 
     void Start ()
     {
-        rangeCanvas = gameObject.transform.Find ("Range Canvas").gameObject;
+		rangeCanvas = gameObject.transform.parent.transform.Find("Range Canvas").gameObject; 
+		//rangeCanvas = gameObject.transform.Find ("Range Canvas").gameObject;
         rangeCanvas.SetActive (false);
     }
 
