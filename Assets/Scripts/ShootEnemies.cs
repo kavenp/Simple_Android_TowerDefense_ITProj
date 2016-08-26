@@ -10,12 +10,14 @@ public class ShootEnemies : MonoBehaviour
     //for instantiating projectile
     private float lastShotTime;
     //time of last shot
+	private GameController gc;
     static private double fireRate = 1;
 
     // Use this for initialization
     void Start ()
     {
-        inRange = new List<GameObject> ();
+		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
+		inRange = new List<GameObject> ();
         lastShotTime = Time.time;
     }
 
@@ -34,7 +36,8 @@ public class ShootEnemies : MonoBehaviour
         GameObject newBullet = (GameObject) Instantiate (projectilePrefab, startloc, projectilePrefab.transform.rotation);
         //instantiate the new bullet
         BulletBehaviour behavior = (BulletBehaviour) newBullet.GetComponent ("BulletBehaviour");
-        behavior.target = target;
+		behavior.gc = gc;
+		behavior.target = target;
         behavior.startpos = startloc;
         behavior.targetpos = targetloc;
         //set bullet behavior to target

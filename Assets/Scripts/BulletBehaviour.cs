@@ -13,7 +13,7 @@ public class BulletBehaviour : MonoBehaviour {
 	public Vector3 targetpos;
 	//bullets target position
 
-	private GameController controller;
+	public GameController gc;
 	//game controller
 	private EnemyHealth enemyHP;
 	//enemy HP
@@ -28,8 +28,6 @@ public class BulletBehaviour : MonoBehaviour {
 		distance = Vector3.Distance (startpos, targetpos);
 		//EnemyDestructionDelegate dele = target.gameObject.GetComponent<EnemyDestructionDelegate>();
 		//dele.enemyDelegate += OnEnemyDestroy;
-		GameObject gc = GameObject.Find("Game Controller");
-		controller = (GameController)gc.GetComponent ("GameController");
 		enemyHP = (EnemyHealth)target.GetComponent("EnemyHealth");
 	}
 
@@ -42,7 +40,7 @@ public class BulletBehaviour : MonoBehaviour {
 	void Update () {
 		float timeInt = Time.time - startTime;
 		//time interval from start to current frame
-		if (!controller.isGamePaused ()) {
+		if (!gc.isGamePaused ()) {
 			gameObject.transform.position = Vector3.Lerp (startpos, targetpos, timeInt * speed / distance);
 			//linearly interpolating from starting position to target considering speed
 			startpos = gameObject.transform.position;
