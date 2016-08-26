@@ -12,7 +12,6 @@ public class EnemyHealth : MonoBehaviour {
 		maxHealth = 100;
 		healthBar = 
 			transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
-		print (healthBar);
 	}
 	
 	// Update is called once per frame

@@ -26,7 +26,7 @@ GameObject:
   - 135: {fileID: 135000011262214020}
   - 114: {fileID: 114000011147367360}
   - 114: {fileID: 114000010139930232}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

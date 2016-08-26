@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BulletBehaviour : MonoBehaviour {
-	private int damage = 25;
+	private int damage = 10;
 	//bullet damage;
 	public float speed = 10;
 	//bullets speed
@@ -40,18 +40,38 @@ public class BulletBehaviour : MonoBehaviour {
 		//time interval from start to current frame
 		gameObject.transform.position = Vector3.Lerp (startpos, targetpos, timeInt * speed / distance);
 		//linearly interpolating from starting position to target considering speed
-		if (gameObject.transform.position.Equals (targetpos)) {
-			//if position reaches target
-			if (target != null) {
-				//check if target still exists
-				enemyHP.Hit(damage);
-				if(enemyHP.health <= 0) {
-					Destroy (target);
-					//destroyed if no health left
-				}
+		startpos = gameObject.transform.position;
+		if (target != null) {
+			targetpos = target.transform.position;
+		} else {
+			Destroy (gameObject);
+			//target is null so destroy bullet;
+		}
+//		if (gameObject.transform.position.Equals (targetpos)) {
+//			//if position reaches target
+//			if (target != null) {
+//				//check if target still exists
+//				enemyHP.Hit(damage);
+//				if(enemyHP.health <= 0) {
+//					Destroy (target);
+//					//destroyed if no health left
+//				}
+//			}
+//			//otherwise target is already destroyed so just destroy bullet
+//			Destroy (gameObject);
+//		}
+	}
+
+	void OnTriggerEnter (Collider other) {
+		if (other.gameObject == target) 
+		{
+			enemyHP.Hit (damage);
+			if(enemyHP.health <= 0)
+			{		
+				Destroy (other.gameObject);
 			}
-			//otherwise target is already destroyed so just destroy bullet
 			Destroy (gameObject);
 		}
 	}
+
 }
