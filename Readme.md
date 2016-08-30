@@ -43,3 +43,10 @@ These are ordered from most to least time consuming to setup.
 * To run in Unity
     1. Set the aspect ratio to 16:9 in the Game tab
     2. Press the play button
+
+
+Running Tests
+-------------
+Tests are run in separate scenes. These are located in the Tests subdirectory
+of Scenes. Run these scenes in the usual way. Errors indicate that not all
+tests were successful.

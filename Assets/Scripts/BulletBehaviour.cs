@@ -11,10 +11,10 @@ public class BulletBehaviour : MonoBehaviour {
 	public Vector3 startpos;
 	//bullets start position
 	public Vector3 targetpos;
-	//bullets target position
+    //bullets target position
 
-	public GameController gc;
-	//game controller
+    public IGameController gc;
+	//game controller, interfaces do not appear in Unity inspector
 	private EnemyHealth enemyHP;
 	//enemy HP
 	private float distance;
@@ -29,7 +29,12 @@ public class BulletBehaviour : MonoBehaviour {
 		//EnemyDestructionDelegate dele = target.gameObject.GetComponent<EnemyDestructionDelegate>();
 		//dele.enemyDelegate += OnEnemyDestroy;
 		enemyHP = (EnemyHealth)target.GetComponent("EnemyHealth");
-	}
+        GameObject gcObject =
+            GameObject.FindGameObjectWithTag("GameController");
+
+        gc = gcObject.GetComponent<IGameController>();
+
+    }
 
 	// Self destructs once enemy is detected to be destroyed
 	void OnEnemyDestroy(GameObject target) {

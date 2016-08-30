@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
+// Shows visually the range of a tower when
+// the tower is being pressed.
 public class TouchTower : MonoBehaviour
 {
-
+    // The object providing a visual representation
+    // of the range of a tower.
     private GameObject rangeCanvas;
 
     void Start ()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoBehaviour, IGameController
 {
     public GameObject enemy;
     public Vector3 spawnValues;
@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
         StartCoroutine (SpawnWaves ());
     }
 
-    IEnumerator SpawnWaves ()
+    public IEnumerator SpawnWaves ()
     {
         yield return new WaitForSeconds (startWait);
 
