@@ -50,3 +50,9 @@ Running Tests
 Tests are run in separate scenes. These are located in the Tests directory.
 Run these scenes in the usual way. Errors indicate that not all tests were
 successful.
+
+Some tests are driven by the Unity Test Tools framework.
+To run these tests, go to the Integration Tests tab, or click
+Unity Test Tools -> Integration Test Runner to open the dockable window.
+In this window press Run All. A tick indicates success, a cross indicates
+failure.
