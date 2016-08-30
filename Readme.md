@@ -47,6 +47,6 @@ These are ordered from most to least time consuming to setup.
 
 Running Tests
 -------------
-Tests are run in separate scenes. These are located in the Tests subdirectory
-of Scenes. Run these scenes in the usual way. Errors indicate that not all
-tests were successful.
+Tests are run in separate scenes. These are located in the Tests directory.
+Run these scenes in the usual way. Errors indicate that not all tests were
+successful.
