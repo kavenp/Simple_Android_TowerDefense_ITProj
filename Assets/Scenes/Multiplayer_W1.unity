@@ -141,7 +141,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &19158639 stripped
@@ -200,7 +201,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &23528440 stripped
@@ -259,7 +261,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &46931661 stripped
@@ -354,7 +357,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &83197830 stripped
@@ -413,7 +417,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &84251985 stripped
@@ -472,7 +477,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &124154201 stripped
@@ -531,7 +537,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &132175692 stripped
@@ -649,7 +656,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &214066066 stripped
@@ -708,7 +716,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &223174008 stripped
@@ -767,7 +776,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &243660285 stripped
@@ -866,7 +876,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &273112913 stripped
@@ -925,7 +936,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &305168944 stripped
@@ -984,7 +996,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &322177622 stripped
@@ -1043,7 +1056,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &394742368 stripped
@@ -1102,7 +1116,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &399250786 stripped
@@ -1220,7 +1235,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &410777065 stripped
@@ -1433,7 +1449,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &515336675 stripped
@@ -1528,7 +1545,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &527083448 stripped
@@ -1536,6 +1554,93 @@ Transform:
   m_PrefabParentObject: {fileID: 4000014179257910, guid: b99d7368d53912841bf3ef39772f1c35,
     type: 2}
   m_PrefabInternal: {fileID: 527083447}
+--- !u!1 &551044184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 551044189}
+  - 20: {fileID: 551044188}
+  - 92: {fileID: 551044187}
+  - 124: {fileID: 551044186}
+  - 81: {fileID: 551044185}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &551044185
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 551044184}
+  m_Enabled: 1
+--- !u!124 &551044186
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 551044184}
+  m_Enabled: 1
+--- !u!92 &551044187
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 551044184}
+  m_Enabled: 1
+--- !u!20 &551044188
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 551044184}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
+--- !u!4 &551044189
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 551044184}
+  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
+  m_LocalPosition: {x: 64, y: 80, z: 33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!1001 &635999580
 Prefab:
   m_ObjectHideFlags: 0
@@ -1587,7 +1692,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &635999581 stripped
@@ -1705,7 +1811,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &654399153 stripped
@@ -1918,7 +2025,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &688721226 stripped
@@ -1977,7 +2085,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &711631165 stripped
@@ -2036,7 +2145,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &713410374 stripped
@@ -2095,7 +2205,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &756116688 stripped
@@ -2154,7 +2265,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &837867039 stripped
@@ -2213,7 +2325,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &856327067 stripped
@@ -2308,7 +2421,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &874480732 stripped
@@ -2403,7 +2517,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &934397266 stripped
@@ -2462,7 +2577,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &949620205 stripped
@@ -2521,7 +2637,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &957681976 stripped
@@ -2580,7 +2697,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &959838471 stripped
@@ -2639,7 +2757,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1011627194 stripped
@@ -2698,7 +2817,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1050057197 stripped
@@ -2757,7 +2877,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1078227838 stripped
@@ -2875,7 +2996,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1107304676 stripped
@@ -2934,7 +3056,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1115516713 stripped
@@ -2993,7 +3116,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1119525250 stripped
@@ -3052,7 +3176,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1124073521 stripped
@@ -3111,7 +3236,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1143100936 stripped
@@ -3206,7 +3332,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1169816674 stripped
@@ -3301,7 +3428,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1177146303 stripped
@@ -3419,7 +3547,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1217515276 stripped
@@ -3478,7 +3607,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1219904809 stripped
@@ -3537,7 +3667,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1235196491 stripped
@@ -3655,7 +3786,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1243573816 stripped
@@ -3714,7 +3846,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1268075022 stripped
@@ -3773,7 +3906,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1269233945 stripped
@@ -3832,7 +3966,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1271811947 stripped
@@ -3950,7 +4085,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1321855243 stripped
@@ -4068,7 +4204,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1369558292 stripped
@@ -4127,7 +4264,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1373732693 stripped
@@ -4186,7 +4324,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (8)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1410744678 stripped
@@ -4245,7 +4384,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1427068853 stripped
@@ -4304,7 +4444,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1438177248 stripped
@@ -4422,7 +4563,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1527360128 stripped
@@ -4481,7 +4623,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1538166846 stripped
@@ -4540,7 +4683,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1554697582 stripped
@@ -4599,7 +4743,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1575408108 stripped
@@ -4658,7 +4803,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1592865734 stripped
@@ -4717,7 +4863,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1644897177 stripped
@@ -4894,7 +5041,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1717897521 stripped
@@ -4953,7 +5101,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1719014823 stripped
@@ -5048,7 +5197,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1818818459 stripped
@@ -5107,7 +5257,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1824654051 stripped
@@ -5166,7 +5317,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1834033646 stripped
@@ -5225,7 +5377,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1835671961 stripped
@@ -5343,7 +5496,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1881743129 stripped
@@ -5402,7 +5556,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1883066962 stripped
@@ -5461,7 +5616,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1902922882 stripped
@@ -5638,7 +5794,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1937046920 stripped
@@ -5733,7 +5890,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1951134822 stripped
@@ -5792,7 +5950,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2030413882 stripped
@@ -5946,7 +6105,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2076172986 stripped
@@ -6041,7 +6201,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2084124374 stripped
@@ -6100,7 +6261,8 @@ Prefab:
       propertyPath: m_Name
       value: Buildable Surface (7)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2126986171 stripped
@@ -6224,7 +6386,8 @@ Prefab:
       value: 
       objectReference: {fileID: 1000010029401038, guid: 6df02baf690ac5344b1d6008d30c423d,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000011302411056, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b99d7368d53912841bf3ef39772f1c35, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2141550144 stripped
