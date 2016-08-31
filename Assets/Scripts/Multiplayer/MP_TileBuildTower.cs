@@ -9,7 +9,6 @@ public class MP_TileBuildTower : MonoBehaviour
 	// Need to make this a list of towers
 	private GameObject tower;
 
-
 	void Awake ()
 	{
 		tower = Resources.Load ("Tower") as GameObject;
@@ -21,8 +20,8 @@ public class MP_TileBuildTower : MonoBehaviour
 		{
 			// Gold stuff
 
-			Vector3 towerPosition = new Vector3 (tt.position.x, 0, tt.position.z);
-			createdTower = Instantiate (tower, towerPosition, Quaternion.identity);
+			Vector3 towerPosition = new Vector3 (this.transform.position.x, tower.transform.position.y, this.transform.position.z);
+			createdTower = Instantiate (tower, towerPosition, tower.transform.rotation);
 			isFree = false;
 		}
 		else

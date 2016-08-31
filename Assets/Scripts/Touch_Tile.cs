@@ -25,13 +25,8 @@ public class Touch_Tile : MonoBehaviour
 		// Only construct tower when game is not paused
 		if (gc.isGamePaused () != true)
 		{
-			Vector3 towerPosition = new Vector3 (
-				                                 this.transform.position.x,
-				                                 tower.transform.position.y,
-				                                 this.transform.position.z);
-
-			createdTower = Instantiate (tower, towerPosition,
-				tower.transform.rotation);
+			Vector3 towerPosition = new Vector3 (this.transform.position.x, tower.transform.position.y, this.transform.position.z);
+			createdTower = Instantiate (tower, towerPosition, tower.transform.rotation);
 		}
 	}
 

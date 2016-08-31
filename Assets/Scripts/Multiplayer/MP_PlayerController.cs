@@ -64,5 +64,4 @@ public class MP_PlayerController : NetworkBehaviour
 		Color orange = new Color (178 / 255.0f, 115 / 255.0f, 0, 1);
 		GetComponent<MeshRenderer> ().material.SetColor ("_EmissionColor", orange);
 	}
-
 }
