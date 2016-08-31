@@ -342,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turningSpeed: 150
   movingSpeed: 30
+  tower: {fileID: 1000010761437714, guid: 1efec4dd1e2277046bb946c46bc521a0, type: 2}
 --- !u!114 &114000014122558150
 MonoBehaviour:
   m_ObjectHideFlags: 1
