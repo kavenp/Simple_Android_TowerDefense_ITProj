@@ -40,14 +40,18 @@ public class MP_PlayerController : NetworkBehaviour
 		RaycastHit hit;
 		Ray ray = new Ray (transform.position, down);
 
+		// Raycast beneath builder
 		if (Physics.Raycast (ray, out hit, 5))
 		{
+			// Hit a buildable surface
 			if (hit.collider.tag == "BS")
 			{
 				currentBuildableTile = hit.collider.gameObject;
+
+				// Get the script build tower and build tower
 				MP_TileBuildTower bt = currentBuildableTile.GetComponent<MP_TileBuildTower> ();
-				Transform tt = hit.collider.transform;
-				bt.BuildTower (tt);
+				Transform tower_transform = hit.collider.transform;
+				bt.BuildTower (tower_transform);
 			}
 			else
 			{
