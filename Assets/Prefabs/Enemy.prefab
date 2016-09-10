@@ -63,6 +63,7 @@ GameObject:
   - 114: {fileID: 114000010196331634}
   - 114: {fileID: 114000013332161000}
   - 114: {fileID: 114000013330102478}
+  - 114: {fileID: 114000010180476646}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -138,6 +139,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114000010180476646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011181081994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 128
+    i1: 100
+    i2: 49
+    i3: 3
+    i4: 239
+    i5: 146
+    i6: 2
+    i7: 100
+    i8: 138
+    i9: 151
+    i10: 39
+    i11: 228
+    i12: 170
+    i13: 92
+    i14: 122
+    i15: 56
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114000010196331634
 MonoBehaviour:
   m_ObjectHideFlags: 1
