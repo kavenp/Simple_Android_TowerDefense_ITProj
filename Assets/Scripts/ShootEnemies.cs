@@ -32,24 +32,17 @@ public class ShootEnemies : MonoBehaviour
 	{
 		Vector3 startloc = gameObject.transform.position;
 		Vector3 targetloc = target.transform.position;
+
 		//get starting and target positions
 		GameObject newBullet = (GameObject) Instantiate (projectilePrefab, startloc, projectilePrefab.transform.rotation);
+
 		//instantiate the new bullet
 		BulletBehaviour behavior = (BulletBehaviour) newBullet.GetComponent ("BulletBehaviour");
-		behavior.gc = (IGameController) gc;
+		behavior.gc = gc;
 		behavior.target = target;
 		behavior.startpos = startloc;
 		behavior.targetpos = targetloc;
-		//set bullet behavior to target
 	}
-
-	//	void OnTriggerStay (Collider other) {
-	//		if (other.gameObject.tag.Equals ("Enemy")) {
-	//			inRange.Add (other.gameObject);
-	//			EnemyDestructionDelegate dele = other.gameObject.GetComponent<EnemyDestructionDelegate>();
-	//			dele.enemyDelegate += OnEnemyDestroy;
-	//		}
-	//	}
 
 	void OnTriggerEnter (Collider other)
 	{
@@ -93,4 +86,13 @@ public class ShootEnemies : MonoBehaviour
 			}
 		}
 	}
+
+
+	//	void OnTriggerStay (Collider other) {
+	//		if (other.gameObject.tag.Equals ("Enemy")) {
+	//			inRange.Add (other.gameObject);
+	//			EnemyDestructionDelegate dele = other.gameObject.GetComponent<EnemyDestructionDelegate>();
+	//			dele.enemyDelegate += OnEnemyDestroy;
+	//		}
+	//	}
 }
