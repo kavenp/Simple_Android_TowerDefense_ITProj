@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class GameController : MonoBehaviour, IGameController
+public class GameControllerDep : MonoBehaviour, IGameController
 {
 	public GameObject enemy;
 	public Vector3 spawnValues;

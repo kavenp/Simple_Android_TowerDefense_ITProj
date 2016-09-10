@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class MP_GameCoordinator : NetworkBehaviour
+public class GameController : NetworkBehaviour
 {
 	public GameObject enemy;
 	public Vector3 spawnValues;
@@ -28,5 +28,15 @@ public class MP_GameCoordinator : NetworkBehaviour
 		NetworkServer.Spawn (createdEnemy);
 
 		CancelInvoke ();
+	}
+
+	public bool isGamePaused ()
+	{
+		return false;
+	}
+
+	public void setPauseFlag (bool flag)
+	{
+		
 	}
 }
