@@ -22,7 +22,8 @@ GameObject:
   - 33: {fileID: 33000013791475188}
   - 23: {fileID: 23000011165636612}
   - 64: {fileID: 64000012954674888}
-  - 114: {fileID: 114000011302411056}
+  - 114: {fileID: 114000014055917262}
+  - 114: {fileID: 114000010353004464}
   m_Layer: 0
   m_Name: Buildable Surface
   m_TagString: Untagged
@@ -91,7 +92,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114000011302411056
+--- !u!114 &114000010353004464
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -99,8 +100,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012155252844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfb5966cc8e384b2f810b9ae059ae3d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 44076867ad241584eb32dcaad7240b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 1000010761437714, guid: 1efec4dd1e2277046bb946c46bc521a0, type: 2}
-  rangeImage: {fileID: 1000010029401038, guid: 6df02baf690ac5344b1d6008d30c423d, type: 2}
+--- !u!114 &114000014055917262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012155252844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 185
+    i1: 157
+    i2: 115
+    i3: 104
+    i4: 213
+    i5: 57
+    i6: 18
+    i7: 132
+    i8: 27
+    i9: 243
+    i10: 239
+    i11: 57
+    i12: 119
+    i13: 47
+    i14: 28
+    i15: 53
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

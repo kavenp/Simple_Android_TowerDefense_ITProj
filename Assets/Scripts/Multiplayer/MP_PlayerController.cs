@@ -30,11 +30,12 @@ public class MP_PlayerController : NetworkBehaviour
 		// Hit build button
 		if (Input.GetKeyDown (KeyCode.Space))
 		{
-			ConstructTower ();
+			CmdConstructTower ();
 		}
 	}
 
-	void ConstructTower ()
+	[Command]
+	void CmdConstructTower ()
 	{
 		Vector3 down = transform.TransformDirection (Vector3.down);
 		RaycastHit hit;
@@ -49,16 +50,16 @@ public class MP_PlayerController : NetworkBehaviour
 				currentBuildableTile = hit.collider.gameObject;
 
 				// Get the script build tower and build tower
-				MP_TileBuildTower bt = currentBuildableTile.GetComponent<MP_TileBuildTower> ();
+				MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower> ();
 				Transform tower_transform = hit.collider.transform;
-				bt.BuildTower (tower_transform);
+				build_script.BuildTower (tower_transform, this.gameObject.GetInstanceID (), 0);
 			}
 			else
 			{
 				currentBuildableTile = null;	
 			}
 
-			Debug.Log (hit.collider.ToString ());
+			//Debug.Log (hit.collider.ToString ());
 
 		}
 	}

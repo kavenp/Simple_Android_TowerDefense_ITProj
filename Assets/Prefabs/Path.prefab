@@ -22,6 +22,7 @@ GameObject:
   - 33: {fileID: 33000013019797530}
   - 23: {fileID: 23000013599819180}
   - 114: {fileID: 114000010262903684}
+  - 114: {fileID: 114000012203968954}
   m_Layer: 0
   m_Name: Path
   m_TagString: Enemy
@@ -90,3 +91,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 1000010761437714, guid: 1efec4dd1e2277046bb946c46bc521a0, type: 2}
+--- !u!114 &114000012203968954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011392108322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 174
+    i1: 186
+    i2: 239
+    i3: 227
+    i4: 109
+    i5: 78
+    i6: 142
+    i7: 244
+    i8: 232
+    i9: 136
+    i10: 234
+    i11: 95
+    i12: 214
+    i13: 170
+    i14: 5
+    i15: 164
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
