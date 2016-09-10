@@ -5998,11 +5998,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1000011181081994, guid: 80643103ef9202648a9727e4aa5c7a38, type: 2}
   spawnValues: {x: 0, y: 0, z: 70}
-  numberOfWaves: 5
-  numberOfEnemiesPerWave: 3
-  spawnWait: 1
+  numberOfWaves: 0
+  numberOfEnemiesPerWave: 0
+  spawnWait: 0
   startWait: 0
-  waveWait: 2
+  waveWait: 0
 --- !u!4 &971626998
 Transform:
   m_ObjectHideFlags: 0

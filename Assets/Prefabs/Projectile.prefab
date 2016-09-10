@@ -116,6 +116,7 @@ MonoBehaviour:
   target: {fileID: 0}
   startpos: {x: 0, y: 0, z: 0}
   targetpos: {x: 0, y: 0, z: 0}
+  gc: {fileID: 0}
 --- !u!114 &114000014153795644
 MonoBehaviour:
   m_ObjectHideFlags: 1

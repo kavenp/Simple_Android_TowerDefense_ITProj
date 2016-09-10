@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ShootEnemies : MonoBehaviour
+public class ShootEnemies : NetworkBehaviour
 {
 	public List<GameObject> inRange;
 	//list of enemies in range
@@ -28,13 +29,15 @@ public class ShootEnemies : MonoBehaviour
 	}
 
 	//Shoot the enemy
-	void Shoot (GameObject target)
+	[Command]
+	void CmdShoot (GameObject target)
 	{
 		Vector3 startloc = gameObject.transform.position;
 		Vector3 targetloc = target.transform.position;
 
 		//get starting and target positions
 		GameObject newBullet = (GameObject) Instantiate (projectilePrefab, startloc, projectilePrefab.transform.rotation);
+		NetworkServer.Spawn (newBullet);
 
 		//instantiate the new bullet
 		BulletBehaviour behavior = (BulletBehaviour) newBullet.GetComponent ("BulletBehaviour");
@@ -80,7 +83,7 @@ public class ShootEnemies : MonoBehaviour
 			if (Time.time - lastShotTime > fireRate)
 			{
 				//shoot if the time between now and last shot is larger than set fire rate
-				Shoot (target);
+				CmdShoot (target);
 				lastShotTime = Time.time;
 				//update time of last shot
 			}
