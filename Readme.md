@@ -1,6 +1,20 @@
 COMP30022 IT Project - Team Aqua
 ================================
 
+The Game:
+------------
+This game is a multiplayer tower defense game.
+
+The Team:
+------------
+Lawrence Kuoch:
+
+Matthew Eldridge:
+
+Jason Traill:
+
+Kaven Peng:
+
 Requirements
 ------------
 - Unity 5.4 or greater
@@ -10,7 +24,7 @@ Requirements
 Build Instructions
 ------------------
 1. Clone the repository or download as a zip file
-2. Open the project in Unity
+2. Import the project in Unity
 3. If no scene is open, open Game.unity in the Assets directory
    in the Project view
 4. Go to File -> Build Settings...
