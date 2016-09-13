@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using System.Collections;
 
@@ -7,6 +9,7 @@ public class MP_PlayerController : NetworkBehaviour
 	// Builder movement variables
 	public float turningSpeed;
 	public float movingSpeed;
+	public bool leftButtonClicked;
 
 	// Current buildable tile
 	private GameObject currentBuildableTile = null;
@@ -14,16 +17,53 @@ public class MP_PlayerController : NetworkBehaviour
 	// Towers
 	public GameObject tower;
 
+
 	void Update ()
 	{
+		// Check that is local player
 		if (!isLocalPlayer)
 		{
-			return;
+			return; 
 		}
+	}
 
+
+	[Command]
+	public void CmdConstructTower ()
+	{
+		Vector3 down = transform.TransformDirection (Vector3.down);
+		RaycastHit hit;
+		Ray ray = new Ray (transform.position, down);
+
+		// Raycast beneath builder
+		if (Physics.Raycast (ray, out hit, 10))
+		{
+			// Hit a buildable surface
+			if (hit.collider.tag == "BS")
+			{
+				currentBuildableTile = hit.collider.gameObject;
+
+				Debug.Log (currentBuildableTile);
+
+				// Get the script build tower and build tower
+				MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower> ();
+				build_script.BuildTower (this.gameObject.GetInstanceID (), 0);
+
+			}
+			else
+			{
+				currentBuildableTile = null;	
+			}
+
+			//Debug.Log (hit.collider.ToString ());
+		}
+	}
+
+	void DebugMove ()
+	{
 		var x = Input.GetAxis ("Horizontal") * Time.deltaTime * turningSpeed;
 		var z = Input.GetAxis ("Vertical") * Time.deltaTime * movingSpeed;
-
+		Debug.Log (z);
 		transform.Rotate (0, x, 0);
 		transform.Translate (0, 0, z);
 
@@ -34,34 +74,21 @@ public class MP_PlayerController : NetworkBehaviour
 		}
 	}
 
-	[Command]
-	void CmdConstructTower ()
+	public void ButtonTranslate (float verticalInput)
 	{
-		Vector3 down = transform.TransformDirection (Vector3.down);
-		RaycastHit hit;
-		Ray ray = new Ray (transform.position, down);
+		var z = verticalInput * Time.deltaTime * movingSpeed;
+		gameObject.transform.Translate (0, 0, z);
+	}
 
-		// Raycast beneath builder
-		if (Physics.Raycast (ray, out hit, 5))
-		{
-			// Hit a buildable surface
-			if (hit.collider.tag == "BS")
-			{
-				currentBuildableTile = hit.collider.gameObject;
+	public void ButtonRotate (float horizontalInput)
+	{
+		var x = horizontalInput * Time.deltaTime * turningSpeed;
+		gameObject.transform.Rotate (0, x, 0);
+	}
 
-				// Get the script build tower and build tower
-				MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower> ();
-				Transform tower_transform = hit.collider.transform;
-				build_script.BuildTower (tower_transform, this.gameObject.GetInstanceID (), 0);
-			}
-			else
-			{
-				currentBuildableTile = null;	
-			}
-
-			//Debug.Log (hit.collider.ToString ());
-
-		}
+	public void ConstructTower ()
+	{
+		CmdConstructTower ();
 	}
 
 	public override void OnStartLocalPlayer ()

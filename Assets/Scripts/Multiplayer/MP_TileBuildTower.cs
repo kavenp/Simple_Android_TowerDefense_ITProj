@@ -20,7 +20,7 @@ public class MP_TileBuildTower :NetworkBehaviour
 		setOwner (-1);
 	}
 
-	public void BuildTower (Transform tt, int playerID, int towerType)
+	public void BuildTower (int playerID, int towerType)
 	{
 		if (isTileFree ())
 		{

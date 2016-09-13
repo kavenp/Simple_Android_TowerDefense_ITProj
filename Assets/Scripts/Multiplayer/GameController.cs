@@ -13,6 +13,10 @@ public class GameController : NetworkBehaviour
 	public float startWait;
 	public float waveWait;
 
+	void Awake ()
+	{
+		this.enemy = GameObject.FindGameObjectWithTag ("Enemy");
+	}
 
 	void Update ()
 	{

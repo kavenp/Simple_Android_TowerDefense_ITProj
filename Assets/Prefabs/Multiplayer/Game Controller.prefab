@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4000013609741134
 Transform:
   m_ObjectHideFlags: 1
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
-    m_Value: 45
+    m_Value: 0
   m_AssetId:
     i0: 192
     i1: 236
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1000011181081994, guid: 80643103ef9202648a9727e4aa5c7a38, type: 2}
-  spawnValues: {x: 0, y: 0, z: 70}
+  spawnValues: {x: 0, y: 0, z: 0}
   numberOfWaves: 0
   numberOfEnemiesPerWave: 0
   spawnWait: 0
