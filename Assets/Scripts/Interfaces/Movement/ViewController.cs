@@ -23,7 +23,7 @@ public class ViewController : MonoBehaviour
 		this.buildButton = false;
 	}
 
-	void Update ()
+	void FixedUpdate ()
 	{
 		GameObject player = GameObject.FindGameObjectWithTag ("Player");
 		MP_PlayerController mpc = player.GetComponent<MP_PlayerController> ();
@@ -32,7 +32,6 @@ public class ViewController : MonoBehaviour
 		{
 			mpc.CmdConstructTower ();
 		}
-
 
 		// Perform state analysis
 		if (this.leftButton)

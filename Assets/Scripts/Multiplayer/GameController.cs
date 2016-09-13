@@ -3,16 +3,18 @@ using UnityEngine.Networking;
 
 public class GameController : NetworkBehaviour
 {
+	// Prefab
 	public GameObject enemy;
 	public Vector3 spawnValues;
 
+	// Need to add spawn values
 	public int numberOfWaves;
 	public int numberOfEnemiesPerWave;
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
 
-	void Awake ()
+	void Start ()
 	{
 		this.enemy = GameObject.FindGameObjectWithTag ("Enemy");
 	}
