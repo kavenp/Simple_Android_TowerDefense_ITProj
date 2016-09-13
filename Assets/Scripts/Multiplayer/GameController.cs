@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 public class GameController : NetworkBehaviour
 {
 	// Prefab
-	public GameObject enemy;
+	private GameObject enemy;
 	public Vector3 spawnValues;
 
 	// Need to add spawn values
@@ -13,6 +13,11 @@ public class GameController : NetworkBehaviour
 	public float spawnWait;
 	public float startWait;
 	public float waveWait;
+
+	void Awake()
+	{
+		this.enemy = Resources.Load("Enemy") as GameObject;
+	}
 
 	void Update ()
 	{
