@@ -10069,6 +10069,17 @@ Prefab:
       propertyPath: numberOfEnemiesPerWave
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012493406734, guid: c0ecb55d1bcc05546a546747d72e6423,
+        type: 2}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1000011181081994, guid: 80643103ef9202648a9727e4aa5c7a38,
+        type: 2}
+    - target: {fileID: 114000012493406734, guid: c0ecb55d1bcc05546a546747d72e6423,
+        type: 2}
+      propertyPath: spawnValues.z
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0ecb55d1bcc05546a546747d72e6423, type: 2}
   m_IsPrefabParent: 0
