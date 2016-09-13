@@ -17,7 +17,6 @@ public class MP_PlayerController : NetworkBehaviour
 	// Towers
 	public GameObject tower;
 
-
 	void Update ()
 	{
 		// Check that is local player
@@ -26,7 +25,6 @@ public class MP_PlayerController : NetworkBehaviour
 			return; 
 		}
 	}
-
 
 	[Command]
 	public void CmdConstructTower ()
@@ -54,6 +52,7 @@ public class MP_PlayerController : NetworkBehaviour
 			{
 				currentBuildableTile = null;	
 			}
+
 
 			//Debug.Log (hit.collider.ToString ());
 		}
