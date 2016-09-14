@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 public class GameController : NetworkBehaviour
 {
 	// Prefab
-	private GameObject enemy;
+	public GameObject enemy;
 	public Vector3 spawnValues;
 
 	// Need to add spawn values
@@ -16,10 +16,10 @@ public class GameController : NetworkBehaviour
 
 	void Awake()
 	{
-		this.enemy = Resources.Load("Enemy") as GameObject;
+		//this.enemy = Resources.Load("Creep") as GameObject;
 	}
 
-	void Update ()
+    void Update ()
 	{
 		InvokeRepeating ("SpawnEnemy", 6, 10f);
 	}

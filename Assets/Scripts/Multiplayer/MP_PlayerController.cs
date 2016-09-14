@@ -24,6 +24,8 @@ public class MP_PlayerController : NetworkBehaviour
 		{
 			return; 
 		}
+
+        DebugMove();
 	}
 
 	[Command]
@@ -62,7 +64,6 @@ public class MP_PlayerController : NetworkBehaviour
 	{
 		var x = Input.GetAxis ("Horizontal") * Time.deltaTime * turningSpeed;
 		var z = Input.GetAxis ("Vertical") * Time.deltaTime * movingSpeed;
-		Debug.Log (z);
 		transform.Rotate (0, x, 0);
 		transform.Translate (0, 0, z);
 
