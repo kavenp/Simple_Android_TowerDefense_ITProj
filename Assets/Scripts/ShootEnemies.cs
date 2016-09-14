@@ -11,13 +11,15 @@ public class ShootEnemies : NetworkBehaviour
 	//for instantiating projectile
 	private float lastShotTime;
 	//time of last shot
-	private GameController gc;
+	//private GameController gc;
 	static private double fireRate = 1;
+
+    private Vector3 previousTargetLoc;
 
 	// Use this for initialization
 	void Start ()
 	{
-		gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
+		//gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
 		inRange = new List<GameObject> ();
 		lastShotTime = Time.time;
 	}
@@ -29,23 +31,30 @@ public class ShootEnemies : NetworkBehaviour
 	}
 
 	//Shoot the enemy
-	[Command]
-	void CmdShoot (GameObject target)
+	//[Command]
+	void Shoot (GameObject target)
 	{
 		Vector3 startloc = gameObject.transform.position;
 		Vector3 targetloc = target.transform.position;
 
+        if (targetloc.Equals(previousTargetLoc))
+        {
+            return;
+        }
+
 		//get starting and target positions
 		GameObject newBullet = (GameObject) Instantiate (projectilePrefab, startloc, projectilePrefab.transform.rotation);
-		NetworkServer.Spawn (newBullet);
+		
 
 		//instantiate the new bullet
 		BulletBehaviour behavior = (BulletBehaviour) newBullet.GetComponent ("BulletBehaviour");
-		behavior.gc = gc;
+		//behavior.gc = gc;
 		behavior.target = target;
 		behavior.startpos = startloc;
 		behavior.targetpos = targetloc;
-	}
+        previousTargetLoc = targetloc;
+        //NetworkServer.Spawn(newBullet);
+    }
 
 	void OnTriggerEnter (Collider other)
 	{
@@ -83,7 +92,7 @@ public class ShootEnemies : NetworkBehaviour
 			if (Time.time - lastShotTime > fireRate)
 			{
 				//shoot if the time between now and last shot is larger than set fire rate
-				CmdShoot (target);
+				Shoot (target);
 				lastShotTime = Time.time;
 				//update time of last shot
 			}

@@ -14,14 +14,18 @@ public class BulletBehaviour : MonoBehaviour
 	public Vector3 targetpos;
 	//bullets target position
 
-	public GameController gc;
+	//public GameController gc;
 	//game controller, interfaces do not appear in Unity inspector
 	private EnemyHealth enemyHP;
 	//enemy HP
 	private float distance;
 	//distance from target
 	private float startTime;
-	//when bullet first shot
+    //when bullet first shot
+
+    private Vector3 previousPosition;
+    //private float existTime = 0;
+    //private int maxTime = 5;
 
 	// Use this for initialization
 	void Start ()
@@ -34,7 +38,7 @@ public class BulletBehaviour : MonoBehaviour
 		GameObject gcObject =
 			GameObject.FindGameObjectWithTag ("GameController");
 
-		gc = gcObject.GetComponent<GameController> ();
+		//gc = gcObject.GetComponent<GameController> ();
 
 	}
 
@@ -53,7 +57,14 @@ public class BulletBehaviour : MonoBehaviour
 		gameObject.transform.position = Vector3.Lerp (startpos, targetpos, timeInt * speed / distance);
 		//linearly interpolating from starting position to target considering speed
 		startpos = gameObject.transform.position;
-		if (target != null)
+
+        if (startpos.Equals(previousPosition))
+        {
+            Destroy(gameObject);
+        }
+
+        previousPosition = startpos;
+        if (target != null)
 		{
 			targetpos = target.transform.position;
 		}
@@ -62,6 +73,7 @@ public class BulletBehaviour : MonoBehaviour
 			Destroy (gameObject);
 			//target is null so destroy bullet;
 		}
+        
 
 //		if (gameObject.transform.position.Equals (targetpos)) {
 //			//if position reaches target
@@ -76,7 +88,7 @@ public class BulletBehaviour : MonoBehaviour
 //			//otherwise target is already destroyed so just destroy bullet
 //			Destroy (gameObject);
 //		}
-	}
+    }
 
 	void OnTriggerEnter (Collider other)
 	{
