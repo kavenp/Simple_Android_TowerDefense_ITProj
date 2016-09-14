@@ -24,6 +24,8 @@ GameObject:
   - 65: {fileID: 65000012967546140}
   - 135: {fileID: 135000011262214020}
   - 114: {fileID: 114000010139930232}
+  - 114: {fileID: 114000013581821462}
+  - 114: {fileID: 114000012616759920}
   m_Layer: 2
   m_Name: Tower
   m_TagString: Tower
@@ -201,6 +203,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114000012616759920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010761437714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114000012648684496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,6 +281,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403baa141e3b20c41bad7f0ffe8102d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000013581821462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010761437714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 30
+    i1: 254
+    i2: 196
+    i3: 221
+    i4: 30
+    i5: 34
+    i6: 119
+    i7: 4
+    i8: 107
+    i9: 185
+    i10: 70
+    i11: 196
+    i12: 107
+    i13: 197
+    i14: 33
+    i15: 160
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!135 &135000011262214020
 SphereCollider:
   m_ObjectHideFlags: 1

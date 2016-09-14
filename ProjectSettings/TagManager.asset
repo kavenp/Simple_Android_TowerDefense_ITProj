@@ -8,6 +8,10 @@ TagManager:
   - Enemy
   - BS
   - Tower
+  - RButton
+  - LButton
+  - DButton
+  - UButton
   layers:
   - Default
   - TransparentFX
