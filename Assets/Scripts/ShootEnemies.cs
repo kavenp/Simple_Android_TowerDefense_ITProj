@@ -39,6 +39,7 @@ public class ShootEnemies : NetworkBehaviour
 
         if (targetloc.Equals(previousTargetLoc))
         {
+            inRange.Remove(target);
             return;
         }
 
