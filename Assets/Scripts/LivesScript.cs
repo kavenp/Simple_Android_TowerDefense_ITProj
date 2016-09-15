@@ -15,12 +15,6 @@ public class LivesScript : MonoBehaviour
 
     void Start()
     {
-        int size = (int)(Screen.dpi / 8.0f);
-        if (size > 0)
-        {
-            // Screen.dpi returns 0 if dpi cannot be determined
-            livesDisplay.fontSize = size;
-         }
         livesDisplay.text = "Lives: " + numLives;
     }
 
