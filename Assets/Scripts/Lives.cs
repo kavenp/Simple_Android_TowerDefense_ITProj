@@ -22,9 +22,13 @@ public class Lives : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            Destroy(other.gameObject);
             numLives--;
             scoreDisplay.text = "Lives: " + numLives;
         }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        Destroy(other.gameObject);
     }
 }
