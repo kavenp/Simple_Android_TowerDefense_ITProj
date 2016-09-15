@@ -12,6 +12,8 @@ TagManager:
   - LButton
   - DButton
   - UButton
+  - Buttons
+  - BButton
   layers:
   - Default
   - TransparentFX

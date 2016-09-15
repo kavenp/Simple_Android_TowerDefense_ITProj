@@ -4,15 +4,11 @@ using System.Collections;
 public class ViewController : MonoBehaviour
 {
 	// States
-	bool upButton;
-	bool downButton;
-	bool leftButton;
-	bool rightButton;
-	bool buildButton;
-
-	// Direction
-	int forward = 1;
-	int backward = -1;
+	private bool upButton;
+	private bool downButton;
+	private bool leftButton;
+	private bool rightButton;
+	private bool buildButton;
 
 	void Start ()
 	{
@@ -23,38 +19,24 @@ public class ViewController : MonoBehaviour
 		this.buildButton = false;
 	}
 
-	void FixedUpdate ()
+	public bool UpButtonPressed ()
 	{
-		GameObject player = GameObject.FindGameObjectWithTag ("Player");
-		MP_PlayerController mpc = player.GetComponent<MP_PlayerController> ();
+		return this.upButton;
+	}
 
-		if (this.buildButton)
-		{
-			mpc.CmdConstructTower ();
-		}
+	public bool DownButtonPressed ()
+	{
+		return this.downButton;
+	}
 
-		// Perform state analysis
-		if (this.leftButton)
-		{
-			mpc.ButtonRotate (backward);
-		}
+	public bool RotateButtonPressed ()
+	{
+		return (this.leftButton || this.rightButton);
+	}
 
-		if (this.rightButton)
-		{
-			mpc.ButtonRotate (forward);
-		}
-
-		if (this.upButton)
-		{
-			mpc.ButtonTranslate (forward);
-		}
-
-		if (this.downButton)
-		{
-			mpc.ButtonTranslate (backward);
-		}
-
-
+	public bool BuildButtonPressed ()
+	{
+		return this.buildButton;
 	}
 
 	public void UpButtonOn ()
@@ -106,7 +88,4 @@ public class ViewController : MonoBehaviour
 	{
 		buildButton = false;
 	}
-
-
-
 }

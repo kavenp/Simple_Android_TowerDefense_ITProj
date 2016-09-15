@@ -17,15 +17,30 @@ public class MP_PlayerController : NetworkBehaviour
 	// Towers
 	public GameObject tower;
 
+	// Direction
+	int forward = 1;
+	int backward = -1;
+
+	// Buttons
+	GameObject buttons;
+	ViewController vc;
+
+	void Start()
+	{
+		buttons = GameObject.FindGameObjectWithTag("Buttons");
+		vc      = buttons.GetComponent<ViewController>();
+	}
+
 	void Update ()
 	{
 		// Check that is local player
 		if (!isLocalPlayer)
 		{
-			return; 
+			return;
 		}
 
-        DebugMove();
+        //DebugMove();
+		ButtonActions();
 	}
 
 	[Command]
@@ -52,7 +67,7 @@ public class MP_PlayerController : NetworkBehaviour
 			}
 			else
 			{
-				currentBuildableTile = null;	
+				currentBuildableTile = null;
 			}
 
 
@@ -72,6 +87,31 @@ public class MP_PlayerController : NetworkBehaviour
 		{
 			CmdConstructTower ();
 		}
+	}
+
+	public void ButtonActions()
+	{
+		if (vc.BuildButtonPressed())
+		{
+			CmdConstructTower ();
+		}
+
+		// Perform state analysis
+		if (vc.RotateButtonPressed())
+		{
+			ButtonRotate (backward);
+		}
+
+		if (vc.UpButtonPressed())
+		{
+			ButtonTranslate (forward);
+		}
+
+		if (vc.DownButtonPressed())
+		{
+			ButtonTranslate (backward);
+		}
+
 	}
 
 	public void ButtonTranslate (float verticalInput)

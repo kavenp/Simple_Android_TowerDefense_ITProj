@@ -43,6 +43,7 @@ GameObject:
   - 114: {fileID: 114000013937066702}
   - 114: {fileID: 114000013104585646}
   - 114: {fileID: 114000010700135868}
+  - 148: {fileID: 148000011459978980}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -711,6 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adebd6f7b6118c4a83d9c8d787bdd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!114 &114000013937066702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -781,6 +783,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!148 &148000011459978980
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011490126506}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 224000011797660696}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!222 &222000010141152946
 CanvasRenderer:
   m_ObjectHideFlags: 1
