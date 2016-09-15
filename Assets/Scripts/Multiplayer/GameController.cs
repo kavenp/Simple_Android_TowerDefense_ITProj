@@ -16,7 +16,7 @@ public class GameController : NetworkBehaviour
 
 	void Awake()
 	{
-		//this.enemy = Resources.Load("Creep") as GameObject;
+		this.enemy = Resources.Load("Creep") as GameObject;
 	}
 
     void Update ()
@@ -42,6 +42,6 @@ public class GameController : NetworkBehaviour
 
 	public void setPauseFlag (bool flag)
 	{
-		
+
 	}
 }

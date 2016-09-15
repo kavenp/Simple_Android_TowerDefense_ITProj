@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013609741134}
   - 114: {fileID: 114000010874514800}
-  - 114: {fileID: 114000012493406734}
+  - 114: {fileID: 114000011911642704}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: GameController
@@ -73,7 +73,7 @@ MonoBehaviour:
     i15: 35
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
---- !u!114 &114000012493406734
+--- !u!114 &114000011911642704
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -81,12 +81,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012233284810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1ea539cecdf293478a81a41edaf7819, type: 3}
+  m_Script: {fileID: 11500000, guid: dbe606dc881ed3d4e941e7d71a4d7164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1000011181081994, guid: 80643103ef9202648a9727e4aa5c7a38, type: 2}
-  spawnValues: {x: 0, y: 0, z: 0}
-  numberOfWaves: 0
+  enemy: {fileID: 1000013756413036, guid: 45ca4cd297224b249b5d5d83c1d7395c, type: 2}
+  spawnValues: {x: 0, y: 0, z: 70}
+  numberOfWaves: 3
   numberOfEnemiesPerWave: 0
   spawnWait: 0
   startWait: 0

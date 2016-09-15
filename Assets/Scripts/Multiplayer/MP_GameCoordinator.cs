@@ -13,20 +13,20 @@ public class MP_GameCoordinator : NetworkBehaviour {
 	public float startWait;
 	public float waveWait;
 
-    public override void OnStartServer()
+    // public override void OnStartServer()
+    // {
+
+    //     Vector3 spawnPosition = new Vector3(spawnValues.x + 40, spawnValues.y + 2, spawnValues.z);
+    //     Quaternion spawnRotation = Quaternion.identity;
+    //     var createdEnemy = (GameObject)Instantiate(enemy, spawnPosition, spawnRotation);
+    //     NetworkServer.Spawn(createdEnemy);
+    // }
+
+
+    void Update()
     {
-        
-        Vector3 spawnPosition = new Vector3(spawnValues.x + 40, spawnValues.y + 2, spawnValues.z);
-        Quaternion spawnRotation = Quaternion.identity;
-        var createdEnemy = (GameObject)Instantiate(enemy, spawnPosition, spawnRotation);
-        NetworkServer.Spawn(createdEnemy);
+    	InvokeRepeating("SpawnEnemy", 6, 10f);
     }
-
-
-    //void Update()
-    //{
-    //	InvokeRepeating("SpawnEnemy", 6, 10f);
-    //}
 
     void SpawnEnemy()
 	{
