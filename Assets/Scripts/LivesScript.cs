@@ -2,11 +2,16 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Lives : MonoBehaviour
+public class LivesScript : MonoBehaviour
 {
     
     public int numLives;
     public Text livesDisplay;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 
     void Start()
     {

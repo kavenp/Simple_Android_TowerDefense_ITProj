@@ -8,9 +8,17 @@ public class DisplayScore : MonoBehaviour
 
     void Start()
     {
-        GameObject scoreInfo = GameObject.Find("ScoreInfo");
-        ScoreInfoScript scoreInfoScript =
-            scoreInfo.GetComponent<ScoreInfoScript>();
-        scoreDisplay.text = "Score: " + scoreInfoScript.score;
+        GameObject playerBase = GameObject.Find("PlayerBase");
+        LivesScript livesScript =
+            playerBase.GetComponent<LivesScript>();
+        if (livesScript.numLives > 0)
+        {
+            int score = livesScript.numLives * 100;
+            scoreDisplay.text = "Score: " + score;
+        }
+        else
+        {
+            scoreDisplay.text = "Game Over";
+        }
     }
 }
