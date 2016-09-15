@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Lives : MonoBehaviour
 {
     
     public int numLives;
-    public Text scoreDisplay;
+    public Text livesDisplay;
 
     void Start()
     {
@@ -13,22 +14,27 @@ public class Lives : MonoBehaviour
         if (size > 0)
         {
             // Screen.dpi returns 0 if dpi cannot be determined
-            scoreDisplay.fontSize = size;
+            livesDisplay.fontSize = size;
          }
-        scoreDisplay.text = "Lives: " + numLives;
+        livesDisplay.text = "Lives: " + numLives;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" && numLives > 0)
         {
             numLives--;
-            scoreDisplay.text = "Lives: " + numLives;
+            livesDisplay.text = "Lives: " + numLives;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         Destroy(other.gameObject);
+
+        if (numLives <= 0)
+        {
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+        }
     }
 }
