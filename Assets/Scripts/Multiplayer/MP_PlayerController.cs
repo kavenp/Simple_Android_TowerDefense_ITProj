@@ -111,7 +111,6 @@ public class MP_PlayerController : NetworkBehaviour
 		{
 			ButtonTranslate (backward);
 		}
-
 	}
 
 	public void ButtonTranslate (float verticalInput)

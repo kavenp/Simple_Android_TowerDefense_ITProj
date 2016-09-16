@@ -10,31 +10,53 @@ public class MP_GameCoordinator : NetworkBehaviour {
 	public int numberOfWaves;
 	public int numberOfEnemiesPerWave;
 	public float spawnWait;
-	public float startWait;
 	public float waveWait;
 
-    // public override void OnStartServer()
-    // {
+	bool isSpawning = false;
 
-    //     Vector3 spawnPosition = new Vector3(spawnValues.x + 40, spawnValues.y + 2, spawnValues.z);
-    //     Quaternion spawnRotation = Quaternion.identity;
-    //     var createdEnemy = (GameObject)Instantiate(enemy, spawnPosition, spawnRotation);
-    //     NetworkServer.Spawn(createdEnemy);
-    // }
-
+	bool isWave = false;
+	bool gameVictory = false;
 
     void Update()
     {
-    	InvokeRepeating("SpawnEnemy", 6, 10f);
+
+		if(isSpawning == false && numberOfEnemiesPerWave > 0)
+		{
+			isSpawning = true;
+			StartCoroutine(SpawnEnemyWave(spawnWait));
+		}
+
+		if(isWave == false && numberOfWaves > 0)
+		{
+			isWave = true;
+			StartCoroutine(SpawnNextWave(waveWait));
+		}
+		else
+		{
+			gameVictory = true;
+		}
     }
 
-    void SpawnEnemy()
+    IEnumerator SpawnEnemyWave(float seconds)
 	{
+		yield return new WaitForSeconds(seconds);
+
 		Vector3 spawnPosition = new Vector3(spawnValues.x, spawnValues.y, spawnValues.z);
 		Quaternion spawnRotation = Quaternion.identity;
 		var createdEnemy = (GameObject)Instantiate(enemy, spawnPosition, spawnRotation);
 		NetworkServer.Spawn (createdEnemy);
 
-		CancelInvoke();
+		isSpawning = false;
+		numberOfEnemiesPerWave -= 1;
 	}
+
+	IEnumerator SpawnNextWave(float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+
+		isWave = false;
+		numberOfWaves -= 1;
+		numberOfEnemiesPerWave = 5;
+	}
+
 }
