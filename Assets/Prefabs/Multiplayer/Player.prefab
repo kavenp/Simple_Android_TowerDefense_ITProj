@@ -342,7 +342,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turningSpeed: 150
   movingSpeed: 30
-  leftButtonClicked: 1
   tower: {fileID: 1000010761437714, guid: 1efec4dd1e2277046bb946c46bc521a0, type: 2}
 --- !u!114 &114000014122558150
 MonoBehaviour:
@@ -356,7 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
