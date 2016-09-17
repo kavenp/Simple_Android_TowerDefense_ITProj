@@ -7,16 +7,16 @@ public class ViewController : MonoBehaviour
 	private bool upButton;
 	private bool downButton;
 	private bool leftButton;
-	private bool rightButton;
 	private bool buildButton;
+	private bool sellButton;
 
 	void Start ()
 	{
 		this.upButton = false;
 		this.downButton = false;
 		this.leftButton = false;
-		this.rightButton = false;
 		this.buildButton = false;
+		this.sellButton = false;
 	}
 
 	public bool UpButtonPressed ()
@@ -31,12 +31,17 @@ public class ViewController : MonoBehaviour
 
 	public bool RotateButtonPressed ()
 	{
-		return (this.leftButton || this.rightButton);
+		return (this.leftButton);
 	}
 
 	public bool BuildButtonPressed ()
 	{
 		return this.buildButton;
+	}
+
+	public bool SellButtonPressed ()
+	{
+		return this.sellButton;
 	}
 
 	public void UpButtonOn ()
@@ -69,14 +74,14 @@ public class ViewController : MonoBehaviour
 		leftButton = false;
 	}
 
-	public void RightButtonOn ()
+	public void SellButtonOn ()
 	{
-		rightButton = true;
+		sellButton = true;
 	}
 
-	public void RightButtonOff ()
+	public void SellButtonOff ()
 	{
-		rightButton = false;
+		sellButton = false;
 	}
 
 	public void BuildButtonOn ()

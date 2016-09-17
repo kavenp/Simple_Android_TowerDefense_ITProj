@@ -56,6 +56,8 @@ public class MP_GameCoordinator : NetworkBehaviour {
 
 		isWave = false;
 		numberOfWaves -= 1;
+
+		// This is terrible but can fix it later on
 		numberOfEnemiesPerWave = 5;
 	}
 
