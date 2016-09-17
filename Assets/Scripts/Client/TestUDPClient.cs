@@ -3,14 +3,16 @@ using System.Net;
 using System.Net.Sockets;
 using System;
 using System.Text;
+using UnityEngine.UI;
 
 // Derived from
 // http://pcrelated.net/index.php/csharp-send-and-receive-data-using-udpclient/
-public class ConnectToCustomServer : MonoBehaviour
+public class TestConnectToCustomServer : MonoBehaviour
 {
-
-    static UdpClient udp;
-    static IPEndPoint udpEndPoint;
+    public Text display;
+    private string response;
+    private UdpClient udp;
+    private IPEndPoint udpEndPoint;
 
     private int socketPort = 9876;
     private string nectarIP = "115.146.95.127";
@@ -30,11 +32,16 @@ public class ConnectToCustomServer : MonoBehaviour
         udp.BeginReceive(new AsyncCallback(UDP_IncomingData), udpEndPoint);
     }
 
-    static void UDP_IncomingData(IAsyncResult asyncResult)
+    void Update()
+    {
+        display.text = response;
+    }
+
+    void UDP_IncomingData(IAsyncResult asyncResult)
     {
         byte[] data = udp.EndReceive(asyncResult, ref udpEndPoint);
 
-        string response = Encoding.UTF8.GetString(data);
+        response = Encoding.UTF8.GetString(data);
         Debug.Log(response);
 
         udp.Close();
