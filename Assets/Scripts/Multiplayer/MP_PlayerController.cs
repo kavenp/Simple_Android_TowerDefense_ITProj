@@ -47,8 +47,12 @@ public class MP_PlayerController : NetworkBehaviour
 
         //DebugMove();
 		ButtonActions();
+<<<<<<< HEAD
 		goldDisplay.text = "Gold: " + playerGold;
 	}
+=======
+    }
+>>>>>>> refs/remotes/origin/master
 
 	[Command]
 	public void CmdConstructTower ()
@@ -150,7 +154,8 @@ public class MP_PlayerController : NetworkBehaviour
 	public void ButtonTranslate (float verticalInput)
 	{
 		var z = verticalInput * Time.deltaTime * movingSpeed;
-		gameObject.transform.Translate (0, 0, z);
+
+        gameObject.transform.Translate (0, 0, z);
 	}
 
 	public void ButtonRotate (float horizontalInput)
