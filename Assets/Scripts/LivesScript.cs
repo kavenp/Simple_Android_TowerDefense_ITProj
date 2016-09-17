@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class LivesScript : MonoBehaviour
 {
-    
+
     public int numLives;
     public Text livesDisplay;
 

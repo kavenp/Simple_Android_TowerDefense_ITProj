@@ -45,7 +45,6 @@ public class ShootEnemies : NetworkBehaviour
 
 		//get starting and target positions
 		GameObject newBullet = (GameObject) Instantiate (projectilePrefab, startloc, projectilePrefab.transform.rotation);
-		
 
 		//instantiate the new bullet
 		BulletBehaviour behavior = (BulletBehaviour) newBullet.GetComponent ("BulletBehaviour");

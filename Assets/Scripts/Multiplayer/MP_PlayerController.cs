@@ -9,7 +9,8 @@ public class MP_PlayerController : NetworkBehaviour
 	// Builder movement variables
 	public float turningSpeed;
 	public float movingSpeed;
-	public bool leftButtonClicked;
+
+	int playerGold = 100;
 
 	// Current buildable tile
 	private GameObject currentBuildableTile = null;
@@ -25,10 +26,15 @@ public class MP_PlayerController : NetworkBehaviour
 	GameObject buttons;
 	ViewController vc;
 
+	// Gold UI
+	Text goldDisplay;
+
 	void Start()
 	{
 		buttons = GameObject.FindGameObjectWithTag("Buttons");
 		vc      = buttons.GetComponent<ViewController>();
+		// Get gold UI
+		goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay").GetComponent<Text>();
 	}
 
 	void Update ()
@@ -41,7 +47,9 @@ public class MP_PlayerController : NetworkBehaviour
 
         //DebugMove();
 		ButtonActions();
+		goldDisplay.text = "Gold: " + playerGold;
 	}
+
 
 	[Command]
 	public void CmdConstructTower ()
@@ -56,22 +64,44 @@ public class MP_PlayerController : NetworkBehaviour
 			// Hit a buildable surface
 			if (hit.collider.tag == "BS")
 			{
+				// Get current tile
 				currentBuildableTile = hit.collider.gameObject;
-
-				Debug.Log (currentBuildableTile);
 
 				// Get the script build tower and build tower
 				MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower> ();
-				build_script.BuildTower (this.gameObject.GetInstanceID (), 0);
-
+				build_script.BuildTower (this.gameObject.GetInstanceID (), 0, ref playerGold);
 			}
 			else
 			{
 				currentBuildableTile = null;
 			}
+		}
+	}
 
+	[Command]
+	public void CmdSellTower ()
+	{
+		Vector3 down = transform.TransformDirection (Vector3.down);
+		RaycastHit hit;
+		Ray ray = new Ray (transform.position, down);
 
-			//Debug.Log (hit.collider.ToString ());
+		// Raycast beneath builder
+		if (Physics.Raycast (ray, out hit, 10))
+		{
+			// Hit a buildable surface
+			if (hit.collider.tag == "BS")
+			{
+				// Get current tile
+				currentBuildableTile = hit.collider.gameObject;
+
+				// Get the script build tower and build tower
+				MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower> ();
+				build_script.SellTower (this.gameObject.GetInstanceID (), ref playerGold);
+			}
+			else
+			{
+				currentBuildableTile = null;
+			}
 		}
 	}
 
@@ -94,6 +124,11 @@ public class MP_PlayerController : NetworkBehaviour
 		if (vc.BuildButtonPressed())
 		{
 			CmdConstructTower ();
+		}
+
+		if (vc.SellButtonPressed())
+		{
+			CmdSellTower ();
 		}
 
 		// Perform state analysis
@@ -134,5 +169,10 @@ public class MP_PlayerController : NetworkBehaviour
 	{
 		Color orange = new Color (178 / 255.0f, 115 / 255.0f, 0, 1);
 		GetComponent<MeshRenderer> ().material.SetColor ("_EmissionColor", orange);
+	}
+
+	public void addGold(int amount)
+	{
+		this.playerGold += amount;
 	}
 }
