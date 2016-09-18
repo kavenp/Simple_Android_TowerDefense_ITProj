@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 // Derived from
 // http://pcrelated.net/index.php/csharp-send-and-receive-data-using-udpclient/
-public class TestUDPClient : MonoBehaviour
+public class TestConnectToCustomServer : MonoBehaviour
 {
     public Text display;
     private string response;

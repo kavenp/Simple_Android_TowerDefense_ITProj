@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MP_GameCoordinator : NetworkBehaviour {
 
@@ -13,9 +14,7 @@ public class MP_GameCoordinator : NetworkBehaviour {
 	public float waveWait;
 
 	bool isSpawning = false;
-
 	bool isWave = false;
-	bool gameVictory = false;
 
     void Update()
     {
@@ -26,15 +25,18 @@ public class MP_GameCoordinator : NetworkBehaviour {
 			StartCoroutine(SpawnEnemyWave(spawnWait));
 		}
 
-		if(isWave == false && numberOfWaves > 0)
+        if (isWave == false && numberOfWaves > 0)
 		{
 			isWave = true;
 			StartCoroutine(SpawnNextWave(waveWait));
 		}
-		else
+        else if (numberOfWaves == 0 && isWave == false &&
+            numberOfEnemiesPerWave == 0 &&
+            GameObject.FindWithTag("Enemy") == null)
 		{
-			gameVictory = true;
-		}
+            // The game has been won
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+        }
     }
 
     IEnumerator SpawnEnemyWave(float seconds)
