@@ -29,6 +29,8 @@ public class MP_PlayerController : NetworkBehaviour
 	// Gold UI
 	Text goldDisplay;
 
+    private int previousNumTowers = 0;
+
 	void Start()
 	{
 		buttons = GameObject.FindGameObjectWithTag("Buttons");
@@ -47,6 +49,7 @@ public class MP_PlayerController : NetworkBehaviour
 
         //DebugMove();
 		ButtonActions();
+        UpdateGold();
 		goldDisplay.text = "Gold: " + playerGold;
 	}
 
@@ -123,7 +126,7 @@ public class MP_PlayerController : NetworkBehaviour
 	{
 		if (vc.BuildButtonPressed())
 		{
-			CmdConstructTower ();
+            CmdConstructTower ();
 		}
 
 		if (vc.SellButtonPressed())
@@ -162,7 +165,7 @@ public class MP_PlayerController : NetworkBehaviour
 
 	public void ConstructTower ()
 	{
-		CmdConstructTower ();
+        CmdConstructTower ();
 	}
 
 	public override void OnStartLocalPlayer ()
@@ -171,8 +174,32 @@ public class MP_PlayerController : NetworkBehaviour
 		GetComponent<MeshRenderer> ().material.SetColor ("_EmissionColor", orange);
 	}
 
-	public void addGold(int amount)
+	public void AddGold(int amount)
 	{
 		this.playerGold += amount;
 	}
+
+    public void UpdateGold()
+    {
+        int numTowers =
+            GameObject.FindGameObjectsWithTag("Tower").Length;
+
+        if (numTowers != previousNumTowers)
+        {
+            int numChanges = numTowers - previousNumTowers;
+            int cost = 0;
+            if (numChanges > 0)
+            {
+                // Towers built, deduct gold
+                cost = 20;
+            }
+            else
+            {
+                // Towers sold, increase gold
+                cost = 10;
+            }
+            playerGold -= numChanges * cost;
+            previousNumTowers = numTowers;
+        }
+    }
 }

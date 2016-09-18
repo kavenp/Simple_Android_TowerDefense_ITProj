@@ -15,12 +15,18 @@ public class EnemyDestructionDelegate : MonoBehaviour
 		}
 
 		// Find all players and give them gold
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        // Ensure game has not ended
+        if (players != null)
         {
-            // Game has not ended
-            MP_PlayerController pc = player.GetComponent<MP_PlayerController>();
-            pc.addGold(10);
+            for (int i = 0; i < players.Length; i++)
+            {
+                MP_PlayerController pc =
+                    players[i].GetComponent<MP_PlayerController>();
+
+                pc.AddGold(10);
+            }
         }
 	}
 }

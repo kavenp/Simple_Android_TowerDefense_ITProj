@@ -54,10 +54,10 @@ public class MP_TileBuildTower :NetworkBehaviour
 				NetworkServer.Spawn (createdTower);
 
 				// Subtract gold
-				playerGold -= towerCost;
+				//playerGold -= towerCost;
 
-				// Set the tile to occupied
-				setTileFree (false);
+                // Set the tile to occupied
+                setTileFree (false);
 			}
 			else
 			{
@@ -88,7 +88,7 @@ public class MP_TileBuildTower :NetworkBehaviour
 					Destroy(this.createdTower);
 
 					// Add gold - flat rate
-					playerGold += (int) (0.9 * refundCost);
+					//playerGold += (int) (0.9 * refundCost);
 
 					// Set the tile to occupied
 					setTileFree (true);
