@@ -1,19 +1,19 @@
 COMP30022 IT Project - Team Aqua
 ================================
 
-The Game:
-------------
-This game is a multiplayer tower defense game.
+Project
+-------
+The project is to build a cooperative multiplayer tower defence game for
+Android. Towers are constructed by builders controlled by the players.
+builders which uses a moveable player to build towers. Features chat
+and replay functionality.
 
-The Team:
-------------
-Lawrence Kuoch:
-
-Matthew Eldridge:
-
-Jason Traill:
-
-Kaven Peng:
+Team
+----
+Lawrence Kuoch: Front-End and UNET Server Developer
+Matthew Eldridge: Front-End Developer
+Jason Traill: Full Stack Developer
+Kaven Peng: Back-End and Database Developer
 
 Requirements
 ------------
