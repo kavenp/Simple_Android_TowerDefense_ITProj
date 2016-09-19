@@ -50,7 +50,7 @@ public class MP_PlayerController : NetworkBehaviour
         //DebugMove();
 		ButtonActions();
         UpdateGold();
-		goldDisplay.text = "Gold: " + playerGold;
+		goldDisplay.text = "Shared Gold: " + playerGold;
 	}
 
 
@@ -127,11 +127,13 @@ public class MP_PlayerController : NetworkBehaviour
 		if (vc.BuildButtonPressed())
 		{
             CmdConstructTower ();
+            vc.BuildButtonOff();
 		}
 
 		if (vc.SellButtonPressed())
 		{
 			CmdSellTower ();
+            vc.SellButtonOff();
 		}
 
 		// Perform state analysis

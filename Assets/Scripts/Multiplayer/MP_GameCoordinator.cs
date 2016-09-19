@@ -34,7 +34,6 @@ public class MP_GameCoordinator : NetworkBehaviour {
             numberOfEnemiesPerWave == 0 &&
             GameObject.FindWithTag("Enemy") == null)
 		{
-            // The game has been won
             SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
     }

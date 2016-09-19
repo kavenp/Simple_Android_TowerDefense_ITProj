@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
+// Reloads the multiplayer scene.
 public class RestartScript : MonoBehaviour
 {
 

@@ -2,6 +2,8 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Updates and displays the number of lives
+// remaining for the players.
 public class LivesScript : MonoBehaviour
 {
 
@@ -10,6 +12,9 @@ public class LivesScript : MonoBehaviour
 
     void Awake()
     {
+        // Need the number of lives remaining
+        // for calculating and displaying the score
+        // in the GameOver scene
         DontDestroyOnLoad(transform.gameObject);
     }
 
@@ -18,6 +23,9 @@ public class LivesScript : MonoBehaviour
         livesDisplay.text = "Lives: " + numLives;
     }
 
+    // Deduct a life if the player has lives
+    // and the object that has entered the
+    // player's base is an enemy.
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy" && numLives > 0)
@@ -27,6 +35,8 @@ public class LivesScript : MonoBehaviour
         }
     }
 
+    // Wait for trigger to exit so that lives
+    // is updated on all clients.
     void OnTriggerExit(Collider other)
     {
         Destroy(other.gameObject);

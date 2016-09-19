@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Logs the enemy health and the time since health
+// was first lost.
 public class TestEnemyHealthScript : MonoBehaviour
 {
     private GameObject enemy = null;
