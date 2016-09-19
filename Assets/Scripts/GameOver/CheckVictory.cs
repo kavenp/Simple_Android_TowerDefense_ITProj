@@ -23,7 +23,7 @@ public class CheckVictory : MonoBehaviour
         //{
         //    SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         //}
-        
+
         if (time < lastWaveTime)
         {
             time += Time.deltaTime;
