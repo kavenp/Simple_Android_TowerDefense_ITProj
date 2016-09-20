@@ -10,24 +10,35 @@ public class MP_HostGame : MonoBehaviour
     private InputField theRoomName;
     private Text nwMessage;
     private GameObject mp_background;
-    private GameObject networking_ui;
+    private GameObject hostgame_ui;
+
+    private GameObject joingame_ui;
+
+    private GameObject goldDisplay;
+    private GameObject livesDisplay;
 
     void Start()
     {
         // Get instance of network manager
         nm = NetworkManager.singleton;
 
-        // Get ui components
-        theRoomName = GameObject.FindGameObjectWithTag("RoomName").GetComponent<InputField>();
-        nwMessage = GameObject.FindGameObjectWithTag("nwMessage").GetComponent<Text>();
-        mp_background = GameObject.FindGameObjectWithTag("Background");
-        networking_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
-
         // Start matchmaking automatically
         if (nm.matchMaker == null)
         {
             nm.StartMatchMaker();
         }
+
+        // Get ui components
+        theRoomName = GameObject.FindGameObjectWithTag("RoomName").GetComponent<InputField>();
+        nwMessage = GameObject.FindGameObjectWithTag("nwMessage").GetComponent<Text>();
+        mp_background = GameObject.FindGameObjectWithTag("Background");
+        hostgame_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
+        joingame_ui = GameObject.FindGameObjectWithTag("JoinGameCanvas");
+        goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay");
+        livesDisplay = GameObject.FindGameObjectWithTag("LivesDisplay");
+
+        livesDisplay.SetActive(false);
+        goldDisplay.SetActive(false);
     }
     public void CreateRoom()
     {
@@ -47,7 +58,12 @@ public class MP_HostGame : MonoBehaviour
 
             // Disable networking overlay
             mp_background.SetActive(false);
-            networking_ui.SetActive(false);
+            hostgame_ui.SetActive(false);
+            joingame_ui.SetActive(false);
+
+            // Allow lives/gold overlay
+            livesDisplay.SetActive(true);
+            goldDisplay.SetActive(true);
         }
     }
 

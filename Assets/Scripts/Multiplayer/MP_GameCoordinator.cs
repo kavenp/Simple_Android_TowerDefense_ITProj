@@ -13,11 +13,18 @@ public class MP_GameCoordinator : NetworkBehaviour
     public float spawnWait;
     public float waveWait;
 
+    // Number of players
+    int concurrentPlayers;
+
     bool isSpawning = false;
     bool isWave = false;
 
     void Update()
     {
+        // Think set so that the game starts when there are 2 concurrent players
+        concurrentPlayers = Network.connections.Length;
+        Debug.Log(concurrentPlayers);
+
         if (isSpawning == false && numberOfEnemiesPerWave > 0)
         {
             isSpawning = true;
