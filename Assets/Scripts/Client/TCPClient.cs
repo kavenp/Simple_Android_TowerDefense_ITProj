@@ -11,7 +11,7 @@ public class TCPClient : MonoBehaviour
     private TcpClient tcpClient;
     private IPEndPoint tcpEndPoint;
 
-    StreamReader clientStreamReader;
+    //StreamReader clientStreamReader;
     StreamWriter clientStreamWriter;
 
     private int socketPort = 9876;
@@ -28,7 +28,7 @@ public class TCPClient : MonoBehaviour
 
         Debug.Log("2");
         tcpClient.Connect(nectarIP, socketPort);
-        
+
 
         NetworkStream networkStream = tcpClient.GetStream();
         //clientStreamReader = new StreamReader(networkStream);
@@ -49,13 +49,13 @@ public class TCPClient : MonoBehaviour
         clientStreamWriter.Close();
         tcpClient.Close();
 
-        
-        
+
+
     }
 
     void IncomingData(IAsyncResult asyncResult)
     {
-        Debug.Log(clientStreamReader.ReadLine());
+        //Debug.Log(clientStreamReader.ReadLine());
 
         //byte[] data = tcpClient.EndReceive(asyncResult, ref tcpEndPoint);
 

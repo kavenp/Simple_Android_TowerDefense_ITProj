@@ -35,8 +35,7 @@ public class BulletBehaviour : MonoBehaviour
 		//EnemyDestructionDelegate dele = target.gameObject.GetComponent<EnemyDestructionDelegate>();
 		//dele.enemyDelegate += OnEnemyDestroy;
 		enemyHP = (EnemyHealth) target.GetComponent ("EnemyHealth");
-		GameObject gcObject =
-			GameObject.FindGameObjectWithTag ("GameController");
+		//GameObject gcObject = GameObject.FindGameObjectWithTag ("GameController");
 
 		//gc = gcObject.GetComponent<GameController> ();
 
@@ -47,7 +46,7 @@ public class BulletBehaviour : MonoBehaviour
 	{
 		Destroy (gameObject);
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -73,7 +72,7 @@ public class BulletBehaviour : MonoBehaviour
 			Destroy (gameObject);
 			//target is null so destroy bullet;
 		}
-        
+
 
 //		if (gameObject.transform.position.Equals (targetpos)) {
 //			//if position reaches target
@@ -96,7 +95,7 @@ public class BulletBehaviour : MonoBehaviour
 		{
 			enemyHP.Hit (damage);
 			if (enemyHP.health <= 0)
-			{		
+			{
 				Destroy (other.gameObject);
 			}
 			Destroy (gameObject);

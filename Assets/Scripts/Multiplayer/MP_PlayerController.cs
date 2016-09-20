@@ -6,8 +6,15 @@ using System.Collections;
 
 public class MP_PlayerController : NetworkBehaviour
 {
-	// Builder movement variables
-	public float turningSpeed;
+    // Game boundaries
+    const int worldHeightMin = 10;
+	const int worldHeightMax = 80;
+
+	const int worldWidthMin = 10;
+	const int worldWidthMax = 120;
+
+    // Builder movement variables
+    public float turningSpeed;
 	public float movingSpeed;
 
 	int playerGold = 100;
@@ -157,6 +164,24 @@ public class MP_PlayerController : NetworkBehaviour
 	{
 		var z = verticalInput * Time.deltaTime * movingSpeed;
 		gameObject.transform.Translate (0, 0, z);
+
+		// Boundary checking
+		if(gameObject.transform.position.z < worldHeightMin)
+		{
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, worldHeightMin);
+        }
+		if(gameObject.transform.position.z > worldHeightMax)
+		{
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, worldHeightMax);
+        }
+		if(gameObject.transform.position.x < worldWidthMin)
+		{
+            gameObject.transform.position = new Vector3(worldWidthMin, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
+		if(gameObject.transform.position.x > worldWidthMax)
+		{
+            gameObject.transform.position = new Vector3(worldWidthMax, gameObject.transform.position.y, gameObject.transform.position.z);
+        }
 	}
 
 	public void ButtonRotate (float horizontalInput)
