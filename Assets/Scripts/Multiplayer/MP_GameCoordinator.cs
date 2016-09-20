@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -28,12 +27,12 @@ public class MP_GameCoordinator : NetworkBehaviour
         concurrentPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
 
         // If 2 players haven't connected wait for connection
-        if(concurrentPlayers < 2)
+        if (concurrentPlayers < 2)
         {
             waitForPlayerTimer -= Time.deltaTime;
 
             // Assume player couldn't connect - Load game over
-            if(waitForPlayerTimer <= 0)
+            if (waitForPlayerTimer <= 0)
             {
                 SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
             }

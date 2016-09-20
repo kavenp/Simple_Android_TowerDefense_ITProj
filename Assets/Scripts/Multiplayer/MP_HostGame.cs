@@ -57,5 +57,4 @@ public class MP_HostGame : MonoBehaviour
             joingame_ui.SetActive(false);
         }
     }
-
 }
