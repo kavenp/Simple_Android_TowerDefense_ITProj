@@ -34,6 +34,7 @@ public class ChatBoxFunctions : MonoBehaviour {
 
 	public void ShowSentMessage() {
 		ShowMessage (message);
+        message = "";
 	}
 
 	public void ShowReceivedMessage() {
