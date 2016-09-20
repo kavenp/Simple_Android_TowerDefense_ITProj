@@ -16,6 +16,9 @@ public class ClientConnection
 
     private static ClientConnection instance = new ClientConnection();
 
+	private string serverResponse;
+	private byte[] receivedData;
+
     // Singleton.
     private ClientConnection()
     {}
@@ -48,8 +51,27 @@ public class ClientConnection
         byte[] data = udp.EndReceive(asyncResult, ref udpEndPoint);
 
         string response = Encoding.UTF8.GetString(data);
+		this.serverResponse = response;
         Debug.Log(response);
-
         udp.Close();
     }
+
+	//EndReceive Wrapper
+	public void EndReceive(IAsyncResult asyncResult)
+	{
+		byte[] data = udp.EndReceive (asyncResult, ref udpEndPoint);
+		this.receivedData = data;
+		udp.Close ();
+	}
+
+	public byte[] GetData()
+	{
+		return receivedData;
+	}
+
+	public string GetResponse() 
+	{
+		return serverResponse;	
+	}
+		
 }
