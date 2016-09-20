@@ -1,17 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class MP_HostGame : MonoBehaviour
 {
     [SerializeField]
-    private uint roomSize = 6;
-    private string roomName;
+    private uint roomSize = 2;
     private NetworkManager nm;
+    private InputField theRoomName;
+    private Text nwMessage;
+    private GameObject mp_background;
+    private GameObject networking_ui;
 
     void Start()
     {
         // Get instance of network manager
         nm = NetworkManager.singleton;
+
+        // Get ui components
+        theRoomName = GameObject.FindGameObjectWithTag("RoomName").GetComponent<InputField>();
+        nwMessage = GameObject.FindGameObjectWithTag("nwMessage").GetComponent<Text>();
+        mp_background = GameObject.FindGameObjectWithTag("Background");
+        networking_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
 
         // Start matchmaking automatically
         if (nm.matchMaker == null)
@@ -19,21 +29,25 @@ public class MP_HostGame : MonoBehaviour
             nm.StartMatchMaker();
         }
     }
-
-
-    public void SetRoomName(string _name)
+    public void CreateRoom()
     {
-        roomName = _name;
-    }
+        string room = theRoomName.text;
 
-    public void CreateRoome()
-    {
-        if (roomName != "" && roomName != null)
+        if(room == "" || room == null)
         {
-            Debug.Log("Creating Room: " + roomName + " with room for " + roomSize + " players");
+            nwMessage.text = "The room name cannot be empty";
+        }
 
-            // Create room
-            nm.matchMaker.CreateMatch(roomName, roomSize, true, "", null, null, 0, 1, nm.OnMatchCreate);
+        if (room != "" && room != null)
+        {
+            Debug.Log("Creating Room: " + room + " with room for " + roomSize + " players");
+
+            // Start match
+            nm.matchMaker.CreateMatch(room, roomSize, true, "", "", "", 0, 0, nm.OnMatchCreate);
+
+            // Disable networking overlay
+            mp_background.SetActive(false);
+            networking_ui.SetActive(false);
         }
     }
 

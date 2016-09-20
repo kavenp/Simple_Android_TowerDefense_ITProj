@@ -17,6 +17,11 @@ TagManager:
   - SButton
   - GoldDisplay
   - Path
+  - RoomName
+  - HostGameCanvas
+  - Background
+  - nwMessage
+  - NetworkError
   layers:
   - Default
   - TransparentFX
