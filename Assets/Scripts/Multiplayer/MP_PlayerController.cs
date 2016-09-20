@@ -42,12 +42,14 @@ public class MP_PlayerController : NetworkBehaviour
 	{
 		buttons = GameObject.FindGameObjectWithTag("Buttons");
 		vc      = buttons.GetComponent<ViewController>();
+
+		// Get gold UI
+		goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay").GetComponent<Text>();
 	}
 
 	void Update ()
 	{
-		// Get gold UI
-		goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay").GetComponent<Text>();
+
 
 		// Check that is local player
 		if (!isLocalPlayer)

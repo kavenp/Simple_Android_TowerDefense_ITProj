@@ -34,11 +34,6 @@ public class MP_HostGame : MonoBehaviour
         mp_background = GameObject.FindGameObjectWithTag("Background");
         hostgame_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
         joingame_ui = GameObject.FindGameObjectWithTag("JoinGameCanvas");
-        goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay");
-        livesDisplay = GameObject.FindGameObjectWithTag("LivesDisplay");
-
-        livesDisplay.SetActive(false);
-        goldDisplay.SetActive(false);
     }
     public void CreateRoom()
     {
@@ -60,10 +55,6 @@ public class MP_HostGame : MonoBehaviour
             mp_background.SetActive(false);
             hostgame_ui.SetActive(false);
             joingame_ui.SetActive(false);
-
-            // Allow lives/gold overlay
-            livesDisplay.SetActive(true);
-            goldDisplay.SetActive(true);
         }
     }
 
