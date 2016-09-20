@@ -25,9 +25,6 @@ public class MP_JoinGame : MonoBehaviour
 
     private GameObject joingame_ui;
 
-    private GameObject goldDisplay;
-    private GameObject livesDisplay;
-
     void Start()
     {
         nm = NetworkManager.singleton;
@@ -45,18 +42,6 @@ public class MP_JoinGame : MonoBehaviour
         mp_background = GameObject.FindGameObjectWithTag("Background");
         hostgame_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
         joingame_ui = GameObject.FindGameObjectWithTag("JoinGameCanvas");
-        goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay");
-        livesDisplay = GameObject.FindGameObjectWithTag("LivesDisplay");
-
-        if(livesDisplay != null)
-        {
-            livesDisplay.SetActive(false);
-        }
-
-        if(goldDisplay != null)
-        {
-            goldDisplay.SetActive(false);
-        }
     }
 
     public void RefreshRoomList()
@@ -120,9 +105,5 @@ public class MP_JoinGame : MonoBehaviour
         mp_background.SetActive(false);
         hostgame_ui.SetActive(false);
         joingame_ui.SetActive(false);
-
-        // Allow lives/gold overlay
-        livesDisplay.SetActive(true);
-        goldDisplay.SetActive(true);
     }
 }

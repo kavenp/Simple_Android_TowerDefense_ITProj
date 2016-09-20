@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -19,11 +20,28 @@ public class MP_GameCoordinator : NetworkBehaviour
     bool isSpawning = false;
     bool isWave = false;
 
+    float waitForPlayerTimer = 60;
+
     void Update()
     {
-        // Think set so that the game starts when there are 2 concurrent players
-        concurrentPlayers = Network.connections.Length;
-        Debug.Log(concurrentPlayers);
+        // Get number of concurrent players
+        concurrentPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
+
+        // If 2 players haven't connected wait for connection
+        if(concurrentPlayers < 2)
+        {
+            waitForPlayerTimer -= Time.deltaTime;
+
+            // Assume player couldn't connect - Load game over
+            if(waitForPlayerTimer <= 0)
+            {
+                SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+            }
+
+            return;
+        }
+
+        Debug.Log("CP = " + concurrentPlayers);
 
         if (isSpawning == false && numberOfEnemiesPerWave > 0)
         {

@@ -7195,7 +7195,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Gold:'
+  m_Text: 
 --- !u!222 &1059588514
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8455,7 +8455,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Lives:'
+  m_Text: 
 --- !u!222 &1161990847
 CanvasRenderer:
   m_ObjectHideFlags: 0
