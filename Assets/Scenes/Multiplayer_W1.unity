@@ -1385,10 +1385,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1987740803}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.8, y: -1.1}
-  m_SizeDelta: {x: 672, y: 480.69}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.0000038147, y: -1.050766}
+  m_SizeDelta: {x: 0, y: 2.4700012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &170078459
 MonoBehaviour:
@@ -5457,7 +5457,7 @@ Prefab:
     - target: {fileID: 224000012488595856, guid: c2584475770d44d4dbe81648516f6098,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000012488595856, guid: c2584475770d44d4dbe81648516f6098,
         type: 2}
@@ -5698,6 +5698,11 @@ Prefab:
     - target: {fileID: 114000013843932018, guid: c2584475770d44d4dbe81648516f6098,
         type: 2}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013381281622, guid: c2584475770d44d4dbe81648516f6098,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5996,8 +6001,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eaa8f98bbd6ac1439f1160688960a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numLives: 0
-  livesDisplay: {fileID: 0}
+  numLives: 10
+  livesDisplay: {fileID: 1161990846}
 --- !u!1 &849744298
 GameObject:
   m_ObjectHideFlags: 0
