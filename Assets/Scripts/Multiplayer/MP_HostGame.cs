@@ -48,6 +48,9 @@ public class MP_HostGame : MonoBehaviour
         {
             Debug.Log("Creating Room: " + room + " with room for " + roomSize + " players");
 
+            // Set network message to nothing
+            nwMessage.text = "";
+
             // Start match
             nm.matchMaker.CreateMatch(room, roomSize, true, "", "", "", 0, 0, nm.OnMatchCreate);
 
