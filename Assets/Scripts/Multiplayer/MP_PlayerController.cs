@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 using UnityEngine.Networking;
 using System.Collections;
 
@@ -19,6 +20,8 @@ public class MP_PlayerController : NetworkBehaviour
 
     int playerGold = 100;
 
+    int previousNumTowers = 0;
+
     // Current buildable tile
     private GameObject currentBuildableTile = null;
 
@@ -36,10 +39,17 @@ public class MP_PlayerController : NetworkBehaviour
     // Gold UI
     Text goldDisplay;
 
-    private int previousNumTowers = 0;
+    // Dictionary of values
+    Dictionary<string, int> towerCostDict = new Dictionary<string, int>();
+    Dictionary<string, int> towerRefundDict = new Dictionary<string, int>();
 
     void Start()
     {
+        // Initialise values for Towers
+        towerCostDict.Add("Tower", 20);
+        towerRefundDict.Add("Tower", 10);
+
+        // Get buttons
         buttons = GameObject.FindGameObjectWithTag("Buttons");
         vc = buttons.GetComponent<ViewController>();
 
@@ -85,7 +95,7 @@ public class MP_PlayerController : NetworkBehaviour
 
                 // Get the script build tower and build tower
                 MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower>();
-                build_script.BuildTower(this.gameObject.GetInstanceID(), 0, ref playerGold);
+                build_script.BuildTower(this.gameObject.GetInstanceID(), "Tower", towerCostDict, playerGold);
             }
             else
             {
@@ -112,7 +122,7 @@ public class MP_PlayerController : NetworkBehaviour
 
                 // Get the script build tower and build tower
                 MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower>();
-                build_script.SellTower(this.gameObject.GetInstanceID(), ref playerGold);
+                build_script.SellTower(this.gameObject.GetInstanceID(), towerRefundDict);
             }
             else
             {
@@ -217,27 +227,30 @@ public class MP_PlayerController : NetworkBehaviour
         this.playerGold += amount;
     }
 
+    public int GetGold()
+    {
+        return this.playerGold;
+    }
+
     public void UpdateGold()
     {
-        int numTowers =
-            GameObject.FindGameObjectsWithTag("Tower").Length;
+        UpdateBaseTowerGold();
+    }
 
-        if (numTowers != previousNumTowers)
+    void UpdateBaseTowerGold()
+    {
+        int numBaseTowers =
+            GameObject.FindGameObjectsWithTag("Tower").Length;
+        int baseTowerCost;
+        towerCostDict.TryGetValue("Tower", out baseTowerCost);
+        int baseRefundCost;
+        towerRefundDict.TryGetValue("Tower", out baseRefundCost);
+
+        if (numBaseTowers != previousNumTowers)
         {
-            int numChanges = numTowers - previousNumTowers;
-            int cost = 0;
-            if (numChanges > 0)
-            {
-                // Towers built, deduct gold
-                cost = 20;
-            }
-            else
-            {
-                // Towers sold, increase gold
-                cost = 10;
-            }
-            playerGold -= numChanges * cost;
-            previousNumTowers = numTowers;
+            int numChanges = numBaseTowers - previousNumTowers;
+            playerGold -= numChanges * baseTowerCost;
+            previousNumTowers = numBaseTowers;
         }
     }
 }

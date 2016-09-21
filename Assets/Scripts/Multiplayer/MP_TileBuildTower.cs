@@ -9,11 +9,8 @@ public class MP_TileBuildTower :NetworkBehaviour
 	private bool isFree = true;
 	private GameObject createdTower = null;
 
-	private int towerType;
+	private string towerType;
 	private int owner;
-
-	// Tower types and cost
-	Dictionary<int, int> towerDict = new Dictionary<int, int>();
 
 	// Need to make this a list of towers
 	private GameObject tower;
@@ -23,15 +20,12 @@ public class MP_TileBuildTower :NetworkBehaviour
 		// Load tower resources
 		tower = Resources.Load ("Tower") as GameObject;
 
-		// Initialise Dictionary
-		towerDict.Add(0, 20);
-
 		// Owner
 		setOwner (-1);
-		setTowerType (-1);
+		setTowerType (null);
 	}
 
-	public void BuildTower (int playerID, int _towerType, ref int playerGold)
+	public void BuildTower (int playerID, string _towerType, Dictionary<string,int> towerDict, int playerGold)
 	{
 		// Get cost of tower
 		int towerCost;
@@ -53,12 +47,12 @@ public class MP_TileBuildTower :NetworkBehaviour
 				createdTower = (GameObject) Instantiate (tower, towerPosition, tower.transform.rotation);
 				NetworkServer.Spawn (createdTower);
 
-				// Subtract gold
-				//playerGold -= towerCost;
+                // Subtract gold - Client side only
+                //mpc.AddGold(-towerCost);
 
                 // Set the tile to occupied
                 setTileFree (false);
-			}
+            }
 			else
 			{
 				// Put UI text saying its currently unbuildable
@@ -69,32 +63,32 @@ public class MP_TileBuildTower :NetworkBehaviour
 		{
 			Debug.Log("Not enough gold");
 		}
-	}
+    }
 
-	public void SellTower (int playerID, ref int playerGold)
+	public void SellTower (int playerID, Dictionary<string,int> towerDict)
 	{
-		if(this.towerType != -1)
+		if(this.towerType != null)
 		{
 			if(isTileFree() == false)
 			{
 				// If owner of the tower
 				if(playerID == this.owner)
 				{
-					// Get cost of tower
+					// Get cost of tower - Client only
 					int refundCost;
 					towerDict.TryGetValue(this.towerType, out refundCost);
 
 					// Destroy tower and refund it
 					Destroy(this.createdTower);
 
-					// Add gold - flat rate
-					//playerGold += (int) (0.9 * refundCost);
+                    // Add gold - flat rate - client side only
+                    //playerGold += (int) (0.9 * refundCost);
 
-					// Set the tile to occupied
-					setTileFree (true);
+                    // Set the tile to occupied
+                    setTileFree (true);
 
 					// Set the tower type to null
-					setTowerType(-1);
+					setTowerType(null);
 				}
 			}
 		}
@@ -105,7 +99,7 @@ public class MP_TileBuildTower :NetworkBehaviour
 		this.owner = newOwner;
 	}
 
-	private void setTowerType (int towerType)
+	private void setTowerType (string towerType)
 	{
 		this.towerType = towerType;
 	}
@@ -118,10 +112,5 @@ public class MP_TileBuildTower :NetworkBehaviour
 	private bool isTileFree ()
 	{
 		return this.isFree;
-	}
-
-	public void SellTower ()
-	{
-
 	}
 }
