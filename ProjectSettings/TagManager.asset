@@ -25,6 +25,7 @@ TagManager:
   - RefreshButton
   - JoinGameCanvas
   - LivesDisplay
+  - LeaveRoomButton
   layers:
   - Default
   - TransparentFX
