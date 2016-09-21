@@ -26,6 +26,7 @@ TagManager:
   - JoinGameCanvas
   - LivesDisplay
   - LeaveRoomButton
+  - Leave
   layers:
   - Default
   - TransparentFX

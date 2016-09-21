@@ -16,6 +16,7 @@ public class LivesScript : MonoBehaviour
         // for calculating and displaying the score
         // in the GameOver scene
         DontDestroyOnLoad(transform.gameObject);
+        livesDisplay = GameObject.FindGameObjectWithTag("LivesDisplay").GetComponent<Text>();
     }
 
     void Start()
