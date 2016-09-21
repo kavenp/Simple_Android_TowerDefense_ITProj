@@ -13,6 +13,8 @@ public class MP_GameCoordinator : NetworkBehaviour
     public float spawnWait;
     public float waveWait;
 
+    private int waveMultiplier = 5;
+
     // Number of players
     int concurrentPlayers;
 
