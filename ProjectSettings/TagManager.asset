@@ -27,6 +27,7 @@ TagManager:
   - LivesDisplay
   - LeaveRoomButton
   - Leave
+  - ChatInputField
   layers:
   - Default
   - TransparentFX
