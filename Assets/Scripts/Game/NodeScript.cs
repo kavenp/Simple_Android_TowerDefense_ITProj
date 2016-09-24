@@ -3,7 +3,9 @@ using System.Collections;
 
 public class NodeScript : MonoBehaviour
 {
-
+    
+	public int nodeNumber;
+	
 	public GameObject nextNode;
 	// Use this for initialization
 	void Start ()

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.IO;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class playReplay : MonoBehaviour {
 
@@ -12,20 +14,32 @@ public class playReplay : MonoBehaviour {
 	
 	public GameObject tower; // For spawning towers
 	public GameObject player; // For spawning players
+	public GameObject enemy;
+	
+	public Text goldDisplay;
 	
 	float startTime; // Start time of playback (used for synchronization)
 
 	float timeInterval;
 	
+	Dictionary<int,GameObject> nodes;
+	
 	GameObject[] currentPlayers;
 	GameObject[] currentTowers;
+	GameObject[] enemies;
 
 	byte[] replay; // The replay file
 	int replayIndex; // The current point in the replay file
 	
+	int count;
+	
+	public int count2;
+	
 	
 	// Use this for initialization
 	void Start () {
+	
+	    count2 = 0;
 	
 	    replay = System.IO.File.ReadAllBytes(fileName); // Read in the replay file
 	    replayIndex = 0;
@@ -36,13 +50,29 @@ public class playReplay : MonoBehaviour {
 	    }
 	    replayIndex+=1;
 		
+		goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay").GetComponent<Text>();
+		
 		// Initialize the start time
 		startTime = Time.time;
 		timeInterval = startTime;
+		
+		count = 0;
+		
+		enemies = new GameObject[]{};
+		
+		nodes = new Dictionary<int,GameObject>();
+		
+		
+		
+		foreach(GameObject i in GameObject.FindGameObjectsWithTag("Node")){
+		    nodes.Add(i.GetComponent<NodeScript>().nodeNumber,i);
+		}
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+	
 	
 	    // If end of replay reached
 	    while(replayIndex < replay.Length){
@@ -56,18 +86,19 @@ public class playReplay : MonoBehaviour {
 			
 			    // If updates have become de-synched, skip this update
 			    if((Time.time-startTime) < timeStamp){
+				    count = 0;
 				    replayIndex-=1;
-				    Debug.Log("Backstep!");
 				    return;
 			    }else{
+				    count+=1;
 			        replayIndex+=8;
 			    }
 		    }
 		    currentPlayers = GameObject.FindGameObjectsWithTag("Player");
-		
 		    // While receiving update player OpCodes
 		    while(replay[replayIndex]==3){
 			    replayIndex+=1; // Move to first parameter
+			
 			
 			    replayIndex+=4; // Skip the ID number, possibly implemented later
 			
@@ -99,7 +130,7 @@ public class playReplay : MonoBehaviour {
 			    }
 			
 		    }
-		
+		    
 		    // Skip despawn towers for now, will be implemented later
 		    while(replay[replayIndex]==5){
 			    replayIndex+=1; // Move to first parameter
@@ -122,7 +153,7 @@ public class playReplay : MonoBehaviour {
 				}
 				
 		    }
-		
+		 
 		    // While receiving Spawn Tower OpCodes
 		    while(replay[replayIndex]==7){
 		        replayIndex+=1; // Move to first parameter
@@ -137,13 +168,85 @@ public class playReplay : MonoBehaviour {
 		        Vector3 towerPosition = new Vector3(xPos,2,zPos);
 		        Instantiate(tower,towerPosition,tower.transform.rotation);
 		    }
+			
+			if(replay[replayIndex]==9){
+			    replayIndex+=1;
+			    int gold = BitConverter.ToInt32(replay,replayIndex);
+				replayIndex+=4;
+				
+			    goldDisplay.text = "Gold: " + gold;
+			}
+			
+			replayIndex+=5; // Skip lives value
+			
+			int count3 = 0;
+			
+			//if(count <= 1){
+			    enemies = GameObject.FindGameObjectsWithTag("Enemy");
+			//}
+			
+			bool isEnemy = false;
+			/**if(!(count <= 1)){
+			    replayIndex += 25;
+			}*/
+			
+			while(replay[replayIndex]==13 && (count <= 1)){
+			
+			    isEnemy = true;
+			    Debug.Log("Enemy!");
+			    replayIndex += 1;
+				
+				float xPos = (float)BitConverter.ToDouble(replay,replayIndex);
+		        replayIndex+=8;
+		        float zPos = (float)BitConverter.ToDouble(replay,replayIndex);
+		        replayIndex+=8;
+				
+				int health = BitConverter.ToInt32(replay,replayIndex);
+		        replayIndex+=4;
+				
+				int node = BitConverter.ToInt32(replay,replayIndex);
+		        replayIndex+=4;
+				
+				Vector3 enemyPosition = new Vector3(xPos,2,zPos);
+				
+				if(enemies.Length > 0){
+				    GameObject enemy = findClosest(xPos, zPos, enemies);
+				
+				    enemy.transform.position = enemyPosition;
+				
+				    enemy.GetComponent<EnemyHealth>().health = health;
+					
+					enemy.GetComponent<EnemyPathing>().setNode(nodes[node]);
+					
+					enemies = removeObject(enemy,enemies);
+				
+				}else{
+				    GameObject e = (GameObject)Instantiate(enemy,enemyPosition,enemy.transform.rotation);
+					e.GetComponent<EnemyHealth>().health = health;
+					e.GetComponent<EnemyPathing>().setNode(nodes[node]);
+				}
+				
+			}
+			
+			if(isEnemy){
+			    foreach(GameObject i in enemies){
+				    Debug.Log("Destroyed!" + enemies.Length);
+					Destroy(i);
+				}
+			    enemies = new GameObject[]{};
+			}
 		
 		    // Skip to the end of Update, will implement other things later
 		    while(replay[replayIndex]!=12){
 		        replayIndex+=1;
 		    }
-		
 		    replayIndex+=1;
+			if(replayIndex == replay.Length){
+			     foreach(GameObject i in enemies){
+				    Debug.Log("Destroyed!" + enemies.Length);
+					Destroy(i);
+				}
+			}
 	        }
 		}
 	
@@ -162,4 +265,42 @@ public class playReplay : MonoBehaviour {
 		
 		return list;	
 	}
+	
+	GameObject[] removeObject(GameObject target,GameObject[] list){
+
+		int index = 0;
+		bool found = false;
+	    // Move the object to the end of the array
+		foreach(GameObject i in list){
+		    if(i == target){
+				list[index] = list[list.Length-1];
+				list[list.Length-1] = i;
+				found = true;
+				break;
+			}
+			index+=1;
+		}
+		
+		// Delete the end of the array (containing the object to delete)
+		if(found){
+			Array.Resize(ref list,list.Length - 1);
+		}
+		
+		return list;	
+	}
+	
+	private GameObject findClosest(float x, float z, GameObject[] objects){
+	    Vector3 pos = new Vector3(x,2,z);
+		GameObject closest = null;
+		float minDistance = 99999999;
+		foreach(GameObject i in objects){
+		    if(Vector3.Distance(pos,i.transform.position) < minDistance){
+			    closest = i;
+				minDistance = Vector3.Distance(pos,i.transform.position);
+			}
+		}
+		
+		return closest;
+	}
+	
 }

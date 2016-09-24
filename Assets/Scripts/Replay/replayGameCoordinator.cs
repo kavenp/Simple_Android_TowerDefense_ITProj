@@ -46,7 +46,7 @@ public class replayGameCoordinator : MonoBehaviour
             numberOfEnemiesPerWave == 0 &&
             GameObject.FindWithTag("Enemy") == null)
         {
-            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+            SceneManager.LoadScene("ReplayOver", LoadSceneMode.Single);
         }
     }
 
@@ -56,7 +56,7 @@ public class replayGameCoordinator : MonoBehaviour
 
         Vector3 spawnPosition = new Vector3(spawnValues.x, spawnValues.y, spawnValues.z);
         Quaternion spawnRotation = Quaternion.identity;
-        Instantiate(enemy, spawnPosition, spawnRotation);
+        //Instantiate(enemy, spawnPosition, spawnRotation);
 
         isSpawning = false;
         numberOfEnemiesPerWave -= 1;

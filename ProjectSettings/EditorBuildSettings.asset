@@ -9,3 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Multiplayer_W1.unity
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
+  - enabled: 1
+    path: Assets/Scenes/Replay.unity
+  - enabled: 1
+    path: Assets/Scenes/ReplayOver.unity

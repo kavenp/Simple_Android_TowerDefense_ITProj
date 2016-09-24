@@ -29,10 +29,15 @@ public class recordReplay : MonoBehaviour {
 	// The starting time of the recording (used for synchronization)
 	float startTime;
 	
+	float timeInterval;
+	
 	// Use this for initialization
 	void Start () {
 	
+	
 	    startTime = Time.time;
+		
+		timeInterval = startTime;
 	
 	    // Writing the header for the replay file, should be the size of
 		// the float type, and size of the int type on the current system
@@ -48,6 +53,9 @@ public class recordReplay : MonoBehaviour {
 	    stream.Write(new byte[]{2},0,1); // End header OpCode
 	    
 	    stream.Close();
+		
+		
+		DontDestroyOnLoad(transform.gameObject);
 	    
 	}
 	
@@ -60,6 +68,7 @@ public class recordReplay : MonoBehaviour {
 		if(players.Length < 1)
 		{
 			startTime = Time.time;
+			timeInterval = startTime;
 		    return;
 		}
 		
@@ -149,7 +158,40 @@ public class recordReplay : MonoBehaviour {
 		stream.Write(new byte[]{10},0,1); // Set lives value OpCode
 		
 		byteStream = BitConverter.GetBytes(lives);
-	        stream.Write(byteStream,0,byteStream.Length);
+	    stream.Write(byteStream,0,byteStream.Length);
+		
+		
+		int health;
+		
+		int nodeNumber;
+		if((Time.time - timeInterval) > 1){
+		    Debug.Log("StoreEnemy!");
+		    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+			
+			foreach(GameObject i in enemies){
+			
+			    stream.Write(new byte[]{13},0,1);
+				
+				recordPosition(byteStream,stream,i);
+				
+				health = i.GetComponent<EnemyHealth>().health;
+				
+				byteStream = BitConverter.GetBytes(health);
+	            stream.Write(byteStream,0,byteStream.Length);
+				
+				nodeNumber = i.GetComponent<EnemyPathing>().currNode.GetComponent<NodeScript>().nodeNumber;
+				
+				
+				byteStream = BitConverter.GetBytes(nodeNumber);
+	            stream.Write(byteStream,0,byteStream.Length);
+				
+				
+				
+			}
+			
+		    timeInterval = Time.time;
+			
+		}
 		
 		stream.Write(new byte[]{12},0,1); // End Update OpCode
 		

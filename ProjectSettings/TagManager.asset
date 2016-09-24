@@ -27,6 +27,9 @@ TagManager:
   - LivesDisplay
   - LeaveRoomButton
   - Leave
+  - Node
+  - Pause
+  - Replay
   layers:
   - Default
   - TransparentFX

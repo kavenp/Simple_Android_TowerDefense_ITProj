@@ -10,7 +10,6 @@ public class EnemyPathing : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currNode = GameObject.Find("Node1");
-	
 	}
 
 	// Update is called once per frame
@@ -23,5 +22,9 @@ public class EnemyPathing : MonoBehaviour {
 			currNode = currNode.GetComponent<NodeScript> ().nextNode;
 		}
 		
+	}
+	
+	public void setNode(GameObject node){
+	    this.currNode = node;
 	}
 }
