@@ -15,9 +15,11 @@ public class playReplay : MonoBehaviour {
 	
 	float startTime; // Start time of playback (used for synchronization)
 
-	GameObject[] currentPlayers;
+	float timeInterval;
 	
-	GameObject[] players;
+	GameObject[] currentPlayers;
+	GameObject[] currentTowers;
+
 	byte[] replay; // The replay file
 	int replayIndex; // The current point in the replay file
 	
@@ -25,7 +27,6 @@ public class playReplay : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-	    players = new GameObject[10];
 	    replay = System.IO.File.ReadAllBytes(fileName); // Read in the replay file
 	    replayIndex = 0;
 		
@@ -37,6 +38,7 @@ public class playReplay : MonoBehaviour {
 		
 		// Initialize the start time
 		startTime = Time.time;
+		timeInterval = startTime;
 	}
 	
 	// Update is called once per frame
@@ -79,7 +81,7 @@ public class playReplay : MonoBehaviour {
 			    float yRot = (float)BitConverter.ToDouble(replay,replayIndex);
 			    replayIndex+=8;
 			
-			    Vector3 playerPosition = new Vector3(xPos,10,zPos);
+			    Vector3 playerPosition = new Vector3(xPos,2,zPos);
 			    Quaternion playerRotation = Quaternion.Euler(0,yRot,0);
 			
 			    // If no more players to move around (this is a new player),
@@ -100,11 +102,26 @@ public class playReplay : MonoBehaviour {
 		
 		    // Skip despawn towers for now, will be implemented later
 		    while(replay[replayIndex]==5){
-		        replayIndex+=17;
+			    replayIndex+=1; // Move to first parameter
+				
+			    // Read in xPos and zPos of tower
+		        float xPos = (float)BitConverter.ToDouble(replay,replayIndex);
+		        replayIndex+=8;
+		        float zPos = (float)BitConverter.ToDouble(replay,replayIndex);
+		        replayIndex+=8;
+				
+				// Find the tower to despawn
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower");
+				
+				foreach(GameObject i in currentTowers){
+				    if((i.transform.position.x == xPos)
+					&& (i.transform.position.z == zPos)){
+					    Destroy(i);
+						break;
+					}
+				}
+				
 		    }
-		
-		    GameObject[] towers;
-		    towers = GameObject.FindGameObjectsWithTag("Tower");
 		
 		    // While receiving Spawn Tower OpCodes
 		    while(replay[replayIndex]==7){
@@ -117,7 +134,7 @@ public class playReplay : MonoBehaviour {
 		        replayIndex+=8;
 		    
 		    	// Spawn the tower
-		        Vector3 towerPosition = new Vector3(xPos,10,zPos);
+		        Vector3 towerPosition = new Vector3(xPos,2,zPos);
 		        Instantiate(tower,towerPosition,tower.transform.rotation);
 		    }
 		

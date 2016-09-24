@@ -4,13 +4,27 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 
+public class TowerPos
+{
+    public GameObject tower;
+    public float xPos;
+	public float zPos;
+	
+	public TowerPos(GameObject t, float x, float z){
+	    this.tower = t;
+		this.xPos = x;
+		this.zPos = z;
+	}
+	
+}
+
 public class recordReplay : MonoBehaviour {
 	
 	// Filename for the temporary file to hold the replay
 	const string fileName = "tempReplay.dat";
 	
 	// List of the towers currently spawned
-	List<GameObject> currentTowers = new List<GameObject>();
+	List<TowerPos> currentTowers = new List<TowerPos>();
 	
 	// The starting time of the recording (used for synchronization)
 	float startTime;
@@ -81,31 +95,44 @@ public class recordReplay : MonoBehaviour {
 		
 		GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
 		
+		List<TowerPos> removeTowers = new List<TowerPos>();
+		
 		// For each tower that has been recorded as existing
-		foreach(GameObject i in currentTowers){
+		foreach(TowerPos i in currentTowers){
 		    
 			// If the tower doesn't actually exist, record a despawn event
-		    int isIn = Array.IndexOf(towers,i);
+		    int isIn = Array.IndexOf(towers,i.tower);
 		    if(isIn <= -1){
 		        stream.Write(new byte[]{5},0,1); // Tower despawn OpCode
-		    
-			    recordPosition(byteStream,stream,i);
+				
+			    recordPosition(byteStream,stream,i.xPos,i.zPos);
 			
-			    currentTowers.Remove(i);
+			    removeTowers.Add(i);
 			
 		    }
+		}
+		
+		foreach(TowerPos i in removeTowers){
+		    currentTowers.Remove(i);
 		}
 		
 		// For each tower that actually exists
 		foreach(GameObject i in towers){
 		    
+			bool isInList = false;
 			// If the tower has not been recorded as existing, record the spawn event
-		    if(!currentTowers.Contains(i)){
+			foreach(TowerPos k in currentTowers){
+			    if(k.tower==i){
+				    isInList = true;
+				}
+			}
+		    if(!isInList){
+			
 		        stream.Write(new byte[]{7},0,1); // Tower spawn OpCode
 			
 			    recordPosition(byteStream,stream,i);
 			
-			    currentTowers.Add(i);
+			    currentTowers.Add(new TowerPos(i,i.transform.position.x,i.transform.position.z));
 		    }
 		}
 		
@@ -139,4 +166,13 @@ public class recordReplay : MonoBehaviour {
 		byteStream = BitConverter.GetBytes((double)i.transform.position.z);
 		stream.Write(byteStream,0,byteStream.Length);
 	}
+	
+	private void recordPosition(byte [] byteStream, FileStream stream, float x, float z){
+		byteStream = BitConverter.GetBytes((double)x);
+		stream.Write(byteStream,0,byteStream.Length);
+		    
+		byteStream = BitConverter.GetBytes((double)z);
+		stream.Write(byteStream,0,byteStream.Length);
+	}
+	
 }
