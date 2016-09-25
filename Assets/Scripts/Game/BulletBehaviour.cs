@@ -102,4 +102,14 @@ public class BulletBehaviour : MonoBehaviour
 		}
 	}
 
+	public void AddDamageToBullet(int damage)
+	{
+        this.damage += damage;
+    }
+
+	public void AddSpeedToBullet(int speed)
+	{
+        this.speed += speed;
+    }
+
 }

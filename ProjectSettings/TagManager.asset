@@ -28,6 +28,8 @@ TagManager:
   - LeaveRoomButton
   - Leave
   - ChatInputField
+  - Tower2
+  - Tower3
   layers:
   - Default
   - TransparentFX

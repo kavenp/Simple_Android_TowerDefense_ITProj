@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 
 public class MP_TileBuildTower :NetworkBehaviour
@@ -11,14 +10,19 @@ public class MP_TileBuildTower :NetworkBehaviour
 
 	private string towerType;
 	private int owner;
+    private const int upgradeLimit = 5;
+    private const int damageIncrease = 5;
+    private int currentUpgradeLimit = 0;
 
-	// Need to make this a list of towers
-	private GameObject tower;
+    // Need to make this a list of towers
+    Dictionary<string, GameObject> towerBuildDict = new Dictionary<string, GameObject>();
 
 	void Awake ()
 	{
 		// Load tower resources
-		tower = Resources.Load ("Tower") as GameObject;
+		towerBuildDict.Add("Tower", Resources.Load ("Tower") as GameObject);
+		towerBuildDict.Add("Tower2", Resources.Load ("Tower2") as GameObject);
+		towerBuildDict.Add("Tower3", Resources.Load ("Tower3") as GameObject);
 
 		// Owner
 		setOwner (-1);
@@ -36,15 +40,18 @@ public class MP_TileBuildTower :NetworkBehaviour
 		{
 			if (isTileFree ())
 			{
-				// Set the owner of the tile to the player
-				setOwner (playerID);
+                GameObject theTower;
+				towerBuildDict.TryGetValue(_towerType, out theTower);
+
+                // Set the owner of the tile to the player
+                setOwner (playerID);
 
 				// Set the tower type build on this tile
 				setTowerType(_towerType);
 
 				// Create the tower and get the server to spawn it
-				Vector3 towerPosition = new Vector3 (this.transform.position.x, tower.transform.position.y, this.transform.position.z);
-				createdTower = (GameObject) Instantiate (tower, towerPosition, tower.transform.rotation);
+				Vector3 towerPosition = new Vector3 (this.transform.position.x, theTower.transform.position.y, this.transform.position.z);
+				createdTower = (GameObject) Instantiate (theTower, towerPosition, theTower.transform.rotation);
 				NetworkServer.Spawn (createdTower);
 
                 // Subtract gold - Client side only
@@ -90,6 +97,34 @@ public class MP_TileBuildTower :NetworkBehaviour
 					// Set the tower type to null
 					setTowerType(null);
 				}
+			}
+		}
+	}
+
+	public void UpgradeTower (int playerID, ref bool upgradedTower)
+	{
+		if(this.towerType != null)
+		{
+			if(isTileFree() == false)
+			{
+				// If owner of the tower
+				if(playerID == this.owner)
+				{
+					if(currentUpgradeLimit < upgradeLimit)
+					{
+						// Modify tower's shooting script
+						ShootEnemies towerShooting = createdTower.GetComponent<ShootEnemies>();
+                        towerShooting.AddAdditionalDamage(damageIncrease);
+
+						// Increase upgrade limit and tell player tower has been upgraded
+                        currentUpgradeLimit += 1;
+                        upgradedTower = true;
+                    }
+					else
+					{
+                        Debug.Log("Current upgrade limit reached for this tower");
+                    }
+                }
 			}
 		}
 	}

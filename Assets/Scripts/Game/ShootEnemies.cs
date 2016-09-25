@@ -14,14 +14,30 @@ public class ShootEnemies : NetworkBehaviour
 	//private GameController gc;
 	static private double fireRate = 1;
 
+	private int additionalDamage = 0;
     private Vector3 previousTargetLoc;
 
 	// Use this for initialization
 	void Start ()
 	{
-		//gc = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ();
 		inRange = new List<GameObject> ();
 		lastShotTime = Time.time;
+
+		// Get the type of tower and modify its starting damage values upon creation
+		if(this.tag == "Tower")
+		{
+            this.additionalDamage = 0;
+        }
+
+		if (this.tag == "Tower2")
+		{
+            this.additionalDamage = 12;
+        }
+
+		if (this.tag == "Tower3")
+		{
+            this.additionalDamage = 23;
+        }
 	}
 
 	void OnEnemyDestroy (GameObject enemy)
@@ -48,8 +64,9 @@ public class ShootEnemies : NetworkBehaviour
 
 		//instantiate the new bullet
 		BulletBehaviour behavior = (BulletBehaviour) newBullet.GetComponent ("BulletBehaviour");
-		//behavior.gc = gc;
-		behavior.target = target;
+        //behavior.gc = gc;
+        behavior.AddDamageToBullet(this.additionalDamage);
+        behavior.target = target;
 		behavior.startpos = startloc;
 		behavior.targetpos = targetloc;
         previousTargetLoc = targetloc;
@@ -98,6 +115,11 @@ public class ShootEnemies : NetworkBehaviour
 			}
 		}
 	}
+
+	public void AddAdditionalDamage(int damage)
+	{
+        this.additionalDamage += damage;
+    }
 
 
 	//	void OnTriggerStay (Collider other) {
