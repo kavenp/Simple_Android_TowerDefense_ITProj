@@ -31,9 +31,6 @@ public class MP_PlayerController : NetworkBehaviour
     // Current buildable tile
     private GameObject currentBuildableTile = null;
 
-    // Towers
-    public GameObject tower;
-
     // Direction
     int forward = 1;
     int backward = -1;
@@ -291,34 +288,64 @@ public class MP_PlayerController : NetworkBehaviour
     {
         // Tower1
         int numBaseTower1 = GameObject.FindGameObjectsWithTag("Tower").Length;
-        int baseTowerCost1; towerCostDict.TryGetValue("Tower", out baseTowerCost1);
-        int baseRefundCost1; towerRefundDict.TryGetValue("Tower", out baseRefundCost1);
         if (numBaseTower1 != previousNumTower1)
         {
+            int cost1 = 0;
             int numChanges1 = numBaseTower1 - previousNumTower1;
-            playerGold -= numChanges1 * baseTowerCost1;
+            if (numChanges1 > 0)
+            {
+                // Towers build, deduct gold
+                towerCostDict.TryGetValue("Tower", out cost1);
+            }
+            else
+            {
+                // Towers sold, increase gold
+                towerRefundDict.TryGetValue("Tower", out cost1);
+            }
+
+            playerGold -= numChanges1 * cost1;
             previousNumTower1 = numBaseTower1;
         }
 
         // Tower2
         int numBaseTower2 = GameObject.FindGameObjectsWithTag("Tower2").Length;
-        int baseTowerCost2; towerCostDict.TryGetValue("Tower2", out baseTowerCost2);
-        int baseRefundCost2; towerRefundDict.TryGetValue("Tower2", out baseRefundCost2);
         if (numBaseTower2 != previousNumTower2)
         {
+            int cost2 = 0;
             int numChanges2 = numBaseTower2 - previousNumTower2;
-            playerGold -= numChanges2 * baseTowerCost2;
+            if (numChanges2 > 0)
+            {
+                // Towers build, deduct gold
+                towerCostDict.TryGetValue("Tower2", out cost2);
+            }
+            else
+            {
+                // Towers sold, increase gold
+                towerRefundDict.TryGetValue("Tower2", out cost2);
+            }
+
+            playerGold -= numChanges2 * cost2;
             previousNumTower2 = numBaseTower2;
         }
 
         // Tower3
         int numBaseTower3 = GameObject.FindGameObjectsWithTag("Tower3").Length;
-        int baseTowerCost3; towerCostDict.TryGetValue("Tower3", out baseTowerCost3);
-        int baseRefundCost3; towerRefundDict.TryGetValue("Tower3", out baseRefundCost3);
         if (numBaseTower3 != previousNumTower3)
         {
+            int cost3 = 0;
             int numChanges3 = numBaseTower3 - previousNumTower3;
-            playerGold -= numChanges3 * baseTowerCost3;
+            if (numChanges3 > 0)
+            {
+                // Towers build, deduct gold
+                towerCostDict.TryGetValue("Tower3", out cost3);
+            }
+            else
+            {
+                // Towers sold, increase gold
+                towerRefundDict.TryGetValue("Tower3", out cost3);
+            }
+
+            playerGold -= numChanges3 * cost3;
             previousNumTower3 = numBaseTower3;
         }
 
