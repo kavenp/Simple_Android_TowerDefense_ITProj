@@ -46,6 +46,12 @@ public class MP_PlayerController : NetworkBehaviour
     Dictionary<string, int> towerCostDict = new Dictionary<string, int>();
     Dictionary<string, int> towerRefundDict = new Dictionary<string, int>();
 
+    private const int upgradeLimit = 5;
+    private int currentUpgradeLimit = 0;
+
+    // Total number of upgrades made
+    private int totalTowerLevel = 0;
+
     void Start()
     {
         // Initialise values for Towers
@@ -212,8 +218,19 @@ public class MP_PlayerController : NetworkBehaviour
 
         if (vc.UpgradeButtonPressed())
         {
-            CmdUpgradeTower();
             vc.UpgradeButtonOff();
+            if (currentUpgradeLimit < upgradeLimit)
+            {
+                CmdUpgradeTower();
+
+                // Increase upgrade limit and tell player tower has been upgraded
+                currentUpgradeLimit += 1;
+            }
+            else
+            {
+                Debug.Log("Current upgrade limit reached for this tower");
+            }
+
         }
 
         // Perform state analysis
@@ -349,11 +366,53 @@ public class MP_PlayerController : NetworkBehaviour
             previousNumTower3 = numBaseTower3;
         }
 
+
         // Update on upgrade
-        if(upgradedTower == true)
+        int i;
+        // Tower1
+        GameObject[] baseTower1 = GameObject.FindGameObjectsWithTag("Tower");
+        int newTowerLevel = 0;
+        if (baseTower1 != null)
         {
-            playerGold -= upgradeCost;
-            upgradedTower = false;
+            for (i = 0; i < baseTower1.Length; i++)
+            {
+                ShootEnemies towerShooting = baseTower1[i].GetComponent<ShootEnemies>();
+                newTowerLevel += towerShooting.level;
+            }
+        }
+
+        // Tower2
+        GameObject[] baseTower2 = GameObject.FindGameObjectsWithTag("Tower2");
+        if (baseTower2 != null)
+        {
+            for (i = 0; i < baseTower2.Length; i++)
+            {
+                ShootEnemies towerShooting = baseTower2[i].GetComponent<ShootEnemies>();
+                newTowerLevel += towerShooting.level;
+            }
+        }
+
+        // Tower3
+        GameObject[] baseTower3 = GameObject.FindGameObjectsWithTag("Tower3");
+        if (baseTower3 != null)
+        {
+            for (i = 0; i < baseTower3.Length; i++)
+            {
+                ShootEnemies towerShooting = baseTower3[i].GetComponent<ShootEnemies>();
+                newTowerLevel += towerShooting.level;
+            }
+        }
+
+        if (newTowerLevel > totalTowerLevel)
+        {
+            int newLevels = newTowerLevel - totalTowerLevel;
+            playerGold -= upgradeCost * newLevels;
+            totalTowerLevel = newTowerLevel;
+        }
+        else if (newTowerLevel != totalTowerLevel)
+        {
+            // No extra refund on selling upgraded towers
+            totalTowerLevel = newTowerLevel;
         }
     }
 }

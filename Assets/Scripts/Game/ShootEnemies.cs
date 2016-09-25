@@ -14,9 +14,13 @@ public class ShootEnemies : NetworkBehaviour
 	//private GameController gc;
 	static private double fireRate = 1;
 
-	[SerializeField]
+	[SyncVar(hook = "AddAdditionalDamage")]
 	private int additionalDamage = 0;
     private Vector3 previousTargetLoc;
+
+    // Number of upgrades
+    [SyncVar]
+    public int level;
 
 	// Use this for initialization
 	void Start ()
@@ -39,7 +43,9 @@ public class ShootEnemies : NetworkBehaviour
 		{
             this.additionalDamage = 23;
         }
-	}
+
+        level = 0;
+    }
 
 	void OnEnemyDestroy (GameObject enemy)
 	{

@@ -10,9 +10,7 @@ public class MP_TileBuildTower :NetworkBehaviour
 
 	private string towerType;
 	private int owner;
-    private const int upgradeLimit = 5;
     private const int damageIncrease = 5;
-    private int currentUpgradeLimit = 0;
 
     // Need to make this a list of towers
     Dictionary<string, GameObject> towerBuildDict = new Dictionary<string, GameObject>();
@@ -110,20 +108,10 @@ public class MP_TileBuildTower :NetworkBehaviour
 				// If owner of the tower
 				if(playerID == this.owner)
 				{
-					if(currentUpgradeLimit < upgradeLimit)
-					{
-						// Modify tower's shooting script
-						ShootEnemies towerShooting = createdTower.GetComponent<ShootEnemies>();
-                        towerShooting.AddAdditionalDamage(damageIncrease);
-
-						// Increase upgrade limit and tell player tower has been upgraded
-                        currentUpgradeLimit += 1;
-                        upgradedTower = true;
-                    }
-					else
-					{
-                        Debug.Log("Current upgrade limit reached for this tower");
-                    }
+					// Modify tower's shooting script
+				    ShootEnemies towerShooting = createdTower.GetComponent<ShootEnemies>();
+                    towerShooting.AddAdditionalDamage(damageIncrease);
+                    towerShooting.level++;
                 }
 			}
 		}
