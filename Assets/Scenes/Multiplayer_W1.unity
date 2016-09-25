@@ -13710,6 +13710,8 @@ MonoBehaviour:
   - {fileID: 1000010761437714, guid: 1efec4dd1e2277046bb946c46bc521a0, type: 2}
   - {fileID: 1000013756413036, guid: 45ca4cd297224b249b5d5d83c1d7395c, type: 2}
   - {fileID: 1000011490126506, guid: 4f7286ee769ab164ebdab6008e56bdaf, type: 2}
+  - {fileID: 1000010761437714, guid: aab0eb6d2ae30d643bd67721cc5fbb0e, type: 2}
+  - {fileID: 1000010078198604, guid: d9f91cb67cbfa6f4c81f2a3512efcaa2, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:
