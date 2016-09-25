@@ -33,7 +33,7 @@ public class MP_GameCoordinator : NetworkBehaviour
         // If 2 players haven't connected wait for connection
         if (concurrentPlayers < 2)
         {
-            //return;
+            return;
         }
 
         Debug.Log("CP = " + concurrentPlayers);

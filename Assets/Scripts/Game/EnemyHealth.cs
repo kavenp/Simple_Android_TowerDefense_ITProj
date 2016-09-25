@@ -5,17 +5,21 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour {
 
 	[SerializeField]
-	private int maxHealth = 100;
+	private int startingMaxHealth = 100;
 
 	[SerializeField]
 	public int health = 100;
+
+	[SerializeField]
+	public int maxHealth = 100;
+
 
     private float dmg_red = 1;
     public Image healthBar;
 	// Use this for initialization
 	void Start () {
-		health    = 100;
-		maxHealth = 100;
+		health    = this.startingMaxHealth;
+		maxHealth = this.startingMaxHealth;
 		healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
 	}
 
@@ -27,7 +31,7 @@ public class EnemyHealth : MonoBehaviour {
 
 	public void AddToMaXHealth(int health)
 	{
-        this.maxHealth += health;
+        this.startingMaxHealth += health;
     }
 
 	public void IncreaseDamageReduction(float red)
