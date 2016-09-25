@@ -14,6 +14,7 @@ public class ShootEnemies : NetworkBehaviour
 	//private GameController gc;
 	static private double fireRate = 1;
 
+	[SerializeField]
 	private int additionalDamage = 0;
     private Vector3 previousTargetLoc;
 

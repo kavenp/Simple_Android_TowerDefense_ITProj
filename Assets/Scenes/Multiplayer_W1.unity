@@ -15746,36 +15746,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
-        type: 2}
-      propertyPath: spawnWait
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
-        type: 2}
-      propertyPath: startWait
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
-        type: 2}
-      propertyPath: waveWait
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
-        type: 2}
-      propertyPath: numberOfEnemiesPerWave
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
-        type: 2}
-      propertyPath: numberOfWaves
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
-        type: 2}
-      propertyPath: spawnValues.y
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0ecb55d1bcc05546a546747d72e6423, type: 2}
   m_IsPrefabParent: 0
