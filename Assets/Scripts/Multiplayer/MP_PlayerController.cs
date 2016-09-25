@@ -223,7 +223,8 @@ public class MP_PlayerController : NetworkBehaviour
             {
                 CmdUpgradeTower();
 
-                // Increase upgrade limit and tell player tower has been upgraded
+                // Increase upgrade limit and tell playe
+                // tower has been upgraded
                 currentUpgradeLimit += 1;
             }
             else
@@ -299,6 +300,7 @@ public class MP_PlayerController : NetworkBehaviour
     public void UpdateGold()
     {
         UpdateBaseTowerGold();
+        DeductUpgradeCost();
     }
 
     void UpdateBaseTowerGold()
@@ -365,9 +367,11 @@ public class MP_PlayerController : NetworkBehaviour
             playerGold -= numChanges3 * cost3;
             previousNumTower3 = numBaseTower3;
         }
+    }
 
-
-        // Update on upgrade
+    // Update gold on tower upgrades.
+    private void DeductUpgradeCost()
+    {
         int i;
         // Tower1
         GameObject[] baseTower1 = GameObject.FindGameObjectsWithTag("Tower");
@@ -376,7 +380,8 @@ public class MP_PlayerController : NetworkBehaviour
         {
             for (i = 0; i < baseTower1.Length; i++)
             {
-                ShootEnemies towerShooting = baseTower1[i].GetComponent<ShootEnemies>();
+                ShootEnemies towerShooting =
+                    baseTower1[i].GetComponent<ShootEnemies>();
                 newTowerLevel += towerShooting.level;
             }
         }
@@ -387,7 +392,8 @@ public class MP_PlayerController : NetworkBehaviour
         {
             for (i = 0; i < baseTower2.Length; i++)
             {
-                ShootEnemies towerShooting = baseTower2[i].GetComponent<ShootEnemies>();
+                ShootEnemies towerShooting =
+                    baseTower2[i].GetComponent<ShootEnemies>();
                 newTowerLevel += towerShooting.level;
             }
         }
@@ -398,7 +404,8 @@ public class MP_PlayerController : NetworkBehaviour
         {
             for (i = 0; i < baseTower3.Length; i++)
             {
-                ShootEnemies towerShooting = baseTower3[i].GetComponent<ShootEnemies>();
+                ShootEnemies towerShooting =
+                    baseTower3[i].GetComponent<ShootEnemies>();
                 newTowerLevel += towerShooting.level;
             }
         }
