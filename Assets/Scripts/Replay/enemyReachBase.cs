@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Script copied from the LivesScript script, but removed components that didn't work with replay
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
@@ -26,6 +28,13 @@ public class enemyReachBase : MonoBehaviour
         livesDisplay.text = "Lives: " + numLives;
 		reached = new List<GameObject>();
     }
+	
+	void Update()
+	{
+	    if(Application.loadedLevelName == "Multiplayer_W1"){
+				Destroy(gameObject);
+			}
+	}
 
     // Deduct a life if the player has lives
     // and the object that has entered the

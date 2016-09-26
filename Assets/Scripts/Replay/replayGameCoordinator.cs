@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Unused, will be deleted
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 

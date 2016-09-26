@@ -2485,7 +2485,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 390161217}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 350e4490bbd76bf4b8933ac2b8c40dc7, type: 3}
   m_Name: 
@@ -4888,6 +4888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce0597e491498049a784341304ab9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reached: []
   numLives: 10
   livesDisplay: {fileID: 0}
 --- !u!65 &801301361

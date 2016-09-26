@@ -35,6 +35,14 @@ public class MP_HostGame : MonoBehaviour
         hostgame_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
         joingame_ui = GameObject.FindGameObjectWithTag("JoinGameCanvas");
     }
+	
+	void Update()
+	{
+	    if(Application.loadedLevelName == "Replay"){
+				Destroy(gameObject);
+			}
+	}
+	
     public void CreateRoom()
     {
         string room = theRoomName.text;

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Script copied from the DisplayScore script, but removed components that didn't work with replay
+
+using UnityEngine;
 using UnityEngine.UI;
 
 // Displays the score.

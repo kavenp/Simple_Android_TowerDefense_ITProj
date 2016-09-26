@@ -23,6 +23,13 @@ public class LivesScript : MonoBehaviour
     {
         livesDisplay.text = "Lives: " + numLives;
     }
+	
+	void Update()
+	{
+	    if(Application.loadedLevelName == "Replay"){
+				Destroy(gameObject);
+			}
+	}
 
     // Deduct a life if the player has lives
     // and the object that has entered the

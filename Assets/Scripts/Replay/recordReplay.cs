@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 
+// Holds a record of the tower pos (needed for despawn event as despawning
+// an object gets rid of any reference to its previous location
 public class TowerPos
 {
     public GameObject tower;
@@ -63,16 +65,21 @@ public class recordReplay : MonoBehaviour {
 	void Update () {
 	
 		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-		
+		var stream = new FileStream(fileName, FileMode.Append);
 		// Recording doesn't start until game has started
 		if(players.Length < 1)
 		{
+		    // If the game has ended, record that it has ended and close recording
+		    if(Application.loadedLevelName == "GameOver"){
+			    stream.Write(new byte[]{14},0,1); //End Recording Operation Code
+				stream.Close();
+				Destroy(gameObject);
+			}
 			startTime = Time.time;
 			timeInterval = startTime;
+			stream.Close();
 		    return;
 		}
-		
-		var stream = new FileStream(fileName, FileMode.Append);
 		
 		stream.Write(new byte[]{11},0,1); //Update Start OpCode
 		
@@ -164,40 +171,38 @@ public class recordReplay : MonoBehaviour {
 		int health;
 		
 		int nodeNumber;
+		
+		// If it's been more than a second since last updating the enemies, update again
 		if((Time.time - timeInterval) > 1){
 		    Debug.Log("StoreEnemy!");
 		    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 			
+			// For each enemy
 			foreach(GameObject i in enemies){
 			
 			    stream.Write(new byte[]{13},0,1);
 				
+				// Update it's position
 				recordPosition(byteStream,stream,i);
 				
+				// Health
 				health = i.GetComponent<EnemyHealth>().health;
-				
 				byteStream = BitConverter.GetBytes(health);
 	            stream.Write(byteStream,0,byteStream.Length);
 				
+				
+				// And node it's following
 				nodeNumber = i.GetComponent<EnemyPathing>().currNode.GetComponent<NodeScript>().nodeNumber;
-				
-				
 				byteStream = BitConverter.GetBytes(nodeNumber);
 	            stream.Write(byteStream,0,byteStream.Length);
-				
-				
-				
 			}
-			
+			// Update the time interval
 		    timeInterval = Time.time;
-			
 		}
 		
 		stream.Write(new byte[]{12},0,1); // End Update OpCode
 		
 		stream.Close();
-		
-	
 	}
 	
 	// Records an (x,z) position of an object to the bytefile
@@ -209,6 +214,7 @@ public class recordReplay : MonoBehaviour {
 		stream.Write(byteStream,0,byteStream.Length);
 	}
 	
+	// Record the position of an object using it's x and z co-ordinates
 	private void recordPosition(byte [] byteStream, FileStream stream, float x, float z){
 		byteStream = BitConverter.GetBytes((double)x);
 		stream.Write(byteStream,0,byteStream.Length);

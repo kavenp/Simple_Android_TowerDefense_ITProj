@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Copied from BulletBehaviour script, but got rid of enemy destruction and networking components
+
+using UnityEngine;
 using System.Collections;
 
 public class replayBulletBehaviour : MonoBehaviour

@@ -44,6 +44,11 @@ public class playReplay : MonoBehaviour {
 	    replay = System.IO.File.ReadAllBytes(fileName); // Read in the replay file
 	    replayIndex = 0;
 		
+		if(replay[replay.Length-1]!=14){
+		    Debug.Log("Replay File not fully recorded!");
+			Destroy(gameObject);
+		}
+		
 		// Skip the header
 	    while(replay[replayIndex]!=2){
 		    replayIndex+=1;
@@ -63,7 +68,7 @@ public class playReplay : MonoBehaviour {
 		nodes = new Dictionary<int,GameObject>();
 		
 		
-		
+		// Instantiate the nodes to their respective values
 		foreach(GameObject i in GameObject.FindGameObjectsWithTag("Node")){
 		    nodes.Add(i.GetComponent<NodeScript>().nodeNumber,i);
 		}
@@ -76,7 +81,10 @@ public class playReplay : MonoBehaviour {
 	
 	    // If end of replay reached
 	    while(replayIndex < replay.Length){
-	
+	        if(replay[replayIndex] == 14){
+			    SceneManager.LoadScene("ReplayOver", LoadSceneMode.Single);
+				Destroy(gameObject);
+			}
 	        // Begin update OpCode (used as error checking)
 	        if(replay[replayIndex]==11){
 	            replayIndex+=1; // Move to next OpCode
@@ -131,6 +139,10 @@ public class playReplay : MonoBehaviour {
 			
 		    }
 		    
+			foreach (GameObject i in currentPlayers){
+			    Destroy(i);
+			}
+			
 		    // Skip despawn towers for now, will be implemented later
 		    while(replay[replayIndex]==5){
 			    replayIndex+=1; // Move to first parameter
@@ -169,6 +181,7 @@ public class playReplay : MonoBehaviour {
 		        Instantiate(tower,towerPosition,tower.transform.rotation);
 		    }
 			
+			// Read the gold value on this update
 			if(replay[replayIndex]==9){
 			    replayIndex+=1;
 			    int gold = BitConverter.ToInt32(replay,replayIndex);
@@ -190,17 +203,21 @@ public class playReplay : MonoBehaviour {
 			    replayIndex += 25;
 			}*/
 			
+			// Update the enemies positions (only done every few seconds)
 			while(replay[replayIndex]==13 && (count <= 1)){
-			
+			    
+				// Enemies have been updated this update
 			    isEnemy = true;
 			    Debug.Log("Enemy!");
 			    replayIndex += 1;
 				
+				// Get enemy position
 				float xPos = (float)BitConverter.ToDouble(replay,replayIndex);
 		        replayIndex+=8;
 		        float zPos = (float)BitConverter.ToDouble(replay,replayIndex);
 		        replayIndex+=8;
 				
+				// Get enemy health, and which node they are up to
 				int health = BitConverter.ToInt32(replay,replayIndex);
 		        replayIndex+=4;
 				
@@ -209,6 +226,8 @@ public class playReplay : MonoBehaviour {
 				
 				Vector3 enemyPosition = new Vector3(xPos,2,zPos);
 				
+				// If there are enemies already instantiated, and haven't been moved
+				// to an update spot, updated those enemies
 				if(enemies.Length > 0){
 				    GameObject enemy = findClosest(xPos, zPos, enemies);
 				
@@ -218,9 +237,12 @@ public class playReplay : MonoBehaviour {
 					
 					enemy.GetComponent<EnemyPathing>().setNode(nodes[node]);
 					
+					// This enemy has been updated, so remove it from the list of enemies to be updated
 					enemies = removeObject(enemy,enemies);
 				
 				}else{
+				
+				    // Otherwise, instantiated a new enemy
 				    GameObject e = (GameObject)Instantiate(enemy,enemyPosition,enemy.transform.rotation);
 					e.GetComponent<EnemyHealth>().health = health;
 					e.GetComponent<EnemyPathing>().setNode(nodes[node]);
@@ -228,6 +250,7 @@ public class playReplay : MonoBehaviour {
 				
 			}
 			
+			// If there are leftover enemies on screen after an enemy update, delete them
 			if(isEnemy){
 			    foreach(GameObject i in enemies){
 				    Debug.Log("Destroyed!" + enemies.Length);
@@ -236,7 +259,7 @@ public class playReplay : MonoBehaviour {
 			    enemies = new GameObject[]{};
 			}
 		
-		    // Skip to the end of Update, will implement other things later
+		    // Skip to the end of Update (if not already there)
 		    while(replay[replayIndex]!=12){
 		        replayIndex+=1;
 		    }
@@ -289,10 +312,11 @@ public class playReplay : MonoBehaviour {
 		return list;	
 	}
 	
+	// Find the closest object to an x,z position
 	private GameObject findClosest(float x, float z, GameObject[] objects){
 	    Vector3 pos = new Vector3(x,2,z);
 		GameObject closest = null;
-		float minDistance = 99999999;
+		float minDistance = 99999999; // Assumed no enemy objects occur outside the map
 		foreach(GameObject i in objects){
 		    if(Vector3.Distance(pos,i.transform.position) < minDistance){
 			    closest = i;

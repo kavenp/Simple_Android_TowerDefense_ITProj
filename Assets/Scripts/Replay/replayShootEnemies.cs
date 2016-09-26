@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Script copied from the shoot enemies script, but removed networking components
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -52,7 +54,6 @@ public class replayShootEnemies : MonoBehaviour
 		behavior.startpos = startloc;
 		behavior.targetpos = targetloc;
         previousTargetLoc = targetloc;
-        //NetworkServer.Spawn(newBullet);
     }
 
 	void OnTriggerEnter (Collider other)
