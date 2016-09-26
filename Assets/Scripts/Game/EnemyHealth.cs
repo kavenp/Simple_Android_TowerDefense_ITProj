@@ -3,30 +3,27 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class EnemyHealth : NetworkBehaviour
+public class EnemyHealth : MonoBehaviour
 {
-	public const int startingMaxHealth = 100;
-
-	[SyncVar(hook = "OnChangeHealth")]
-	private int currentHealth = startingMaxHealth;
-
-    [SerializeField]
-	public int health;
 
 	[SerializeField]
-	public int maxHealth;
+	private int startingMaxHealth = 100;
+
+	[SerializeField]
+	public int health = 100;
+
+	[SerializeField]
+	public int maxHealth = 100;
 
 
     private float dmg_red = 1;
     public Image healthBar;
 	// Use this for initialization
 	void Start () {
-		currentHealth = startingMaxHealth;
-        health 		  = currentHealth;
-        maxHealth     = startingMaxHealth;
-        //healthBar     = transform.FindChild("EnemyCanvas").GetComponent<Image>();
-        healthBar = GameObject.FindGameObjectWithTag("EnemyCanvas").GetComponent<Image>();
-    }
+		health    = this.startingMaxHealth;
+		maxHealth = this.startingMaxHealth;
+		healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
+	}
 
 	// Update is called once per frame
 	void Update ()
@@ -36,7 +33,7 @@ public class EnemyHealth : NetworkBehaviour
 
 	public void AddToMaXHealth(int health)
 	{
-        //startingMaxHealth += health;
+        this.startingMaxHealth += health;
     }
 
 	public void IncreaseDamageReduction(float red)
@@ -50,35 +47,8 @@ public class EnemyHealth : NetworkBehaviour
         }
     }
 
-	public void Hit (int damage)
-	{
-		if(!isServer)
-		{
-            return;
-        }
-
-        currentHealth = (int) (currentHealth - (dmg_red * damage));
-		if (currentHealth <= 0)
-		{
-            RpcDestroy();
-        }
-
-
-        //health = (int) (health - (dmg_red * damage));
-		//healthBar.fillAmount = (float)(health)/(float)(maxHealth);
+	public void Hit (int damage) {
+		health = (int) (health - (dmg_red * damage));
+		healthBar.fillAmount = (float)(health)/(float)(maxHealth);
 	}
-
-	void OnChangeHealth(int currentHealth)
-	{
-		healthBar.fillAmount = (float)(currentHealth)/(float)(maxHealth);
-	}
-
-	[ClientRpc]
-	void RpcDestroy()
-	{
-        Debug.Log("I get here");
-        MP_PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<MP_PlayerController>();
-        pc.AddGold(10);
-        Destroy(gameObject);
-    }
 }

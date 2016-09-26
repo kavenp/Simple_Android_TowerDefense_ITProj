@@ -40,8 +40,6 @@ GameObject:
   - 114: {fileID: 114000011476478808}
   - 114: {fileID: 114000011840282766}
   - 114: {fileID: 114000010964090742}
-  - 222: {fileID: 222000011961524068}
-  - 114: {fileID: 114000010910605492}
   m_Layer: 0
   m_Name: EnemyCanvas
   m_TagString: Untagged
@@ -185,33 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08e8517ec00642c3bf242f6df717d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114000010910605492
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010704153222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 298d3dc7d7c1034459fa20ef37ccfc1d, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!114 &114000010964090742
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,9 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc2cf8930f23410883e1534a4ac3ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMaxHealth: 100
   health: 0
-  maxHealth: 100
   healthBar: {fileID: 0}
 --- !u!114 &114000013469065546
 MonoBehaviour:
@@ -386,12 +355,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: -0.000000059604645, y: 0, z: 0.000000029802322}
---- !u!222 &222000011961524068
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010704153222}
 --- !u!222 &222000013201027868
 CanvasRenderer:
   m_ObjectHideFlags: 1

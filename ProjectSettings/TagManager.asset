@@ -30,7 +30,6 @@ TagManager:
   - ChatInputField
   - Tower2
   - Tower3
-  - EnemyCanvas
   layers:
   - Default
   - TransparentFX
