@@ -14,7 +14,7 @@ public class ShootEnemies : NetworkBehaviour
 	//private GameController gc;
 	static private double fireRate = 1;
 
-	[SyncVar(hook = "AddAdditionalDamage")]
+	//[SyncVar(hook = "AddAdditionalDamage")]
 	private int additionalDamage = 0;
     private Vector3 previousTargetLoc;
 

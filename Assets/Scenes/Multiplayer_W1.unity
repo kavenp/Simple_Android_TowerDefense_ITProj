@@ -1928,7 +1928,14 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: -38.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114000014256206304, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 59ebadb2c50ede544b6ca2b6097fc447,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 114000012399454854, guid: 4f7286ee769ab164ebdab6008e56bdaf, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4f7286ee769ab164ebdab6008e56bdaf, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &243660284
