@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class BulletBehaviour : MonoBehaviour
+public class BulletBehaviour : NetworkBehaviour
 {
 	private int damage = 10;
 	//bullet damage;
@@ -96,11 +97,14 @@ public class BulletBehaviour : MonoBehaviour
 			enemyHP.Hit (damage);
 			if (enemyHP.health <= 0)
 			{
-				Destroy (other.gameObject);
-			}
-			Destroy (gameObject);
-		}
+                Destroy (other.gameObject);
+                Destroy(gameObject);
+            }
+        }
 	}
+
+
+
 
 	public void AddDamageToBullet(int damage)
 	{
