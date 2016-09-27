@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0
+  m_SendInterval: 0.09090909
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -116,7 +116,6 @@ MonoBehaviour:
   target: {fileID: 0}
   startpos: {x: 0, y: 0, z: 0}
   targetpos: {x: 0, y: 0, z: 0}
-  gc: {fileID: 0}
 --- !u!114 &114000014153795644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,8 +146,8 @@ MonoBehaviour:
     i13: 192
     i14: 38
     i15: 145
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!135 &135000010426507790
 SphereCollider:
   m_ObjectHideFlags: 1

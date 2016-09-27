@@ -313,6 +313,7 @@ MonoBehaviour:
   inRange: []
   projectilePrefab: {fileID: 1000010526564576, guid: e154c9f604ff52d4493a3fbfc0c02691,
     type: 2}
+  level: 0
 --- !u!135 &135000013940262244
 SphereCollider:
   m_ObjectHideFlags: 1
