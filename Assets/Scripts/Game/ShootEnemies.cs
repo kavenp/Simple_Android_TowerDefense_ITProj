@@ -46,7 +46,7 @@ public class ShootEnemies : NetworkBehaviour
             this.additionalDamage = 23;
         }
 
-        level = 0;
+        level = 1;
     }
 
     void OnEnemyDestroy(GameObject enemy)

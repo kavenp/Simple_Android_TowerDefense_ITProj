@@ -8,7 +8,7 @@ public class LivesScript : MonoBehaviour
 {
 
     public int numLives;
-    public Text livesDisplay;
+    private Text livesDisplay;
 
     void Awake()
     {
@@ -16,7 +16,11 @@ public class LivesScript : MonoBehaviour
         // for calculating and displaying the score
         // in the GameOver scene
         DontDestroyOnLoad(transform.gameObject);
-        livesDisplay = GameObject.FindGameObjectWithTag("LivesDisplay").GetComponent<Text>();
+
+        GameObject livesDisplayObject =
+            GameObject.FindGameObjectWithTag("LivesDisplay");
+
+        livesDisplay = livesDisplayObject.GetComponent<Text>();
     }
 
     void Start()
