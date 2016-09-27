@@ -25,9 +25,9 @@ public class ShootEnemies : NetworkBehaviour
     private NetworkIdentity objNetId;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        inRange = new List<GameObject> ();
+        inRange = new List<GameObject>();
         lastShotTime = Time.time;
 
         // Get the type of tower and modify its starting damage values upon creation
@@ -49,30 +49,30 @@ public class ShootEnemies : NetworkBehaviour
         level = 0;
     }
 
-    void OnEnemyDestroy (GameObject enemy)
+    void OnEnemyDestroy(GameObject enemy)
     {
-        inRange.Remove (enemy);
+        inRange.Remove(enemy);
         //once destroyed remove enemy from list
     }
 
     //Shoot the enemy
     //[Command]
-    void Shoot (GameObject target)
+    void Shoot(GameObject target)
     {
         Vector3 startloc = gameObject.transform.position;
         Vector3 targetloc = target.transform.position;
 
-        if (targetloc.Equals (previousTargetLoc))
+        if (targetloc.Equals(previousTargetLoc))
         {
-            inRange.Remove (target);
+            inRange.Remove(target);
             return;
         }
 
-        CmdSpawnBullet (startloc, targetloc, target);
+        CmdSpawnBullet(startloc, targetloc, target);
 
-        if (objNetId != null)
+        if (objNetId != null && objNetId.hasAuthority)
         {
-            objNetId.RemoveClientAuthority (connectionToClient);    
+            objNetId.RemoveClientAuthority(connectionToClient);
         }
 
 
@@ -80,13 +80,13 @@ public class ShootEnemies : NetworkBehaviour
     }
 
     [ClientRpc]
-    void RpcSpawnBullet (GameObject newBullet, Vector3 startloc, Vector3 targetloc, GameObject target)
+    void RpcSpawnBullet(GameObject newBullet, Vector3 startloc, Vector3 targetloc, GameObject target)
     {
-        newBullet = (GameObject) Instantiate (projectilePrefab, startloc, projectilePrefab.transform.rotation);
+        newBullet = (GameObject)Instantiate(projectilePrefab, startloc, projectilePrefab.transform.rotation);
 
-        BulletBehaviour behavior = (BulletBehaviour) newBullet.GetComponent ("BulletBehaviour");
+        BulletBehaviour behavior = (BulletBehaviour)newBullet.GetComponent("BulletBehaviour");
         //behavior.gc = gc;
-        behavior.AddDamageToBullet (this.additionalDamage);
+        behavior.AddDamageToBullet(this.additionalDamage);
         behavior.target = target;
         behavior.startpos = startloc;
         behavior.targetpos = targetloc;
@@ -96,60 +96,60 @@ public class ShootEnemies : NetworkBehaviour
 
 
     [Command]
-    void CmdSpawnBullet (Vector3 startloc, Vector3 targetloc, GameObject target)
+    void CmdSpawnBullet(Vector3 startloc, Vector3 targetloc, GameObject target)
     {
-        GameObject newBullet = (GameObject) Instantiate (projectilePrefab, startloc, projectilePrefab.transform.rotation);
+        GameObject newBullet = (GameObject)Instantiate(projectilePrefab, startloc, projectilePrefab.transform.rotation);
 
-        objNetId = gameObject.GetComponent<NetworkIdentity> ();
-        if (objNetId != null)
+        objNetId = gameObject.GetComponent<NetworkIdentity>();
+        if (objNetId.hasAuthority)
         {
-            objNetId.RemoveClientAuthority (connectionToClient);    
-            objNetId.AssignClientAuthority (connectionToClient);    
+            objNetId.RemoveClientAuthority(connectionToClient);
+            objNetId.AssignClientAuthority(connectionToClient);
         }
 
 
 
         //instantiate the new bullet
-        BulletBehaviour behavior = (BulletBehaviour) newBullet.GetComponent ("BulletBehaviour");
+        BulletBehaviour behavior = (BulletBehaviour)newBullet.GetComponent("BulletBehaviour");
         //behavior.gc = gc;
-        behavior.AddDamageToBullet (this.additionalDamage);
+        behavior.AddDamageToBullet(this.additionalDamage);
         //behavior.target = target;
-        behavior.SetTarget (target);
+        behavior.SetTarget(target);
         behavior.startpos = startloc;
         behavior.targetpos = targetloc;
 
         previousTargetLoc = targetloc;
 
-        NetworkServer.Spawn (newBullet);
+        NetworkServer.Spawn(newBullet);
 
 
 
-        RpcSpawnBullet (newBullet, startloc, targetloc, target);
+        RpcSpawnBullet(newBullet, startloc, targetloc, target);
     }
 
 
 
-    void OnTriggerEnter (Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Equals ("Enemy"))
+        if (other.gameObject.tag.Equals("Enemy"))
         {
-            inRange.Add (other.gameObject);
-            EnemyDestructionDelegate dele = other.gameObject.GetComponent<EnemyDestructionDelegate> ();
+            inRange.Add(other.gameObject);
+            EnemyDestructionDelegate dele = other.gameObject.GetComponent<EnemyDestructionDelegate>();
             dele.enemyDelegate += OnEnemyDestroy;
         }
     }
 
-    void OnTriggerExit (Collider other)
+    void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag.Equals ("Enemy"))
+        if (other.gameObject.tag.Equals("Enemy"))
         {
-            inRange.Remove (other.gameObject);
-            EnemyDestructionDelegate dele = other.gameObject.GetComponent<EnemyDestructionDelegate> ();
+            inRange.Remove(other.gameObject);
+            EnemyDestructionDelegate dele = other.gameObject.GetComponent<EnemyDestructionDelegate>();
             dele.enemyDelegate -= OnEnemyDestroy;
         }
     }
 
-    void Update ()
+    void Update()
     {
         GameObject target = null;
         //initialize null target
@@ -165,14 +165,14 @@ public class ShootEnemies : NetworkBehaviour
             if (Time.time - lastShotTime > fireRate)
             {
                 //shoot if the time between now and last shot is larger than set fire rate
-                Shoot (target);
+                Shoot(target);
                 lastShotTime = Time.time;
                 //update time of last shot
             }
         }
     }
 
-    public void AddAdditionalDamage (int damage)
+    public void AddAdditionalDamage(int damage)
     {
         this.additionalDamage += damage;
     }
