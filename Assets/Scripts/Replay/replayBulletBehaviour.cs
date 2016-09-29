@@ -5,7 +5,7 @@ using System.Collections;
 
 public class replayBulletBehaviour : MonoBehaviour
 {
-	private int damage = 10;
+	private int damage = 3;
 	//bullet damage;
 	public float speed = 5;
 	//bullets speed
@@ -99,5 +99,22 @@ public class replayBulletBehaviour : MonoBehaviour
 			Destroy (gameObject);
 		}
 	}
+	
+	public void SetTarget (GameObject _target)
+    {
+        this.target = _target;
+    }
+
+
+
+    public void AddDamageToBullet (int damage)
+    {
+        this.damage += damage;
+    }
+
+    public void AddSpeedToBullet (int speed)
+    {
+        this.speed += speed;
+    }
 
 }

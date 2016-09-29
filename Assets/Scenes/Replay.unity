@@ -4889,7 +4889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reached: []
-  numLives: 10
+  numLives: 500
   livesDisplay: {fileID: 0}
 --- !u!65 &801301361
 BoxCollider:
@@ -11183,6 +11183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 1000010761437714, guid: 3264555665b90ea4aaa295798c82bad8, type: 2}
+  tower2: {fileID: 1000010761437714, guid: 7c8bf05f135e10d47b1cbdb8841b665d, type: 2}
+  tower3: {fileID: 1000010078198604, guid: acf72da90fe2fc64a8ce27ec59a7fe8b, type: 2}
   player: {fileID: 1000013756413036, guid: 14a1b9acf0af1bb4db20eaf811b430e8, type: 2}
   enemy: {fileID: 1000011181081994, guid: 51ce098968f38e742b8adbb2e7ea969b, type: 2}
   goldDisplay: {fileID: 0}

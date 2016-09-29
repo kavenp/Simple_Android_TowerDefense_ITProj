@@ -13,6 +13,11 @@ public class playReplay : MonoBehaviour {
 	//const string fileName = "Example Replays\MPReplay.dat";
 	
 	public GameObject tower; // For spawning towers
+	public GameObject tower2;
+	public GameObject tower3;
+	
+	public Dictionary<int,GameObject> towerType;
+	
 	public GameObject player; // For spawning players
 	public GameObject enemy;
 	
@@ -20,7 +25,6 @@ public class playReplay : MonoBehaviour {
 	
 	float startTime; // Start time of playback (used for synchronization)
 
-	float timeInterval;
 	
 	Dictionary<int,GameObject> nodes;
 	
@@ -59,7 +63,6 @@ public class playReplay : MonoBehaviour {
 		
 		// Initialize the start time
 		startTime = Time.time;
-		timeInterval = startTime;
 		
 		count = 0;
 		
@@ -73,6 +76,11 @@ public class playReplay : MonoBehaviour {
 		    nodes.Add(i.GetComponent<NodeScript>().nodeNumber,i);
 		}
 		
+		towerType = new Dictionary<int,GameObject>();
+		
+		towerType.Add(1,tower);
+		towerType.Add(2,tower2);
+		towerType.Add(3,tower3);
 	}
 	
 	// Update is called once per frame
@@ -84,6 +92,7 @@ public class playReplay : MonoBehaviour {
 	        if(replay[replayIndex] == 14){
 			    SceneManager.LoadScene("ReplayOver", LoadSceneMode.Single);
 				Destroy(gameObject);
+				return;
 			}
 	        // Begin update OpCode (used as error checking)
 	        if(replay[replayIndex]==11){
@@ -143,9 +152,9 @@ public class playReplay : MonoBehaviour {
 			    Destroy(i);
 			}
 			
-		    // Skip despawn towers for now, will be implemented later
 		    while(replay[replayIndex]==5){
 			    replayIndex+=1; // Move to first parameter
+				
 				
 			    // Read in xPos and zPos of tower
 		        float xPos = (float)BitConverter.ToDouble(replay,replayIndex);
@@ -155,31 +164,86 @@ public class playReplay : MonoBehaviour {
 				
 				// Find the tower to despawn
 				currentTowers = GameObject.FindGameObjectsWithTag("Tower");
+				if(destroyTowers(currentTowers, xPos, zPos)){
+				    continue;
+				}
 				
-				foreach(GameObject i in currentTowers){
-				    if((i.transform.position.x == xPos)
-					&& (i.transform.position.z == zPos)){
-					    Destroy(i);
-						break;
-					}
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower2");
+				if(destroyTowers(currentTowers, xPos, zPos)){
+				    continue;
+				}
+				
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower3");
+				if(destroyTowers(currentTowers, xPos, zPos)){
+				    continue;
 				}
 				
 		    }
-		 
+		    int type;
 		    // While receiving Spawn Tower OpCodes
 		    while(replay[replayIndex]==7){
 		        replayIndex+=1; // Move to first parameter
+				
 			
 			    // Read in xPos and zPos of tower
 		        float xPos = (float)BitConverter.ToDouble(replay,replayIndex);
 		        replayIndex+=8;
 		        float zPos = (float)BitConverter.ToDouble(replay,replayIndex);
 		        replayIndex+=8;
-		    
+		        
+				type = BitConverter.ToInt32(replay,replayIndex);
+		        replayIndex+=4;
+				
+				GameObject finTower = towerType[type];
+				
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower");
+				if(towerAtPos(currentTowers, xPos, zPos)){
+				    continue;
+				}
+				
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower2");
+				if(towerAtPos(currentTowers, xPos, zPos)){
+				    continue;
+				}
+				
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower3");
+				if(towerAtPos(currentTowers, xPos, zPos)){
+				    continue;
+				}
+				
 		    	// Spawn the tower
 		        Vector3 towerPosition = new Vector3(xPos,2,zPos);
-		        Instantiate(tower,towerPosition,tower.transform.rotation);
+		        Instantiate(finTower,towerPosition,finTower.transform.rotation);
 		    }
+			
+			while(replay[replayIndex]==16){
+			    replayIndex+=1;
+			    float xPos = (float)BitConverter.ToDouble(replay,replayIndex);
+		        replayIndex+=8;
+		        float zPos = (float)BitConverter.ToDouble(replay,replayIndex);
+		        replayIndex+=8;
+				
+				int currDamage;
+				currDamage = BitConverter.ToInt32(replay,replayIndex);
+		        replayIndex+=4;
+				
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower");
+				if(upgradeTowers(currentTowers, xPos, zPos, currDamage)){
+				    continue;
+				}
+				
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower2");
+				if(upgradeTowers(currentTowers, xPos, zPos, currDamage)){
+				    continue;
+				}
+				
+				currentTowers = GameObject.FindGameObjectsWithTag("Tower3");
+				if(upgradeTowers(currentTowers, xPos, zPos, currDamage)){
+				    continue;
+				}
+				
+				
+			}
 			
 			// Read the gold value on this update
 			if(replay[replayIndex]==9){
@@ -208,7 +272,6 @@ public class playReplay : MonoBehaviour {
 			    
 				// Enemies have been updated this update
 			    isEnemy = true;
-			    Debug.Log("Enemy!");
 			    replayIndex += 1;
 				
 				// Get enemy position
@@ -253,7 +316,6 @@ public class playReplay : MonoBehaviour {
 			// If there are leftover enemies on screen after an enemy update, delete them
 			if(isEnemy){
 			    foreach(GameObject i in enemies){
-				    Debug.Log("Destroyed!" + enemies.Length);
 					Destroy(i);
 				}
 			    enemies = new GameObject[]{};
@@ -266,7 +328,6 @@ public class playReplay : MonoBehaviour {
 		    replayIndex+=1;
 			if(replayIndex == replay.Length){
 			     foreach(GameObject i in enemies){
-				    Debug.Log("Destroyed!" + enemies.Length);
 					Destroy(i);
 				}
 			}
@@ -325,6 +386,41 @@ public class playReplay : MonoBehaviour {
 		}
 		
 		return closest;
+	}
+	
+	private bool destroyTowers(GameObject[] currentTowers,float xPos,float zPos){
+				
+		foreach(GameObject i in currentTowers){
+			if((i.transform.position.x == xPos)
+			&& (i.transform.position.z == zPos)){
+				Destroy(i);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private bool upgradeTowers(GameObject[] currentTowers,float xPos, float zPos, int damage){
+	    foreach(GameObject i in currentTowers){
+			if((i.transform.position.x == xPos)
+			&& (i.transform.position.z == zPos)){
+				replayShootEnemies t = (replayShootEnemies)i.GetComponent("replayShootEnemies");
+				t.setAdditionalDamage(damage);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private bool towerAtPos(GameObject[] currentTowers, float xPos, float zPos){
+	    foreach(GameObject i in currentTowers){
+		    if((i.transform.position.x == xPos)
+			&& (i.transform.position.z == zPos)){
+			    return true;
+			}
+		}
+		return false;
 	}
 	
 }

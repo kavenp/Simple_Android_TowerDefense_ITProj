@@ -7730,7 +7730,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.6, y: -22.25}
+  m_AnchoredPosition: {x: -9.6, y: -48}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1059588513
@@ -15885,6 +15885,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013609741134, guid: c0ecb55d1bcc05546a546747d72e6423, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
+        type: 2}
+      propertyPath: numberOfWaves
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
+        type: 2}
+      propertyPath: spawnWait
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

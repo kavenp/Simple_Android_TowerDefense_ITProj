@@ -30,6 +30,8 @@ public class BulletBehaviour : NetworkBehaviour
     //private int maxTime = 5;
 
     // Use this for initialization
+	
+	
     void Start ()
     {
         startTime = Time.time;

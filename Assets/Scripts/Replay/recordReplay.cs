@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using System.IO;
 
@@ -33,6 +34,8 @@ public class recordReplay : MonoBehaviour {
 	
 	float timeInterval;
 	
+	Dictionary<GameObject, int> towerDam;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -55,6 +58,8 @@ public class recordReplay : MonoBehaviour {
 	    stream.Write(new byte[]{2},0,1); // End header OpCode
 	    
 	    stream.Close();
+		
+		towerDam = new Dictionary<GameObject,int>();
 		
 		
 		DontDestroyOnLoad(transform.gameObject);
@@ -110,47 +115,32 @@ public class recordReplay : MonoBehaviour {
 		}
 		
 		GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+		towers = towers.Concat(GameObject.FindGameObjectsWithTag("Tower2")).ToArray();
+		towers = towers.Concat(GameObject.FindGameObjectsWithTag("Tower3")).ToArray();
+		despawnTowers(byteStream, stream, 3, towers);
 		
-		List<TowerPos> removeTowers = new List<TowerPos>();
 		
-		// For each tower that has been recorded as existing
-		foreach(TowerPos i in currentTowers){
-		    
-			// If the tower doesn't actually exist, record a despawn event
-		    int isIn = Array.IndexOf(towers,i.tower);
-		    if(isIn <= -1){
-		        stream.Write(new byte[]{5},0,1); // Tower despawn OpCode
-				
-			    recordPosition(byteStream,stream,i.xPos,i.zPos);
-			
-			    removeTowers.Add(i);
-			
-		    }
-		}
+		towers = GameObject.FindGameObjectsWithTag("Tower");
+		spawnTowers(byteStream, stream, 1, towers);
 		
-		foreach(TowerPos i in removeTowers){
-		    currentTowers.Remove(i);
-		}
+		towers = GameObject.FindGameObjectsWithTag("Tower2");
+		spawnTowers(byteStream, stream, 2, towers);
 		
-		// For each tower that actually exists
-		foreach(GameObject i in towers){
-		    
-			bool isInList = false;
-			// If the tower has not been recorded as existing, record the spawn event
-			foreach(TowerPos k in currentTowers){
-			    if(k.tower==i){
-				    isInList = true;
-				}
-			}
-		    if(!isInList){
-			
-		        stream.Write(new byte[]{7},0,1); // Tower spawn OpCode
-			
-			    recordPosition(byteStream,stream,i);
-			
-			    currentTowers.Add(new TowerPos(i,i.transform.position.x,i.transform.position.z));
-		    }
-		}
+		towers = GameObject.FindGameObjectsWithTag("Tower3");
+		spawnTowers(byteStream, stream, 3, towers);
+		
+		
+		
+		towers = GameObject.FindGameObjectsWithTag("Tower");
+		updateLevel(byteStream, stream, towers);
+		
+		towers = GameObject.FindGameObjectsWithTag("Tower2");
+		updateLevel(byteStream, stream, towers);
+		
+		towers = GameObject.FindGameObjectsWithTag("Tower3");
+		updateLevel(byteStream, stream, towers);
+		
+		
 		
 		int gold = players[0].GetComponent<MP_PlayerController>().GetGold();
 		
@@ -174,7 +164,6 @@ public class recordReplay : MonoBehaviour {
 		
 		// If it's been more than a second since last updating the enemies, update again
 		if((Time.time - timeInterval) > 1){
-		    Debug.Log("StoreEnemy!");
 		    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 			
 			// For each enemy
@@ -221,6 +210,79 @@ public class recordReplay : MonoBehaviour {
 		    
 		byteStream = BitConverter.GetBytes((double)z);
 		stream.Write(byteStream,0,byteStream.Length);
+	}
+	
+	private void spawnTowers(byte [] byteStream, FileStream stream, int type, GameObject[] towers){
+	    foreach(GameObject i in towers){
+		    
+			bool isInList = false;
+			
+			// If the tower has not been recorded as existing, record the spawn event
+			foreach(TowerPos k in currentTowers){
+			    if(k.tower==i){
+				    isInList = true;
+				}
+			}
+		    if(!isInList){
+			
+		        stream.Write(new byte[]{7},0,1); // Tower spawn OpCode
+			
+			    recordPosition(byteStream,stream,i);
+				
+				byteStream = BitConverter.GetBytes(type);
+		        stream.Write(byteStream,0,byteStream.Length);
+				
+				ShootEnemies t = (ShootEnemies)i.GetComponent("ShootEnemies");
+		        int currDamage = t.getAdditionalDamage();
+				
+				towerDam.Add(i,currDamage);
+			
+			    currentTowers.Add(new TowerPos(i,i.transform.position.x,i.transform.position.z));
+		    }
+		}
+	}
+	
+	private void despawnTowers(byte [] byteStream, FileStream stream, int type, GameObject[] towers){
+	    List<TowerPos> removeTowers = new List<TowerPos>();
+		
+		// For each tower that has been recorded as existing
+		foreach(TowerPos i in currentTowers){
+			// If the tower doesn't actually exist, record a despawn event
+		    int isIn = Array.IndexOf(towers,i.tower);
+		    if(isIn <= -1){
+		        stream.Write(new byte[]{5},0,1); // Tower despawn OpCode
+				
+			    recordPosition(byteStream,stream,i.xPos,i.zPos);
+			
+			    removeTowers.Add(i);
+			
+		    }
+		}
+		
+		foreach(TowerPos i in removeTowers){
+		    towerDam.Remove(i.tower);
+		    currentTowers.Remove(i);
+		}
+	}
+	
+	private void updateLevel(byte [] byteStream, FileStream stream, GameObject[] towers){
+	    foreach(GameObject i in towers){
+		    ShootEnemies t = (ShootEnemies)i.GetComponent("ShootEnemies");
+		    int currDamage = t.getAdditionalDamage();
+			if(currDamage != towerDam[i]){
+				
+				stream.Write(new byte[]{16},0,1);
+				
+				recordPosition(byteStream,stream,i.transform.position.x,i.transform.position.z);
+				
+				byteStream = BitConverter.GetBytes(currDamage);
+		        stream.Write(byteStream,0,byteStream.Length);
+				
+				towerDam.Remove(i);
+				towerDam.Add(i,currDamage);
+				
+			}
+		}
 	}
 	
 }

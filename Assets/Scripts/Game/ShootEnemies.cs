@@ -176,6 +176,11 @@ public class ShootEnemies : NetworkBehaviour
     {
         this.additionalDamage += damage;
     }
+	
+	public int getAdditionalDamage()
+	{
+	    return this.additionalDamage;
+	}
 
 
     //	void OnTriggerStay (Collider other) {
