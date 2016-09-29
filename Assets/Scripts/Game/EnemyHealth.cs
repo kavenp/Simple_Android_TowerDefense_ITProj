@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
+	    healthBar.fillAmount = (float)(health)/(float)(maxHealth);
 	}
 
 	public void AddToMaXHealth(int health)

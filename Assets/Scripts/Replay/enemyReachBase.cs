@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿// Script copied from the LivesScript script, but removed components that didn't work with replay
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 // Updates and displays the number of lives
 // remaining for the players.
-public class LivesScript : MonoBehaviour
+public class enemyReachBase : MonoBehaviour
 {
-
+    public List<GameObject> reached;
     public int numLives;
-    private Text livesDisplay;
+    public Text livesDisplay;
 
     void Awake()
     {
@@ -16,21 +20,18 @@ public class LivesScript : MonoBehaviour
         // for calculating and displaying the score
         // in the GameOver scene
         DontDestroyOnLoad(transform.gameObject);
-
-        GameObject livesDisplayObject =
-            GameObject.FindGameObjectWithTag("LivesDisplay");
-
-        livesDisplay = livesDisplayObject.GetComponent<Text>();
+        livesDisplay = GameObject.FindGameObjectWithTag("LivesDisplay").GetComponent<Text>();
     }
 
     void Start()
     {
         livesDisplay.text = "Lives: " + numLives;
+		reached = new List<GameObject>();
     }
 	
 	void Update()
 	{
-	    if(Application.loadedLevelName == "Replay"){
+	    if(Application.loadedLevelName == "Multiplayer_W1"){
 				Destroy(gameObject);
 			}
 	}
@@ -40,16 +41,20 @@ public class LivesScript : MonoBehaviour
     // player's base is an enemy.
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy" && numLives > 0)
+	    
+        if (other.tag == "Enemy" && numLives > 0 && !reached.Contains(other.gameObject))
         {
             numLives--;
             livesDisplay.text = "Lives: " + numLives;
         }
+		
+		reached.Add(other.gameObject);
+		
+		GameObject.FindGameObjectWithTag("Replay").GetComponent<playReplay>().count2+=1;
+		
     }
-
-    // Wait for trigger to exit so that lives
-    // is updated on all clients.
-    void OnTriggerExit(Collider other)
+	
+	void OnTriggerExit(Collider other)
     {
         Destroy(other.gameObject);
 

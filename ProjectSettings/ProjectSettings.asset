@@ -544,7 +544,7 @@ PlayerSettings:
   XboxOne::VR::enabledDevices: []
   iOS::VR::enabledDevices: []
   tvOS::VR::enabledDevices: []
-  cloudProjectId: 9ef321a0-a382-4385-8f88-3ffcfcf0764a
+  cloudProjectId: 68817032-756e-448a-98c1-19221fb9c860
   projectName: itproject
-  organizationId: ling105
+  organizationId: shardray
   cloudEnabled: 0
