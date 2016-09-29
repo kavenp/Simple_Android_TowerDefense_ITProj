@@ -1,26 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class EnemyHealth : MonoBehaviour {
-	private int maxHealth;
-	public int health;
-	public Image healthBar;
+public class EnemyHealth : MonoBehaviour
+{
+
+	[SerializeField]
+	private int startingMaxHealth = 100;
+
+	[SerializeField]
+	public int health = 100;
+
+	[SerializeField]
+	public int maxHealth = 100;
+
+
+    private float dmg_red = 1;
+    public Image healthBar;
 	// Use this for initialization
 	void Start () {
-		health = 100;
-		maxHealth = 100;
-		healthBar = 
-			transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
+		health    = this.startingMaxHealth;
+		maxHealth = this.startingMaxHealth;
+		healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 	    healthBar.fillAmount = (float)(health)/(float)(maxHealth);
 	}
 
+	public void AddToMaXHealth(int health)
+	{
+        this.startingMaxHealth += health;
+    }
+
+	public void IncreaseDamageReduction(float red)
+	{
+        this.dmg_red -= red;
+
+		// Limit damage reduction
+		if(dmg_red < 0.3)
+		{
+            dmg_red = 0.3f;
+        }
+    }
+
 	public void Hit (int damage) {
-		health -= damage;
+		health = (int) (health - (dmg_red * damage));
 		healthBar.fillAmount = (float)(health)/(float)(maxHealth);
 	}
 }

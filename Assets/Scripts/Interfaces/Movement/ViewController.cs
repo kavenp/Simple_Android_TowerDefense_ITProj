@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ViewController : MonoBehaviour
 {
@@ -8,16 +7,22 @@ public class ViewController : MonoBehaviour
 	private bool downButton;
 	private bool leftButton;
 	private bool buildButton;
-	private bool sellButton;
+	private bool buildButton2;
+    private bool buildButton3;
+    private bool sellButton;
 
-	void Start ()
+    private bool upgradeButton;
+    void Start ()
 	{
 		this.upButton = false;
 		this.downButton = false;
 		this.leftButton = false;
 		this.buildButton = false;
+		this.buildButton2 = false;
+		this.buildButton3 = false;
 		this.sellButton = false;
-	}
+        this.upgradeButton = false;
+    }
 
 	public bool UpButtonPressed ()
 	{
@@ -37,6 +42,21 @@ public class ViewController : MonoBehaviour
 	public bool BuildButtonPressed ()
 	{
 		return this.buildButton;
+	}
+
+	public bool BuildButton2Pressed ()
+	{
+		return this.buildButton2;
+	}
+
+	public bool BuildButton3Pressed ()
+	{
+		return this.buildButton3;
+	}
+
+	public bool UpgradeButtonPressed ()
+	{
+		return this.upgradeButton;
 	}
 
 	public bool SellButtonPressed ()
@@ -92,5 +112,35 @@ public class ViewController : MonoBehaviour
 	public void BuildButtonOff ()
 	{
 		buildButton = false;
+	}
+
+	public void BuildButton2On ()
+	{
+		buildButton2 = true;
+	}
+
+	public void BuildButton2Off ()
+	{
+		buildButton2 = false;
+	}
+
+	public void BuildButton3On ()
+	{
+		buildButton3 = true;
+	}
+
+	public void BuildButton3Off ()
+	{
+		buildButton3 = false;
+	}
+
+	public void UpgradeButtonOn ()
+	{
+		upgradeButton = true;
+	}
+
+	public void UpgradeButtonOff ()
+	{
+		upgradeButton = false;
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using Newtonsoft.Json;
@@ -52,7 +53,7 @@ public class ChatBoxFunctions : MonoBehaviour {
 		clientConnection.Send (chatMsg);
 		clientConnection.BeginReceive(
 			new AsyncCallback(ReceiveMessage));
-	}
+    }
 
 	public void ReceiveMessage (IAsyncResult asyncResult) {
 		clientConnection.EndReceive (asyncResult);

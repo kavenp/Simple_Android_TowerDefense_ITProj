@@ -24,7 +24,6 @@ public class EnemyDestructionDelegate : MonoBehaviour
             {
                 MP_PlayerController pc =
                     players[i].GetComponent<MP_PlayerController>();
-
                 pc.AddGold(10);
             }
         }

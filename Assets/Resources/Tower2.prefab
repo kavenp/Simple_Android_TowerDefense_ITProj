@@ -27,8 +27,8 @@ GameObject:
   - 114: {fileID: 114000013581821462}
   - 114: {fileID: 114000012616759920}
   m_Layer: 2
-  m_Name: Tower
-  m_TagString: Tower
+  m_Name: Tower2
+  m_TagString: Tower2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 52c0edd75f762e84e9c392a5d38ed0c3, type: 2}
+  - {fileID: 2100000, guid: c6cd4ab4466dec740b31c61ac80a1450, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -296,22 +296,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 30
-    i1: 254
-    i2: 196
-    i3: 221
-    i4: 30
-    i5: 34
-    i6: 119
-    i7: 4
-    i8: 107
-    i9: 185
-    i10: 70
-    i11: 196
-    i12: 107
-    i13: 197
-    i14: 33
-    i15: 160
+    i0: 170
+    i1: 176
+    i2: 235
+    i3: 109
+    i4: 42
+    i5: 227
+    i6: 13
+    i7: 100
+    i8: 59
+    i9: 214
+    i10: 119
+    i11: 33
+    i12: 204
+    i13: 95
+    i14: 187
+    i15: 14
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!135 &135000011262214020

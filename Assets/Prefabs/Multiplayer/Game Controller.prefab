@@ -85,9 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1000013756413036, guid: 45ca4cd297224b249b5d5d83c1d7395c, type: 2}
-  spawnValues: {x: 0, y: 0, z: 70}
-  numberOfWaves: 3
-  numberOfEnemiesPerWave: 0
-  spawnWait: 0
-  startWait: 0
-  waveWait: 0
+  spawnValues: {x: 0, y: 2, z: 70}
+  numberOfWaves: 10
+  numberOfEnemiesPerWave: 5
+  spawnWait: 1
+  waveWait: 10

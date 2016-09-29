@@ -18,15 +18,18 @@ public class MP_PlayerController : NetworkBehaviour
     public float turningSpeed;
     public float movingSpeed;
 
-    int playerGold = 100;
+    private const int upgradeCost = 30;
 
-    int previousNumTowers = 0;
+    int playerGold = 500;
+
+    int previousNumTower1 = 0;
+    int previousNumTower2 = 0;
+    int previousNumTower3 = 0;
+
+    bool upgradedTower = false;
 
     // Current buildable tile
     private GameObject currentBuildableTile = null;
-
-    // Towers
-    public GameObject tower;
 
     // Direction
     int forward = 1;
@@ -43,11 +46,21 @@ public class MP_PlayerController : NetworkBehaviour
     Dictionary<string, int> towerCostDict = new Dictionary<string, int>();
     Dictionary<string, int> towerRefundDict = new Dictionary<string, int>();
 
+    private const int upgradeLimit = 5;
+    private int currentUpgradeLimit = 0;
+
+    // Total number of upgrades made
+    private int totalTowerLevel = 0;
+
     void Start()
     {
         // Initialise values for Towers
         towerCostDict.Add("Tower", 20);
         towerRefundDict.Add("Tower", 10);
+        towerCostDict.Add("Tower2", 40);
+        towerRefundDict.Add("Tower2", 20);
+        towerCostDict.Add("Tower3", 60);
+        towerRefundDict.Add("Tower3", 30);
 
         // Get buttons
         buttons = GameObject.FindGameObjectWithTag("Buttons");
@@ -78,7 +91,7 @@ public class MP_PlayerController : NetworkBehaviour
 
 
     [Command]
-    public void CmdConstructTower()
+    public void CmdConstructTower(string tower)
     {
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
@@ -95,7 +108,7 @@ public class MP_PlayerController : NetworkBehaviour
 
                 // Get the script build tower and build tower
                 MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower>();
-                build_script.BuildTower(this.gameObject.GetInstanceID(), "Tower", towerCostDict, playerGold);
+                build_script.BuildTower(this.gameObject.GetInstanceID(), tower, towerCostDict, playerGold);
             }
             else
             {
@@ -120,9 +133,36 @@ public class MP_PlayerController : NetworkBehaviour
                 // Get current tile
                 currentBuildableTile = hit.collider.gameObject;
 
-                // Get the script build tower and build tower
+                // Get the script build tower and sell tower
+                MP_TileBuildTower sell_script = currentBuildableTile.GetComponent<MP_TileBuildTower>();
+                sell_script.SellTower(this.gameObject.GetInstanceID(), towerRefundDict);
+            }
+            else
+            {
+                currentBuildableTile = null;
+            }
+        }
+    }
+
+    [Command]
+    public void CmdUpgradeTower()
+    {
+        Vector3 down = transform.TransformDirection(Vector3.down);
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, down);
+
+        // Raycast beneath builder
+        if (Physics.Raycast(ray, out hit, 10))
+        {
+            // Hit a buildable surface
+            if (hit.collider.tag == "BS")
+            {
+                // Get current tile
+                currentBuildableTile = hit.collider.gameObject;
+
+                // Get the script build tower and upgrade tower
                 MP_TileBuildTower build_script = currentBuildableTile.GetComponent<MP_TileBuildTower>();
-                build_script.SellTower(this.gameObject.GetInstanceID(), towerRefundDict);
+                build_script.UpgradeTower(this.gameObject.GetInstanceID(), ref upgradedTower);
             }
             else
             {
@@ -141,7 +181,7 @@ public class MP_PlayerController : NetworkBehaviour
         // Hit build button
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            CmdConstructTower();
+            CmdConstructTower("Tower");
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -154,14 +194,44 @@ public class MP_PlayerController : NetworkBehaviour
     {
         if (vc.BuildButtonPressed())
         {
-            CmdConstructTower();
+            CmdConstructTower("Tower");
             vc.BuildButtonOff();
+        }
+
+        if (vc.BuildButton2Pressed())
+        {
+            CmdConstructTower("Tower2");
+            vc.BuildButton2Off();
+        }
+
+        if (vc.BuildButton3Pressed())
+        {
+            CmdConstructTower("Tower3");
+            vc.BuildButton3Off();
         }
 
         if (vc.SellButtonPressed())
         {
             CmdSellTower();
             vc.SellButtonOff();
+        }
+
+        if (vc.UpgradeButtonPressed())
+        {
+            vc.UpgradeButtonOff();
+            if (currentUpgradeLimit < upgradeLimit)
+            {
+                CmdUpgradeTower();
+
+                // Increase upgrade limit and tell playe
+                // tower has been upgraded
+                currentUpgradeLimit += 1;
+            }
+            else
+            {
+                Debug.Log("Current upgrade limit reached for this tower");
+            }
+
         }
 
         // Perform state analysis
@@ -211,11 +281,6 @@ public class MP_PlayerController : NetworkBehaviour
         gameObject.transform.Rotate(0, x, 0);
     }
 
-    public void ConstructTower()
-    {
-        CmdConstructTower();
-    }
-
     public override void OnStartLocalPlayer()
     {
         Color orange = new Color(178 / 255.0f, 115 / 255.0f, 0, 1);
@@ -235,22 +300,126 @@ public class MP_PlayerController : NetworkBehaviour
     public void UpdateGold()
     {
         UpdateBaseTowerGold();
+        DeductUpgradeCost();
     }
 
     void UpdateBaseTowerGold()
     {
-        int numBaseTowers =
-            GameObject.FindGameObjectsWithTag("Tower").Length;
-        int baseTowerCost;
-        towerCostDict.TryGetValue("Tower", out baseTowerCost);
-        int baseRefundCost;
-        towerRefundDict.TryGetValue("Tower", out baseRefundCost);
-
-        if (numBaseTowers != previousNumTowers)
+        // Tower1
+        int numBaseTower1 = GameObject.FindGameObjectsWithTag("Tower").Length;
+        if (numBaseTower1 != previousNumTower1)
         {
-            int numChanges = numBaseTowers - previousNumTowers;
-            playerGold -= numChanges * baseTowerCost;
-            previousNumTowers = numBaseTowers;
+            int cost1 = 0;
+            int numChanges1 = numBaseTower1 - previousNumTower1;
+            if (numChanges1 > 0)
+            {
+                // Towers build, deduct gold
+                towerCostDict.TryGetValue("Tower", out cost1);
+            }
+            else
+            {
+                // Towers sold, increase gold
+                towerRefundDict.TryGetValue("Tower", out cost1);
+            }
+
+            playerGold -= numChanges1 * cost1;
+            previousNumTower1 = numBaseTower1;
+        }
+
+        // Tower2
+        int numBaseTower2 = GameObject.FindGameObjectsWithTag("Tower2").Length;
+        if (numBaseTower2 != previousNumTower2)
+        {
+            int cost2 = 0;
+            int numChanges2 = numBaseTower2 - previousNumTower2;
+            if (numChanges2 > 0)
+            {
+                // Towers build, deduct gold
+                towerCostDict.TryGetValue("Tower2", out cost2);
+            }
+            else
+            {
+                // Towers sold, increase gold
+                towerRefundDict.TryGetValue("Tower2", out cost2);
+            }
+
+            playerGold -= numChanges2 * cost2;
+            previousNumTower2 = numBaseTower2;
+        }
+
+        // Tower3
+        int numBaseTower3 = GameObject.FindGameObjectsWithTag("Tower3").Length;
+        if (numBaseTower3 != previousNumTower3)
+        {
+            int cost3 = 0;
+            int numChanges3 = numBaseTower3 - previousNumTower3;
+            if (numChanges3 > 0)
+            {
+                // Towers build, deduct gold
+                towerCostDict.TryGetValue("Tower3", out cost3);
+            }
+            else
+            {
+                // Towers sold, increase gold
+                towerRefundDict.TryGetValue("Tower3", out cost3);
+            }
+
+            playerGold -= numChanges3 * cost3;
+            previousNumTower3 = numBaseTower3;
+        }
+    }
+
+    // Update gold on tower upgrades.
+    private void DeductUpgradeCost()
+    {
+        int i;
+        // Tower1
+        GameObject[] baseTower1 = GameObject.FindGameObjectsWithTag("Tower");
+        int newTowerLevel = 0;
+        if (baseTower1 != null)
+        {
+            for (i = 0; i < baseTower1.Length; i++)
+            {
+                ShootEnemies towerShooting =
+                    baseTower1[i].GetComponent<ShootEnemies>();
+                newTowerLevel += towerShooting.level;
+            }
+        }
+
+        // Tower2
+        GameObject[] baseTower2 = GameObject.FindGameObjectsWithTag("Tower2");
+        if (baseTower2 != null)
+        {
+            for (i = 0; i < baseTower2.Length; i++)
+            {
+                ShootEnemies towerShooting =
+                    baseTower2[i].GetComponent<ShootEnemies>();
+                newTowerLevel += towerShooting.level;
+            }
+        }
+
+        // Tower3
+        GameObject[] baseTower3 = GameObject.FindGameObjectsWithTag("Tower3");
+        if (baseTower3 != null)
+        {
+            for (i = 0; i < baseTower3.Length; i++)
+            {
+                ShootEnemies towerShooting =
+                    baseTower3[i].GetComponent<ShootEnemies>();
+                newTowerLevel += towerShooting.level;
+            }
+        }
+
+        if (newTowerLevel > totalTowerLevel)
+        {
+            int newLevels = newTowerLevel - totalTowerLevel;
+            playerGold -= upgradeCost * newLevels;
+            totalTowerLevel = newTowerLevel;
+        }
+        else if (newTowerLevel != totalTowerLevel)
+        {
+            // No extra refund on selling upgraded towers
+            totalTowerLevel = newTowerLevel;
         }
     }
 }
