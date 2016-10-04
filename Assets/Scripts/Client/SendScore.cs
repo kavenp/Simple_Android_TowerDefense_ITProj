@@ -22,6 +22,7 @@ public class SendScore : MonoBehaviour
         // Store the infomation to be sent in an object,
         // which can then be serialized into JSON
         ScoreInfo scoreInfo = new ScoreInfo();
+        scoreInfo.type = "NewScore";
         scoreInfo.senderID = SystemInfo.deviceUniqueIdentifier;
         scoreInfo.score = score;
 

@@ -23,7 +23,7 @@ public class ScoreServer {
     /**
      * Updates the scores in the database if the new score
      * is one of the user's top 3 scores.
-     * @param userID The unique identifier of the user's phone.
+     * @param userID A unique identifier for the user's phone.
      * @param newScore The new score achieved by the user.
      */
     public void updateScores(String userID, int newScore) {
@@ -46,7 +46,7 @@ public class ScoreServer {
     /**
      * Retrieves the top 3 scores of the user and sorts them
      * with the new score in ascending order.
-     * @param userID The unique identifier of the user's phone.
+     * @param userID A unique identifier for the user's phone.
      * @param newScore The new score achieved by the user.
      * @return The sorted scores.
      */
@@ -78,7 +78,7 @@ public class ScoreServer {
     /**
      * Retrieves the top 3 scores of the user, in descending
      * order.
-     * @param userID The unique identifier of the user's phone.
+     * @param userID A unique identifier for the user's phone.
      * @return The top 3 scores.
      */
     public int[] retrieveScores(String userID) {

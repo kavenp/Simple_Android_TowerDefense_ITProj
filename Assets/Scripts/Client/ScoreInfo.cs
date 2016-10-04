@@ -5,6 +5,7 @@
 // JSON format.
 public class ScoreInfo
 {
+    public string type;
     public string senderID;
     public int score;
 }
