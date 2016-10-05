@@ -46,8 +46,7 @@ public class MP_PlayerController : NetworkBehaviour
     Dictionary<string, int> towerCostDict = new Dictionary<string, int>();
     Dictionary<string, int> towerRefundDict = new Dictionary<string, int>();
 
-    private const int upgradeLimit = 5;
-    private int currentUpgradeLimit = 0;
+
 
     // Total number of upgrades made
     private int totalTowerLevel = 0;
@@ -219,19 +218,7 @@ public class MP_PlayerController : NetworkBehaviour
         if (vc.UpgradeButtonPressed())
         {
             vc.UpgradeButtonOff();
-            if (currentUpgradeLimit < upgradeLimit)
-            {
-                CmdUpgradeTower();
-
-                // Increase upgrade limit and tell playe
-                // tower has been upgraded
-                currentUpgradeLimit += 1;
-            }
-            else
-            {
-                Debug.Log("Current upgrade limit reached for this tower");
-            }
-
+            CmdUpgradeTower();
         }
 
         // Perform state analysis

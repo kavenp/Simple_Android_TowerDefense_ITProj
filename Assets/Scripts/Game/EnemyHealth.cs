@@ -7,9 +7,12 @@ public class EnemyHealth : MonoBehaviour
 {
 
 	[SerializeField]
-	private int startingMaxHealth = 100;
+	private static int startingMaxHealth = 100;
 
-	[SerializeField]
+    [SerializeField]
+    private static float startingDmgRed = 1f;
+
+    [SerializeField]
 	public int health = 100;
 
 	[SerializeField]
@@ -20,8 +23,9 @@ public class EnemyHealth : MonoBehaviour
     public Image healthBar;
 	// Use this for initialization
 	void Start () {
-		health    = this.startingMaxHealth;
-		maxHealth = this.startingMaxHealth;
+        dmg_red = startingDmgRed;
+		health    = startingMaxHealth;
+		maxHealth = startingMaxHealth;
 		healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
 	}
 
@@ -33,17 +37,17 @@ public class EnemyHealth : MonoBehaviour
 
 	public void AddToMaXHealth(int health)
 	{
-        this.startingMaxHealth += health;
+        startingMaxHealth += health;
     }
 
 	public void IncreaseDamageReduction(float red)
 	{
-        this.dmg_red -= red;
+        startingDmgRed -= red;
 
 		// Limit damage reduction
-		if(dmg_red < 0.3)
+		if(startingDmgRed < 0.3)
 		{
-            dmg_red = 0.3f;
+            startingDmgRed = 0.3f;
         }
     }
 

@@ -35,7 +35,7 @@ public class TouchTower : MonoBehaviour
         Debug.Log ("Tower touched");
         rangeCanvas.SetActive (true);
 
-        towerLevelDisplay.text = "Level: " + shootEnemies.level;
+        towerLevelDisplay.text = "Level: " + (shootEnemies.level + 1);
     }
 
     void OnMouseUp ()

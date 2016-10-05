@@ -15,8 +15,8 @@ public class MP_GameCoordinator : NetworkBehaviour
 
     private int waveMultiplier = 2;
 
-    private const int creepHealthAdditive = 30;
-    private const float creepDamageRed = 0.1f;
+    private int creepHealthAdditive = 10;
+    private const float creepDamageRed = 0.05f;
 
 
     // Number of players
@@ -31,7 +31,7 @@ public class MP_GameCoordinator : NetworkBehaviour
         concurrentPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
 
         // If 2 players haven't connected wait for connection
-        if (concurrentPlayers < 2)
+        if (concurrentPlayers < 1)
         {
             return;
         }
@@ -65,13 +65,6 @@ public class MP_GameCoordinator : NetworkBehaviour
         Quaternion spawnRotation = Quaternion.identity;
         var createdEnemy = (GameObject)Instantiate(enemy, spawnPosition, spawnRotation);
 
-        if(numberOfWaves % waveMultiplier == 0)
-        {
-            // Add more health / dmg red to creeps
-            EnemyHealth creepHealth = createdEnemy.GetComponent<EnemyHealth>();
-            creepHealth.AddToMaXHealth(creepHealthAdditive);
-            creepHealth.IncreaseDamageReduction(creepDamageRed);
-        }
 
         NetworkServer.Spawn(createdEnemy);
 
@@ -85,6 +78,10 @@ public class MP_GameCoordinator : NetworkBehaviour
 
         isWave = false;
         numberOfWaves -= 1;
+
+        EnemyHealth creepHealth = enemy.GetComponent<EnemyHealth>();
+        creepHealth.AddToMaXHealth(creepHealthAdditive);
+        creepHealth.IncreaseDamageReduction(creepDamageRed);
 
         // This is terrible but can fix it later on
         numberOfEnemiesPerWave = 5;
