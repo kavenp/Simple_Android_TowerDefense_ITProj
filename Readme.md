@@ -18,10 +18,10 @@ Key features of the game are:
 
 Team
 ----
-Lawrence Kuoch: Front-End and UNET Server Developer  
-Matthew Eldridge: Front-End Developer  
-Jason Traill: Full Stack Developer  
-Kaven Peng: Back-End and Database Developer
+- Lawrence Kuoch: Front-End and UNET Server Developer  
+- Matthew Eldridge: Front-End Developer  
+- Jason Traill: Full Stack Developer  
+- Kaven Peng: Back-End and Database Developer
 
 Requirements
 ------------
