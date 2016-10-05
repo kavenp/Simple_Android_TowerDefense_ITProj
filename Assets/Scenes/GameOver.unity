@@ -335,7 +335,7 @@ GameObject:
   - 222: {fileID: 738385163}
   - 114: {fileID: 738385162}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ReplayButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,7 +410,7 @@ GameObject:
   - 114: {fileID: 1135694146}
   - 114: {fileID: 1135694145}
   m_Layer: 5
-  m_Name: Button
+  m_Name: LobbyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,7 +605,7 @@ GameObject:
   - 222: {fileID: 1685243491}
   - 114: {fileID: 1685243490}
   m_Layer: 5
-  m_Name: Text
+  m_Name: LobbyButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,7 +661,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: Lobby
 --- !u!222 &1685243491
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -680,7 +680,7 @@ GameObject:
   - 114: {fileID: 1970731276}
   - 114: {fileID: 1970731275}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: ReplayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

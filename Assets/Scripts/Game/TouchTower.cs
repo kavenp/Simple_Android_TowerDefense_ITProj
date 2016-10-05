@@ -35,6 +35,8 @@ public class TouchTower : MonoBehaviour
         Debug.Log ("Tower touched");
         rangeCanvas.SetActive (true);
 
+        // Towers start at level 1, internally the level is equivalent
+        // to the number of upgrades
         towerLevelDisplay.text = "Level: " + (shootEnemies.level + 1);
     }
 

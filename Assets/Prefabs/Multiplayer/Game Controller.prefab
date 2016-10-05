@@ -89,4 +89,4 @@ MonoBehaviour:
   numberOfWaves: 10
   numberOfEnemiesPerWave: 5
   spawnWait: 1
-  waveWait: 10
+  waveWait: 20

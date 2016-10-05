@@ -22,5 +22,9 @@ public class DisplayScore : MonoBehaviour
         {
             scoreDisplay.text = "Game Over";
         }
+
+        // Destroy the Player Base so it doesn't remain
+        // in future scenes
+        Destroy(playerBase);
     }
 }

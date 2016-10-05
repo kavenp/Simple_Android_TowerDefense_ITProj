@@ -10,8 +10,8 @@ public class ViewController : MonoBehaviour
 	private bool buildButton2;
     private bool buildButton3;
     private bool sellButton;
-
     private bool upgradeButton;
+
     void Start ()
 	{
 		this.upButton = false;
