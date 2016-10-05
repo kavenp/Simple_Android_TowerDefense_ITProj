@@ -3,10 +3,18 @@ COMP30022 IT Project - Team Aqua
 
 Project
 -------
-The project is to build a cooperative multiplayer tower defence game for
-Android. Towers are constructed by builders controlled by the players.
-builders which uses a moveable player to build towers. Features chat
-and replay functionality.
+"Insert_game_name" is a cooperative multiplayer tower defense game for
+Android. Every period of time, enemies are spawned and make their way
+to the player's base in order to destroy it. The player however controls
+movable builders which can build towers so that they can destroy enemies. 
+
+Key features of the game are:
+-------
+- Playing a game with anyone around the world
+- Chatting in game with your team mate
+- Watching a replay of your most recent match
+- Access to your high-scores and leaderboards
+- Innovative and unique gameplay and design
 
 Team
 ----
