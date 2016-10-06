@@ -30,7 +30,7 @@ public class ScoreServer {
         
         int[] scores = retrieveScores(userID, newScore);
         
-        if (scores[3] != newScore) {
+        if (scores[0] != newScore) {
             // New high score, update the user's entry
             // in the database
             String query = "UPDATE UserInfo SET "

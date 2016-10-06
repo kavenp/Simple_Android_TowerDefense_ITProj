@@ -53,17 +53,19 @@ public class UserInfoServer {
             DatagramPacket receivePacket =
                     new DatagramPacket(receiveData, receiveData.length);
             
-            InetAddress ipAddress = receivePacket.getAddress();
-            int port = receivePacket.getPort();
-            
             try {
                 serverSocket.receive(receivePacket);
                 
             } catch (IOException e) {
                 e.printStackTrace();
+                continue;
             }
             
-            String message = new String(receivePacket.getData());
+            InetAddress ipAddress = receivePacket.getAddress();
+            int port = receivePacket.getPort();
+            String message = new String(receivePacket.getData(),
+                    0, receivePacket.getLength());
+            
             processMessage(message, ipAddress, port);
         }
     }
@@ -92,11 +94,18 @@ public class UserInfoServer {
             }
             
             String type = (String)jsonObject.get("type");
-            if (type == "NewScore") {
-                int newScore = (int)jsonObject.get("score");
-                scoreServer.updateScores(userID, newScore);
+            
+            if (type == null) {
+                System.err.println("Warning: " +
+                		"Received message with no type key.");
+                return;
+            }
+            
+            if (type.equals("NewScore")) {
+                long newScore = (Long)jsonObject.get("score");
+                scoreServer.updateScores(userID, (int)newScore);
                 
-            } else if (type == "GetScores") {
+            } else if (type.equals("GetScores")) {
                 sendScores(userID, ipAddress, port);
                 
             } else {
