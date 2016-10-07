@@ -31,10 +31,13 @@ public class ClientConnection
         return instance;     
     }
 
+	public void OpenSocket() {
+		socket = new UdpClient (socketPort);
+	}
+
     // Send message to the server.
     public void Send(string message)
     {
-		socket = new UdpClient (socketPort);
 		byte[] data = Encoding.ASCII.GetBytes(message);
 		socket.Send(data, data.Length, nectarIP, socketPort);
     }
@@ -42,9 +45,6 @@ public class ClientConnection
     // Wrapper for UdpClient's BeginReceive method.
     public void BeginReceiveWrapper(AsyncCallback callback)
     {
-		if (socket == null) {	
-			socket = new UdpClient (socketPort);
-		}
 		socket.BeginReceive(callback, socket);
     }
 

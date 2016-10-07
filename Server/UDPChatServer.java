@@ -1,24 +1,37 @@
+import java.io.IOException;
 import java.net.*;
 import java.util.*;
 import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-// Derived from Computer Networking: A Top Down Approach, by Kurose and Ross
 public class UDPChatServer {
 
+	private static HashMap<String, ArrayList<Tuple<String, InetAddress, Integer>>> roomConnections = 
+			new HashMap<String,ArrayList<Tuple<String, InetAddress, Integer>>>(); 
 	private String senderID = "";
 	private String roomName = "";
-	private HashMap roomConnections = new HashMap(); 
-	
-    public static void main(String args[]) throws Exception {
-        DatagramSocket serverSocket = new DatagramSocket(9876);
+    
+    public void run() {
+    	DatagramSocket serverSocket = null;
+		try {
+			serverSocket = new DatagramSocket(9876);
+		} catch (SocketException e1) {
+			e1.printStackTrace();
+		}
         byte[] receiveData = new byte[1024];
         byte[] sendData = new byte[1024];
+        byte[] ackData = new byte[1024];
 
         while (true) {
             // Receive packet and print sentence
             DatagramPacket receivePacket =
                     new DatagramPacket(receiveData, receiveData.length);
-            serverSocket.receive(receivePacket);
+			try {
+				serverSocket.receive(receivePacket);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
             String sentence = new String(receivePacket.getData(),
                     0, receivePacket.getLength());
             System.out.println(sentence);
@@ -33,29 +46,43 @@ public class UDPChatServer {
             	//if room is already in map just add in the new connection
             	//and send ack packet
             	{
-            		Tuple newConn = new Tuple<String, InetAddress, int> (senderID, IPAddress, port);
+            		Tuple<String, InetAddress, Integer> newConn = new Tuple<String, InetAddress, Integer> (senderID, IPAddress, port);
             		roomConnections.get(roomName).add(newConn);
             		JSONObject obj = new JSONObject();
             		obj.put("senderID", "server");
             		obj.put("roomID", roomName);
             		obj.put("message","");
+        			//reset roomName variable for next connection
+        			this.roomName = null;
+            		System.out.println(obj.toJSONString());
             		ackData = obj.toJSONString().getBytes();
             		DatagramPacket ackPacket = 
             				new DatagramPacket(ackData, ackData.length, IPAddress, port);
-            		serversocket.send(ackPacket);
+            		try {
+						serverSocket.send(ackPacket);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
             	} else {
             		ArrayList connList = new ArrayList();
-            		Tuple newConn = new Tuple<String, InetAddress, int> (senderID, IPAddress, port);
+            		Tuple newConn = new Tuple<String, InetAddress, Integer> (senderID, IPAddress, port);
             		connList.add(newConn);
             		roomConnections.put(roomName,connList);
             		JSONObject obj = new JSONObject();
             		obj.put("senderID", "server");
             		obj.put("roomID", roomName);
             		obj.put("message","");
+        			//reset roomName variable for next connection
+        			this.roomName = null;
+            		System.out.println(obj.toJSONString());
             		ackData = obj.toJSONString().getBytes();
             		DatagramPacket ackPacket =
             				new DatagramPacket(ackData, ackData.length, IPAddress, port);
-            		serversocket.send(ackPacket);
+            		try {
+						serverSocket.send(ackPacket);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
             	}
             }
             
@@ -63,22 +90,22 @@ public class UDPChatServer {
             String room = getRoom(sentence);
             
             if(roomConnections.containsKey(room)) {
-            	conns = roomConnections.get(room);
-            	for (Tuple temp : conns) {
-            		sendData = sentence.getBytes();
+            	//get the all connections in a room
+            	ArrayList<Tuple<String, InetAddress, Integer>> conns = roomConnections.get(room);
+            	System.out.println(conns);
+        		sendData = sentence.getBytes();
+        		//create and send a packet to each connection
+            	for (Tuple<String, InetAddress, Integer> temp : conns) {
             		DatagramPacket sendPacket = 
-            				new DatagramPacket(sendData, sendData.length, temp.y, temp.z);
-            		serverSocket.send(sendPacket);
+            				new DatagramPacket(sendData, sendData.length, temp.y, temp.z.intValue());
+            		System.out.println("IP = "+temp.y +" Port = " +temp.z + "\n");
+            		try {
+						serverSocket.send(sendPacket);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
             	}
             }
-
-            // Repack and send back sentence
-            //sendData = sentence.getBytes();
-            //DatagramPacket sendPacket =
-            //        new DatagramPacket(sendData, sendData.length, IPAddress,
-            //                port);
-
-            //serverSocket.send(sendPacket);
         }
     }
     
@@ -113,14 +140,18 @@ public class UDPChatServer {
     		Object obj = parser.parse(jsonStr);
     		JSONObject jsonObject = (JSONObject) obj;
     		//get parsed values and store them
-    		this.roomName = (String) jsonObject.get("roomName");
+    		this.roomName =  (String) jsonObject.get("roomName");
     		this.senderID = (String) jsonObject.get("senderID");
-    		return True;
+    		if(roomName != null) {
+    			return true;
+    		} else {
+    			return false;
+    		}
     		
     	} catch (ParseException e) {
     		//exception happens when there is no roomName attribute in jsonObject
-    		//which means this is a chat message, not a initial connection
-    		return False;
+    		//which means this is a chat message, not an initial connection
+    		return false;
     	}
     } 
     

@@ -22,8 +22,8 @@ public class ChatBoxFunctions : MonoBehaviour {
 	}
 
 	void Start () {
-		SetMessage ("Chat connected...");
-		SendMessage ();
+		clientConnection.OpenSocket();
+		clientConnection.BeginReceiveWrapper(new AsyncCallback(ReceiveMessage));
 	}
 
 	public void ShowMessage (string msg) {
@@ -47,12 +47,17 @@ public class ChatBoxFunctions : MonoBehaviour {
 
 	//sends message to server in JSON format
 	public void SendMessage () {
+		//Stop BeginReceive so we can send a message
+		clientConnection.End ();
 		MessageInfo msgInfo = new MessageInfo ();
 		msgInfo.senderID = SystemInfo.deviceUniqueIdentifier;
 		msgInfo.message = this.message;
 		msgInfo.roomID = this.roomID;
 		string chatMsg = JsonConvert.SerializeObject (msgInfo);
+		//Reopen socket and send message
+		clientConnection.OpenSocket ();
 		clientConnection.Send (chatMsg);
+		//Restart BeginReceive
 		clientConnection.BeginReceiveWrapper (
 			new AsyncCallback (ReceiveMessage));
     }
@@ -64,7 +69,8 @@ public class ChatBoxFunctions : MonoBehaviour {
 		MessageInfo receivedMsg = JsonConvert.DeserializeObject<MessageInfo> (convertData);
 		this.receivedString = receivedMsg.message;
 		this.roomID = receivedMsg.roomID;
-		//start waiting for next message
+		//start waiting for next message, restart BeginReceive
+		clientConnection.OpenSocket();
 		clientConnection.BeginReceiveWrapper (
 			new AsyncCallback(ReceiveMessage));
 	}
@@ -78,5 +84,4 @@ public class ChatBoxFunctions : MonoBehaviour {
 			ShowReceivedMessage ();
 		}
 	}
-
 }
