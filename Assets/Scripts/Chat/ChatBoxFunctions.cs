@@ -13,11 +13,17 @@ public class ChatBoxFunctions : MonoBehaviour {
 
 	public string message = "";
 	public string receivedString = "";
+	private string roomID = "";
 	private ClientConnection clientConnection = ClientConnection.GetInstance();
 
 	//sets the chat message
 	public void SetMessage (string message) {
 		this.message = message;
+	}
+
+	void Start () {
+		SetMessage ("Chat connected...");
+		SendMessage ();
 	}
 
 	public void ShowMessage (string msg) {
@@ -33,11 +39,6 @@ public class ChatBoxFunctions : MonoBehaviour {
 		}
 	}
 
-	public void ShowSentMessage() {
-		ShowMessage (message);
-        message = "";
-	}
-
 	public void ShowReceivedMessage() {
 		ShowMessage ("received: " + receivedString);
 		//reset to empty after showing
@@ -49,27 +50,27 @@ public class ChatBoxFunctions : MonoBehaviour {
 		MessageInfo msgInfo = new MessageInfo ();
 		msgInfo.senderID = SystemInfo.deviceUniqueIdentifier;
 		msgInfo.message = this.message;
+		msgInfo.roomID = this.roomID;
 		string chatMsg = JsonConvert.SerializeObject (msgInfo);
 		clientConnection.Send (chatMsg);
-		clientConnection.BeginReceive(
-			new AsyncCallback(ReceiveMessage));
+		clientConnection.BeginReceiveWrapper (
+			new AsyncCallback (ReceiveMessage));
     }
 
 	public void ReceiveMessage (IAsyncResult asyncResult) {
-		clientConnection.EndReceive (asyncResult);
+		clientConnection.EndReceiveWrapper (asyncResult);
 		byte[] received = clientConnection.GetData ();
 		string convertData = Encoding.UTF8.GetString (received);
 		MessageInfo receivedMsg = JsonConvert.DeserializeObject<MessageInfo> (convertData);
 		this.receivedString = receivedMsg.message;
+		this.roomID = receivedMsg.roomID;
 		//start waiting for next message
-		clientConnection.BeginReceive(
+		clientConnection.BeginReceiveWrapper (
 			new AsyncCallback(ReceiveMessage));
 	}
 
-	void Start () {
-		this.message = "Initial connection check.";
-		SendMessage ();
-		this.message = "";
+	public void SetRoom(string room) {
+		this.roomID = room;
 	}
 
 	void Update () {

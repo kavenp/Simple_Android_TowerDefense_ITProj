@@ -31,7 +31,7 @@ public class SendScore : MonoBehaviour
         clientConnection.Send(scoreMessage);
 
         // Test purposes only
-        clientConnection.BeginReceive(
+        clientConnection.BeginReceiveWrapper(
             new AsyncCallback(clientConnection.DebugIncomingData));
     }
 }

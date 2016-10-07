@@ -7,12 +7,12 @@ using System.Text;
 // Provides an interface to the NeCTAR server.
 public class ClientConnection
 {
+	private int socketPort = 9876;
+	private string nectarIP = "115.146.95.127";
 
-    private UdpClient udp;
-    private IPEndPoint udpEndPoint;
-
-    private int socketPort = 9876;
-    private string nectarIP = "115.146.95.127";
+	private IPEndPoint target;
+	private UdpClient server;
+	private UdpClient socket;
 
     private static ClientConnection instance = new ClientConnection();
 
@@ -21,7 +21,9 @@ public class ClientConnection
 
     // Singleton.
     private ClientConnection()
-    {}
+	{
+		//socket = new UdpClient (socketPort);
+	}
 
     // Get client connection object.
     public static ClientConnection GetInstance()
@@ -32,36 +34,43 @@ public class ClientConnection
     // Send message to the server.
     public void Send(string message)
     {
-        udpEndPoint = new IPEndPoint(IPAddress.Any, socketPort);
-        udp = new UdpClient(udpEndPoint);
-        byte[] data = Encoding.ASCII.GetBytes(message);
-        udp.Send(data, data.Length, nectarIP, socketPort);
+		socket = new UdpClient (socketPort);
+		byte[] data = Encoding.ASCII.GetBytes(message);
+		socket.Send(data, data.Length, nectarIP, socketPort);
     }
 
     // Wrapper for UdpClient's BeginReceive method.
-    public void BeginReceive(AsyncCallback callback)
+    public void BeginReceiveWrapper(AsyncCallback callback)
     {
-        udp.BeginReceive(callback, udpEndPoint);
+		if (socket == null) {	
+			socket = new UdpClient (socketPort);
+		}
+		socket.BeginReceive(callback, socket);
     }
 
     // Waits for a response asynchronously, then logs
     // the response for debugging purposes.
     public void DebugIncomingData(IAsyncResult asyncResult)
     {
-        byte[] data = udp.EndReceive(asyncResult, ref udpEndPoint);
-
+		socket = new UdpClient (socketPort);
+		target = new IPEndPoint(IPAddress.Parse(nectarIP),socketPort);
+        byte[] data = socket.EndReceive(asyncResult, ref target);
         string response = Encoding.UTF8.GetString(data);
 		this.serverResponse = response;
         Debug.Log(response);
-        udp.Close();
+        socket.Close();
     }
 
 	//EndReceive Wrapper
-	public void EndReceive(IAsyncResult asyncResult)
+	public void EndReceiveWrapper(IAsyncResult asyncResult)
 	{
-		byte[] data = udp.EndReceive (asyncResult, ref udpEndPoint);
+		byte[] data = socket.EndReceive (asyncResult, ref target);
 		this.receivedData = data;
-		udp.Close ();
+		socket.Close ();
+	}
+
+	public void End() {
+		socket.Close ();
 	}
 
 	public byte[] GetData()
