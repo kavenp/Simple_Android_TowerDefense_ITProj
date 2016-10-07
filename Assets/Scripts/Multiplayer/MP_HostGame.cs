@@ -85,6 +85,7 @@ public class MP_HostGame : MonoBehaviour
 
 			// Serialize and send room name to chat server
 			string initConMsg = JsonConvert.SerializeObject(roomInfo);
+			clientConnection.OpenSocket ();
 			clientConnection.Send (initConMsg);
 			//After initial send start waiting for return ack from server
 			clientConnection.BeginReceiveWrapper(

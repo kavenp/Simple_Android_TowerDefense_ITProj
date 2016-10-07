@@ -130,6 +130,7 @@ public class MP_JoinGame : MonoBehaviour
 
 		//serialize and send room information to chat server
 		string initConMsg = JsonConvert.SerializeObject(roomInfo);
+		clientConnection.OpenSocket ();
 		clientConnection.Send (initConMsg);
 		//After initial send start waiting for return ack from server
 		clientConnection.BeginReceiveWrapper(
