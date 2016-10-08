@@ -102,6 +102,7 @@ GameObject:
   - 114: {fileID: 85455680}
   - 114: {fileID: 85455679}
   - 114: {fileID: 85455681}
+  - 114: {fileID: 85455682}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -165,6 +166,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b610d201fe0dee242b0482aa0e578399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &85455682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 85455676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7e20344c01f0c4c83079f45c647fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &150443214
@@ -474,7 +486,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 85455679}
+      - m_Target: {fileID: 85455682}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:

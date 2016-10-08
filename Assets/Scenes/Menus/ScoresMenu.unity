@@ -99,8 +99,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 85455678}
   - 114: {fileID: 85455677}
+  - 114: {fileID: 85455679}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: SceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,6 +134,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &85455679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 85455676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959c0ec3a5500494b97143e49e54c646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &150443214
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +528,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 85455679}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
