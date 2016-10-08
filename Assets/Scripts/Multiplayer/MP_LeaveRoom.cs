@@ -19,14 +19,7 @@ public class MP_LeaveRoom : MonoBehaviour
         MatchInfo matchInfo = nm.matchInfo;
         nm.matchMaker.DestroyMatch(matchInfo.networkId, 0, OnMatchDestroy);
 
-        // nm.StopHost();
-        // nm.StopMatchMaker();
-
-
-        //stop receiving chat
         clientConnection.End();
-
-		// SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
      public static void OnMatchDestroy(bool success, string extendedInfo)
@@ -35,12 +28,6 @@ public class MP_LeaveRoom : MonoBehaviour
         NetworkManager.singleton.StopHost();
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         Destroy(GameObject.Find("NetworkManager"));
-
-        //  NetworkManager.singleton.StopHost();
-        //  NetworkManager.singleton.StopMatchMaker();
-        //  NetworkManager.Shutdown();
-
-        //  NetworkTransport.Shutdown();
     }
 }
 
