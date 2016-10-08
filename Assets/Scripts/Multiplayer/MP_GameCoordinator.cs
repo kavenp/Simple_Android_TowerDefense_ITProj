@@ -25,19 +25,23 @@ public class MP_GameCoordinator : NetworkBehaviour
     bool isSpawning = false;
     bool isWave = false;
 
+    int playable = 2;
+
     void Update()
     {
         // Get number of concurrent players
         concurrentPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
 
         // If 2 players haven't connected wait for connection
-        if (concurrentPlayers < 1)
+        if (concurrentPlayers < playable)
         {
             return;
         }
 
-        Debug.Log("CP = " + concurrentPlayers);
+        // At this point, if the host is still playing and the client has disconnectede the game will still resume
+        playable = 1;
 
+        // Spawn wave management
         if (isSpawning == false && numberOfEnemiesPerWave > 0)
         {
             isSpawning = true;
@@ -50,8 +54,8 @@ public class MP_GameCoordinator : NetworkBehaviour
             StartCoroutine(SpawnNextWave(waveWait));
         }
         else if (numberOfWaves == 0 && isWave == false &&
-            numberOfEnemiesPerWave == 0 &&
-            GameObject.FindWithTag("Enemy") == null)
+                 numberOfEnemiesPerWave == 0 &&
+                 GameObject.FindWithTag("Enemy") == null)
         {
             SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }

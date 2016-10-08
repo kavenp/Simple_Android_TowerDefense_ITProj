@@ -4,44 +4,38 @@ using System.Net.Sockets;
 using System;
 using System.Text;
 
-// Provides an interface to the server.
+// Provides an interface to the NeCTAR server.
 public class ClientConnection
 {
-    // For sending and recieving UDP packets
-    private UdpClient udp = null;
+
+    private UdpClient udp;
     private IPEndPoint udpEndPoint;
 
-    // Port and IP of the server
     private int socketPort = 9876;
-    private string serverIP = "115.146.95.127";
-
-    // The data from the last response
-    // received from the server
-    private byte[] receivedData;
+    private string nectarIP = "115.146.95.127";
 
     private static ClientConnection instance = new ClientConnection();
+
+	private string serverResponse;
+	private byte[] receivedData;
 
     // Singleton.
     private ClientConnection()
     {}
 
-    // Get the client connection object.
+    // Get client connection object.
     public static ClientConnection GetInstance()
     {
         return instance;     
     }
 
-    // Send a message to the server.
+    // Send message to the server.
     public void Send(string message)
     {
-        if (udp != null)
-        {
-            udp.Close();
-        }
         udpEndPoint = new IPEndPoint(IPAddress.Any, socketPort);
         udp = new UdpClient(udpEndPoint);
         byte[] data = Encoding.ASCII.GetBytes(message);
-        udp.Send(data, data.Length, serverIP, socketPort);
+        udp.Send(data, data.Length, nectarIP, socketPort);
     }
 
     // Wrapper for UdpClient's BeginReceive method.
@@ -57,12 +51,12 @@ public class ClientConnection
         byte[] data = udp.EndReceive(asyncResult, ref udpEndPoint);
 
         string response = Encoding.UTF8.GetString(data);
-        string serverResponse = response;
+		this.serverResponse = response;
         Debug.Log(response);
         udp.Close();
     }
 
-	// EndReceive Wrapper.
+	//EndReceive Wrapper
 	public void EndReceive(IAsyncResult asyncResult)
 	{
 		byte[] data = udp.EndReceive (asyncResult, ref udpEndPoint);
@@ -70,11 +64,14 @@ public class ClientConnection
 		udp.Close ();
 	}
 
-    // Call after calling the EndReceive method.
-    // Gets the data from the last response received
-    // from the server.
-    public byte[] GetData()
+	public byte[] GetData()
 	{
 		return receivedData;
-	}	
+	}
+
+	public string GetResponse() 
+	{
+		return serverResponse;	
+	}
+		
 }

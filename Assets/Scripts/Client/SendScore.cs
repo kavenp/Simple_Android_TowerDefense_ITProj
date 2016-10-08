@@ -14,7 +14,6 @@ public class SendScore : MonoBehaviour
 
         if (livesScript.numLives <= 0)
         {
-            // Game was lost, no score
             return;
         }
 
@@ -22,14 +21,17 @@ public class SendScore : MonoBehaviour
 
         // Store the infomation to be sent in an object,
         // which can then be serialized into JSON
-        NewScoreMessage newScoreMessage = new NewScoreMessage();
-        newScoreMessage.type = "NewScore";
-        newScoreMessage.senderID = SystemInfo.deviceUniqueIdentifier;
-        newScoreMessage.score = score;
+        ScoreInfo scoreInfo = new ScoreInfo();
+        scoreInfo.senderID = SystemInfo.deviceUniqueIdentifier;
+        scoreInfo.score = score;
 
-        string message = JsonConvert.SerializeObject(newScoreMessage);
+        string scoreMessage = JsonConvert.SerializeObject(scoreInfo);
 
         ClientConnection clientConnection = ClientConnection.GetInstance();
-        clientConnection.Send(message);
+        clientConnection.Send(scoreMessage);
+
+        // Test purposes only
+        clientConnection.BeginReceive(
+            new AsyncCallback(clientConnection.DebugIncomingData));
     }
 }

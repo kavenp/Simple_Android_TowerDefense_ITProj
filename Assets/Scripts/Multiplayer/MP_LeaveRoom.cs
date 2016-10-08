@@ -18,6 +18,6 @@ public class MP_LeaveRoom : MonoBehaviour
         nm.matchMaker.DropConnection(matchInfo.networkId, matchInfo.nodeId, 0, nm.OnDropConnection);
         nm.StopHost();
 
-		SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+		SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }
