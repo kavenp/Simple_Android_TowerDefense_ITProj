@@ -88,5 +88,5 @@ public class ClientConnection
     public byte[] GetData()
 	{
 		return receivedData;
-	}	
+	}
 }

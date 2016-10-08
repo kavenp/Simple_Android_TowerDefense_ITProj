@@ -23,6 +23,6 @@ public class MP_LeaveRoom : MonoBehaviour
 		//stop receiving chat
 		clientConnection.End();
 
-		SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+		SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }

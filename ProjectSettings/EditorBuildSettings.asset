@@ -14,4 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ReplayOver.unity
   - enabled: 1
-    path: Assets/Scenes/Menus/ScoresMenu.unity
+    path: Assets/Scenes/Disconnect.unity
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+  - enabled: 1
+    path: Assets/Scenes/Oops.unity
