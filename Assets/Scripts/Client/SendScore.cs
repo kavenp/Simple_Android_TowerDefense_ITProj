@@ -30,6 +30,7 @@ public class SendScore : MonoBehaviour
         string message = JsonConvert.SerializeObject(newScoreMessage);
 
         ClientConnection clientConnection = ClientConnection.GetInstance();
+        clientConnection.OpenSocket();
         clientConnection.Send(message);
     }
 }

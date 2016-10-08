@@ -35,6 +35,7 @@ public class RetrieveScores : MonoBehaviour
         string message = JsonConvert.SerializeObject(getScoresMessage);
 
         ClientConnection clientConnection = ClientConnection.GetInstance();
+        clientConnection.OpenSocket();
         clientConnection.Send(message);
 
         // Wait for the response

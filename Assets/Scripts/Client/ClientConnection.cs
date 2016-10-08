@@ -23,28 +23,31 @@ public class ClientConnection
     // Singleton.
     private ClientConnection()
 	{
-		//socket = new UdpClient (socketPort);
-	}
+        socket = new UdpClient(socketPort);
+    }
 
     // Get the client connection object.
     public static ClientConnection GetInstance()
     {
-        return instance;     
+        return instance;
     }
 
 	public void OpenSocket() {
-		socket = new UdpClient (socketPort);
+        if (socket.Client == null)
+        {
+            socket = new UdpClient(socketPort);
+        }
 	}
 
     // Send message to the server.
     public void Send(string message)
     {
-        if (socket != null)
-        {
-            socket.Close();
-        }
-        OpenSocket();
-		byte[] data = Encoding.ASCII.GetBytes(message);
+        //if (socket != null)
+        //{
+        //    socket.Close();
+        //}
+        //OpenSocket();
+        byte[] data = Encoding.ASCII.GetBytes(message);
 		socket.Send(data, data.Length, serverIP, socketPort);
     }
 
