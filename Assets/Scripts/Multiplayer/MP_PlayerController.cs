@@ -453,4 +453,14 @@ public class MP_PlayerController : NetworkBehaviour
             totalTowerLevel = newTowerLevel;
         }
     }
+
+    public void LoadDisconnectedScene()
+    {
+        SceneManager.LoadScene("Disconnect", LoadSceneMode.Single);
+    }
+
+    public void LoadOopsScene()
+    {
+        SceneManager.LoadScene("Oops", LoadSceneMode.Single);
+    }
 }

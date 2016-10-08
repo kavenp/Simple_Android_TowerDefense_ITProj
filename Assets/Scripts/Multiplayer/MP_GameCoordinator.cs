@@ -38,9 +38,6 @@ public class MP_GameCoordinator : NetworkBehaviour
             return;
         }
 
-        // At this point, if the host is still playing and the client has disconnectede the game will still resume
-        playable = 1;
-
         // Spawn wave management
         if (isSpawning == false && numberOfEnemiesPerWave > 0)
         {
@@ -59,6 +56,8 @@ public class MP_GameCoordinator : NetworkBehaviour
         {
             SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
+
+        CheckDC(concurrentPlayers, playable);
     }
 
     IEnumerator SpawnEnemyWave(float seconds)
@@ -89,5 +88,52 @@ public class MP_GameCoordinator : NetworkBehaviour
 
         // This is terrible but can fix it later on
         numberOfEnemiesPerWave = 5;
+    }
+
+    public void CheckDC(int concurrentPlayers, int playable)
+    {
+        // Check again if theres less than 2 players
+        if(concurrentPlayers < playable)
+        {
+            MP_PlayerController lonePlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<MP_PlayerController>();
+            lonePlayer.LoadDisconnectedScene();
+        }
+    }
+
+     void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        GameObject[] notifyPlayers = GameObject.FindGameObjectsWithTag("Player");
+        MP_PlayerController mpc;
+
+        // Game is hosting and not using unity services
+        if(!Network.isServer)
+        {
+            Debug.Log("Server connection disconnected");
+            for(int i = 0; i < notifyPlayers.Length; i += 1)
+            {
+                mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
+                mpc.LoadOopsScene();
+            }
+
+        }
+        // Game has lost connection
+        else if (info == NetworkDisconnection.LostConnection)
+        {
+            Debug.Log("Lost connection to server");
+            for(int i = 0; i < notifyPlayers.Length; i += 1)
+            {
+                mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
+                mpc.LoadOopsScene();
+            }
+        }
+        else
+        {
+            Debug.Log("Disconnected from server");
+            for(int i = 0; i < notifyPlayers.Length; i += 1)
+            {
+                mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
+                mpc.LoadOopsScene();
+            }
+        }
     }
 }
