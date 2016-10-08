@@ -128,7 +128,9 @@ public class MP_JoinGame : MonoBehaviour
     // Join match was successful
     public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo)
     {
-        ClearRoomList();
+        if(success == true)
+        {
+            ClearRoomList();
         status.text = "JOINING...";
 
         MatchInfoSnapshot cm = getCurrentMatchInfo();
@@ -149,6 +151,7 @@ public class MP_JoinGame : MonoBehaviour
         mp_background.SetActive(false);
         hostgame_ui.SetActive(false);
         joingame_ui.SetActive(false);
+        }
     }
 
 	public void ReceiveAck (IAsyncResult asyncResult) {
