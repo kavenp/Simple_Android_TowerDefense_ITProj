@@ -13,11 +13,17 @@ public class ChatBoxFunctions : MonoBehaviour {
 
 	public string message = "";
 	public string receivedString = "";
+	private string roomID = "";
 	private ClientConnection clientConnection = ClientConnection.GetInstance();
 
 	//sets the chat message
 	public void SetMessage (string message) {
 		this.message = message;
+	}
+
+	void Start () {
+		clientConnection.OpenSocket();
+		clientConnection.BeginReceiveWrapper(new AsyncCallback(ReceiveMessage));
 	}
 
 	public void ShowMessage (string msg) {
@@ -33,11 +39,6 @@ public class ChatBoxFunctions : MonoBehaviour {
 		}
 	}
 
-	public void ShowSentMessage() {
-		ShowMessage (message);
-        message = "";
-	}
-
 	public void ShowReceivedMessage() {
 		ShowMessage ("received: " + receivedString);
 		//reset to empty after showing
@@ -46,30 +47,36 @@ public class ChatBoxFunctions : MonoBehaviour {
 
 	//sends message to server in JSON format
 	public void SendMessage () {
+		//Stop BeginReceive so we can send a message
+		clientConnection.End ();
 		MessageInfo msgInfo = new MessageInfo ();
 		msgInfo.senderID = SystemInfo.deviceUniqueIdentifier;
 		msgInfo.message = this.message;
+		msgInfo.roomID = this.roomID;
 		string chatMsg = JsonConvert.SerializeObject (msgInfo);
+		//Reopen socket and send message
+		clientConnection.OpenSocket ();
 		clientConnection.Send (chatMsg);
-		clientConnection.BeginReceive(
-			new AsyncCallback(ReceiveMessage));
+		//Restart BeginReceive
+		clientConnection.BeginReceiveWrapper (
+			new AsyncCallback (ReceiveMessage));
     }
 
 	public void ReceiveMessage (IAsyncResult asyncResult) {
-		clientConnection.EndReceive (asyncResult);
+		clientConnection.EndReceiveWrapper (asyncResult);
 		byte[] received = clientConnection.GetData ();
 		string convertData = Encoding.UTF8.GetString (received);
 		MessageInfo receivedMsg = JsonConvert.DeserializeObject<MessageInfo> (convertData);
 		this.receivedString = receivedMsg.message;
-		//start waiting for next message
-		clientConnection.BeginReceive(
+		this.roomID = receivedMsg.roomID;
+		//start waiting for next message, restart BeginReceive
+		clientConnection.OpenSocket();
+		clientConnection.BeginReceiveWrapper (
 			new AsyncCallback(ReceiveMessage));
 	}
 
-	void Start () {
-		this.message = "Initial connection check.";
-		SendMessage ();
-		this.message = "";
+	public void SetRoom(string room) {
+		this.roomID = room;
 	}
 
 	void Update () {
@@ -77,5 +84,4 @@ public class ChatBoxFunctions : MonoBehaviour {
 			ShowReceivedMessage ();
 		}
 	}
-
 }

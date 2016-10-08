@@ -5,5 +5,6 @@
 public class MessageInfo 
 {
 	public string senderID;
+	public string roomID;
 	public string message;
 }

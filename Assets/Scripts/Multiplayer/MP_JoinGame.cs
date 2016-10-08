@@ -2,12 +2,20 @@
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
+using System;
 using System.Collections;
+using System.Text;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class MP_JoinGame : MonoBehaviour
 {
-    private NetworkManager nm;
+	public GameObject chatbox;
+	public GameObject canvas;
+
+	private NetworkManager nm;
+
+	private ClientConnection clientConnection = ClientConnection.GetInstance();
 
     [SerializeField]
     private Text status;
@@ -19,11 +27,11 @@ public class MP_JoinGame : MonoBehaviour
     private Transform roomListParent;
 
     List<GameObject> roomList = new List<GameObject>();
-
     private GameObject mp_background;
     private GameObject hostgame_ui;
-
     private GameObject joingame_ui;
+
+	private string receivedRoom = "";
 
     void Start()
     {
@@ -43,6 +51,21 @@ public class MP_JoinGame : MonoBehaviour
         hostgame_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
         joingame_ui = GameObject.FindGameObjectWithTag("JoinGameCanvas");
     }
+
+	void Update() {
+		//instantiate a chatbox once we have received room info
+		//from ack packet and set roomID for chatBox
+		if (this.receivedRoom != "") {
+			GameObject newChat = 
+				(GameObject)Instantiate (chatbox, chatbox.transform.position, chatbox.transform.rotation);
+			newChat.transform.SetParent (canvas.transform,false);
+			ChatBoxFunctions chatFuncs = newChat.GetComponent<ChatBoxFunctions> ();
+			chatFuncs.SetRoom(this.receivedRoom);
+			//reset to null once ack is over
+			//so we don't keep instantiating new chatboxes
+			this.receivedRoom = "";
+		}
+	}
 
     public void RefreshRoomList()
     {
@@ -101,9 +124,29 @@ public class MP_JoinGame : MonoBehaviour
 		ClearRoomList();
         status.text = "JOINING...";
 
+		RoomInfo roomInfo = new RoomInfo ();
+		roomInfo.senderID = SystemInfo.deviceUniqueIdentifier;
+		roomInfo.roomName = _match.name;
+
+		//serialize and send room information to chat server
+		string initConMsg = JsonConvert.SerializeObject(roomInfo);
+		clientConnection.OpenSocket ();
+		clientConnection.Send (initConMsg);
+		//After initial send start waiting for return ack from server
+		clientConnection.BeginReceiveWrapper(
+			new AsyncCallback(ReceiveAck));
+
         // Disable networking overlay
         mp_background.SetActive(false);
         hostgame_ui.SetActive(false);
         joingame_ui.SetActive(false);
     }
+
+	public void ReceiveAck (IAsyncResult asyncResult) {
+		clientConnection.EndReceiveWrapper (asyncResult);
+		byte[] received = clientConnection.GetData ();
+		string convertData = Encoding.UTF8.GetString (received);
+		MessageInfo receivedMsg = JsonConvert.DeserializeObject<MessageInfo> (convertData);
+		this.receivedRoom = receivedMsg.roomID;
+	}
 }
