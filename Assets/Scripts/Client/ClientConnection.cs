@@ -12,7 +12,6 @@ public class ClientConnection
     private string serverIP = "115.146.95.127";
 
 	private IPEndPoint target;
-	private UdpClient server;
 	private UdpClient socket;
 
     // The data from the last response
@@ -40,12 +39,12 @@ public class ClientConnection
     // Send message to the server.
     public void Send(string message)
     {
-        if (udp != null)
+        if (socket != null)
         {
-            udp.Close();
+            socket.Close();
         }
 		byte[] data = Encoding.ASCII.GetBytes(message);
-		socket.Send(data, data.Length, nectarIP, socketPort);
+		socket.Send(data, data.Length, serverIP, socketPort);
     }
 
     // Wrapper for UdpClient's BeginReceive method.
@@ -59,10 +58,10 @@ public class ClientConnection
     public void DebugIncomingData(IAsyncResult asyncResult)
     {
 		socket = new UdpClient (socketPort);
-		target = new IPEndPoint(IPAddress.Parse(nectarIP),socketPort);
+		target = new IPEndPoint(IPAddress.Parse(serverIP),socketPort);
+
         byte[] data = socket.EndReceive(asyncResult, ref target);
         string response = Encoding.UTF8.GetString(data);
-        string serverResponse = response;
         Debug.Log(response);
         socket.Close();
     }

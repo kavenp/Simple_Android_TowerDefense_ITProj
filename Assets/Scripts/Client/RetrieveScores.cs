@@ -38,7 +38,7 @@ public class RetrieveScores : MonoBehaviour
         clientConnection.Send(message);
 
         // Wait for the response
-        clientConnection.BeginReceive(
+        clientConnection.BeginReceiveWrapper(
             new AsyncCallback(GetScoresResponse));
     }
 
@@ -61,7 +61,7 @@ public class RetrieveScores : MonoBehaviour
     public void GetScoresResponse(IAsyncResult asyncResult)
     {
         ClientConnection clientConnection = ClientConnection.GetInstance();
-        clientConnection.EndReceive(asyncResult);
+        clientConnection.EndReceiveWrapper(asyncResult);
 
         // Get the data, encode and deserialize
         byte[] data = clientConnection.GetData();
