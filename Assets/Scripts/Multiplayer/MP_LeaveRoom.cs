@@ -17,12 +17,30 @@ public class MP_LeaveRoom : MonoBehaviour
     public void LeaveRoom()
     {
         MatchInfo matchInfo = nm.matchInfo;
-        nm.matchMaker.DropConnection(matchInfo.networkId, matchInfo.nodeId, 0, nm.OnDropConnection);
-        nm.StopHost();
+        nm.matchMaker.DestroyMatch(matchInfo.networkId, 0, OnMatchDestroy);
 
-		//stop receiving chat
-		clientConnection.End();
+        // nm.StopHost();
+        // nm.StopMatchMaker();
 
-		SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+
+        //stop receiving chat
+        clientConnection.End();
+
+		// SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+     public static void OnMatchDestroy(bool success, string extendedInfo)
+     {
+        Debug.Log("Match Destroyed" + extendedInfo);
+        NetworkManager.singleton.StopHost();
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        Destroy(GameObject.Find("NetworkManager"));
+
+        //  NetworkManager.singleton.StopHost();
+        //  NetworkManager.singleton.StopMatchMaker();
+        //  NetworkManager.Shutdown();
+
+        //  NetworkTransport.Shutdown();
     }
 }
+

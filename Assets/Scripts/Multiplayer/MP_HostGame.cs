@@ -44,13 +44,13 @@ public class MP_HostGame : MonoBehaviour
         hostgame_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
         joingame_ui = GameObject.FindGameObjectWithTag("JoinGameCanvas");
     }
-	
+
 	void Update()
 	{
 		//instantiate a chatbox once we have received room info
 		//from ack packet and set roomID for chatBox
 		if (this.receivedRoom != "") {
-			GameObject newChat = 
+			GameObject newChat =
 				(GameObject)Instantiate (chatbox, chatbox.transform.position, chatbox.transform.rotation);
 			newChat.transform.SetParent (canvas.transform,false);
 			ChatBoxFunctions chatFuncs = newChat.GetComponent<ChatBoxFunctions> ();
@@ -64,7 +64,7 @@ public class MP_HostGame : MonoBehaviour
 				Destroy(gameObject);
 			}
 	}
-	
+
     public void CreateRoom()
     {
         string room = theRoomName.text;

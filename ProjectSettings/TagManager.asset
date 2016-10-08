@@ -35,6 +35,7 @@ TagManager:
   - Tower3
   - TowerLevelDisplay
   - ChatBox
+  - NetworkManager
   layers:
   - Default
   - TransparentFX
