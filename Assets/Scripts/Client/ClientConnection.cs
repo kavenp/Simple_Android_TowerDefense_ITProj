@@ -43,6 +43,7 @@ public class ClientConnection
         {
             socket.Close();
         }
+        OpenSocket();
 		byte[] data = Encoding.ASCII.GetBytes(message);
 		socket.Send(data, data.Length, serverIP, socketPort);
     }
