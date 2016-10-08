@@ -33,6 +33,7 @@ public class MP_JoinGame : MonoBehaviour
 
 	private string receivedRoom = "";
 
+    private MatchInfoSnapshot theCurrentMatchInfo = null;
     void Start()
     {
         nm = NetworkManager.singleton;
@@ -56,7 +57,7 @@ public class MP_JoinGame : MonoBehaviour
 		//instantiate a chatbox once we have received room info
 		//from ack packet and set roomID for chatBox
 		if (this.receivedRoom != "") {
-			GameObject newChat = 
+			GameObject newChat =
 				(GameObject)Instantiate (chatbox, chatbox.transform.position, chatbox.transform.rotation);
 			newChat.transform.SetParent (canvas.transform,false);
 			ChatBoxFunctions chatFuncs = newChat.GetComponent<ChatBoxFunctions> ();
@@ -120,13 +121,21 @@ public class MP_JoinGame : MonoBehaviour
 
     public void JoinRoom(MatchInfoSnapshot _match)
     {
-        nm.matchMaker.JoinMatch(_match.networkId, "", "", "", 0, 0, nm.OnMatchJoined);
-		ClearRoomList();
+        // Try to join match
+        nm.matchMaker.JoinMatch(_match.networkId, "", "", "", 0, 0, OnMatchJoined);
+    }
+
+    // Join match was successful
+    public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo)
+    {
+        ClearRoomList();
         status.text = "JOINING...";
 
-		RoomInfo roomInfo = new RoomInfo ();
+        MatchInfoSnapshot cm = getCurrentMatchInfo();
+
+        RoomInfo roomInfo = new RoomInfo ();
 		roomInfo.senderID = SystemInfo.deviceUniqueIdentifier;
-		roomInfo.roomName = _match.name;
+		roomInfo.roomName = cm.name;
 
 		//serialize and send room information to chat server
 		string initConMsg = JsonConvert.SerializeObject(roomInfo);
@@ -149,4 +158,14 @@ public class MP_JoinGame : MonoBehaviour
 		MessageInfo receivedMsg = JsonConvert.DeserializeObject<MessageInfo> (convertData);
 		this.receivedRoom = receivedMsg.roomID;
 	}
+
+    public void setCurrentMatchInfo(MatchInfoSnapshot match)
+    {
+        this.theCurrentMatchInfo = match;
+    }
+
+     public MatchInfoSnapshot getCurrentMatchInfo()
+    {
+        return this.theCurrentMatchInfo;
+    }
 }
