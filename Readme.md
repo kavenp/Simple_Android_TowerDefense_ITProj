@@ -3,17 +3,18 @@ COMP30022 IT Project - Team Aqua
 
 Project
 -------
-"Insert_game_name" is a cooperative multiplayer tower defense game for
-Android. Every period of time, enemies are spawned and make their way
-to the player's base in order to destroy it. The player however controls
-movable builders which can build towers so that they can destroy enemies. 
+Team Aqua TD is a cooperative multiplayer tower defense game for
+Android. Enemies are spawned periodically and make their way to the
+player's base in order to destroy it. In order to defend the base,
+players control movable builders which can build towers to shoot at
+the enemies.
 
-Key features of the game are:
--------
-- Playing a game with anyone around the world
-- Chatting in game with your team mate
+Key Features
+------------
+- The ability to play with anyone around the world
+- Chatting in-game with your teammate
 - Watching a replay of your most recent match
-- Access to your high-scores and leaderboards
+- A record of your high-scores
 - Innovative and unique gameplay and design
 
 Team
@@ -21,24 +22,31 @@ Team
 - Lawrence Kuoch: Front-End and UNET Server Developer  
 - Matthew Eldridge: Front-End Developer  
 - Jason Traill: Full Stack Developer  
-- Kaven Peng: Back-End and Database Developer
+- Kaven Peng: Back-End Developer
 
 Requirements
 ------------
 - Unity 5.4 or greater
-- Android Studio (if an emulator is to be used)
-
+- Android phone (optional)
+- Android Studio (optional, only if an emulator is to be used)
+- Two devices, where a device is either a computer or a phone
 
 Build Instructions
 ------------------
+The game needs to be built twice, on two separate devices,
+in order to play multiplayer.
+
 1. Clone the repository or download as a zip file
 2. Import the project in Unity
-3. If no scene is open, open Game.unity in the Assets directory
-   in the Project view
+3. If no scene is open, open MainMenu.unity in the Scenes directory
+   in Unity's Project view window
 4. Go to File -> Build Settings...
 
-Of the following three, only two need to be performed.  
-These are ordered from most to least time consuming to setup.
+* To run on an Android phone
+    1. Select Android and press the Build button, save the apk file
+    2. Connect your phone to the computer, copy the apk onto the device
+    3. Locate the apk in your phone's file system, click on it and install
+    4. Click open when the installation finishes
 
 * To run on an Android emulator
     1. Select Android and press the Build button, save the apk file
@@ -65,7 +73,6 @@ These are ordered from most to least time consuming to setup.
 * To run in Unity
     1. Set the aspect ratio to 16:9 in the Game tab
     2. Press the play button
-
 
 Running Tests
 -------------
