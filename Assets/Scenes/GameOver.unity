@@ -176,7 +176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 85455676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da7e20344c01f0c4c83079f45c647fc7, type: 3}
+  m_Script: {fileID: 11500000, guid: 959c0ec3a5500494b97143e49e54c646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &150443214
@@ -422,7 +422,7 @@ GameObject:
   - 114: {fileID: 1135694146}
   - 114: {fileID: 1135694145}
   m_Layer: 5
-  m_Name: LobbyButton
+  m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -673,7 +673,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lobby
+  m_Text: MainMenu
 --- !u!222 &1685243491
 CanvasRenderer:
   m_ObjectHideFlags: 0
