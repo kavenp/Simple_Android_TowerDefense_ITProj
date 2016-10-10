@@ -116,5 +116,13 @@ public class replayBulletBehaviour : MonoBehaviour
     {
         this.speed += speed;
     }
+	
+	public void setDamage(int damage){
+	    this.damage = damage;
+	}
+	
+	public void setSpeed(float speed){
+	    this.speed = speed;
+	}
 
 }

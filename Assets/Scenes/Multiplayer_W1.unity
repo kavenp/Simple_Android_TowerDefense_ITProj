@@ -5318,7 +5318,7 @@ Prefab:
     - target: {fileID: 224000012488595856, guid: c2584475770d44d4dbe81648516f6098,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000012488595856, guid: c2584475770d44d4dbe81648516f6098,
         type: 2}
@@ -15890,7 +15890,7 @@ Prefab:
     - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
         type: 2}
       propertyPath: numberOfWaves
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000011911642704, guid: c0ecb55d1bcc05546a546747d72e6423,
         type: 2}

@@ -135,10 +135,25 @@ public class replayShootEnemies : MonoBehaviour
     {
         this.additionalDamage = damage;
     }
+	
+	public void setLastShotTime(float time){
+		this.lastShotTime = time;
+	}
 
 	public int getAdditionalDamage()
 	{
 	    return this.additionalDamage;
+	}
+	
+	public GameObject getTarget(){
+		GameObject target = null;
+        //initialize null target
+        //float minDist = float.MaxValue;
+        if (inRange.Count != 0)
+        {
+            target = inRange[0];
+        }
+		return target;
 	}
 
     //	void OnTriggerStay (Collider other) {

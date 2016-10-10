@@ -31,7 +31,7 @@ public class MP_GameCoordinator : NetworkBehaviour
         concurrentPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
 
         // If 2 players haven't connected wait for connection
-        if (concurrentPlayers < 2)
+        if (concurrentPlayers < 1)
         {
             return;
         }

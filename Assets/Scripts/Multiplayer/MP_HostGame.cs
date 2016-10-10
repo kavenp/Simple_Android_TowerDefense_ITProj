@@ -38,7 +38,7 @@ public class MP_HostGame : MonoBehaviour
 	
 	void Update()
 	{
-	    if(Application.loadedLevelName == "Replay"){
+	    if(Application.loadedLevelName == "GameOver"){
 				Destroy(gameObject);
 			}
 	}

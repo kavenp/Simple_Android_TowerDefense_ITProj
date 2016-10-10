@@ -55,9 +55,6 @@ public class replayGameCoordinator : MonoBehaviour
     IEnumerator SpawnEnemyWave(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-
-        Vector3 spawnPosition = new Vector3(spawnValues.x, spawnValues.y, spawnValues.z);
-        Quaternion spawnRotation = Quaternion.identity;
         //Instantiate(enemy, spawnPosition, spawnRotation);
 
         isSpawning = false;

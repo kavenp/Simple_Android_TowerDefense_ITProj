@@ -181,6 +181,10 @@ public class ShootEnemies : NetworkBehaviour
 	{
 	    return this.additionalDamage;
 	}
+	
+	public float getLastShotTime(){
+	    return this.lastShotTime;
+	}
 
 
     //	void OnTriggerStay (Collider other) {

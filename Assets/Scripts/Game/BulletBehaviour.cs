@@ -122,5 +122,9 @@ public class BulletBehaviour : NetworkBehaviour
     {
         this.speed += speed;
     }
+	
+	public int getDamage(){
+	    return this.damage;
+	}
 
 }

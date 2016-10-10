@@ -88,6 +88,11 @@ public class MP_PlayerController : NetworkBehaviour
             goldDisplay.text = "Shared Gold: " + playerGold;
         }
     }
+	
+	public bool isLocal()
+	{
+	    return isLocalPlayer;
+	}
 
 
     [Command]

@@ -3,13 +3,15 @@ using System.Collections;
 
 public class EnemyPathing : MonoBehaviour {
 
-	public GameObject currNode;
+	public GameObject currNode = null;
 	public float enemySpeed;
 	private Vector3 moveLoc;
 
 	// Use this for initialization
 	void Start () {
-		currNode = GameObject.Find("Node1");
+	    if(currNode == null){
+		    currNode = GameObject.Find("Node1");
+		}
 	}
 
 	// Update is called once per frame
