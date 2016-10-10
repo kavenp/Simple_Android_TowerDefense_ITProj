@@ -30,7 +30,7 @@ public class MP_LeaveRoom : MonoBehaviour
         mgc.Disconnect(clientConnection);
 
         // Wait for cmd sync
-        StartCoroutine(Waiting());
+        //StartCoroutine(Waiting());
 
         nm.matchMaker.DestroyMatch(matchInfo.networkId, 0, OnMatchDestroy);
         //Network.Disconnect();

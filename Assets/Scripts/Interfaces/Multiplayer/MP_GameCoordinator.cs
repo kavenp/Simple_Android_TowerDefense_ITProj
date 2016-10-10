@@ -127,42 +127,42 @@ public class MP_GameCoordinator : NetworkBehaviour
         Destroy(GameObject.Find("NetworkManager"));
     }
 
-    // void OnDisconnectedFromServer(NetworkDisconnection info)
-    // {
-    //     GameObject[] notifyPlayers = GameObject.FindGameObjectsWithTag("Player");
-    //     MP_PlayerController mpc;
+    void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        GameObject[] notifyPlayers = GameObject.FindGameObjectsWithTag("Player");
+        MP_PlayerController mpc;
 
-    //     // Game is hosting and not using unity services
-    //     if(!Network.isServer)
-    //     {
-    //         Debug.Log("Server connection disconnected");
-    //         for(int i = 0; i < notifyPlayers.Length; i += 1)
-    //         {
-    //             mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
-    //             mpc.LoadOopsScene();
-    //         }
+        // Game is hosting and not using unity services
+        if(!Network.isServer)
+        {
+            Debug.Log("Server connection disconnected");
+            for(int i = 0; i < notifyPlayers.Length; i += 1)
+            {
+                mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
+                mpc.CmdLoadDisconnectedScene();
+            }
 
-    //     }
-    //     // Game has lost connection
-    //     else if (info == NetworkDisconnection.LostConnection)
-    //     {
-    //         Debug.Log("Lost connection to server");
-    //         for(int i = 0; i < notifyPlayers.Length; i += 1)
-    //         {
-    //             mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
-    //             mpc.LoadOopsScene();
-    //         }
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("Disconnected from server");
-    //         for(int i = 0; i < notifyPlayers.Length; i += 1)
-    //         {
-    //             mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
-    //             mpc.LoadOopsScene();
-    //         }
-    //     }
-    // }
+        }
+        // Game has lost connection
+        else if (info == NetworkDisconnection.LostConnection)
+        {
+            Debug.Log("Lost connection to server");
+            for(int i = 0; i < notifyPlayers.Length; i += 1)
+            {
+                mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
+                mpc.CmdLoadDisconnectedScene();
+            }
+        }
+        else
+        {
+            Debug.Log("Disconnected from server");
+            for(int i = 0; i < notifyPlayers.Length; i += 1)
+            {
+                mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
+                mpc.CmdLoadDisconnectedScene();
+            }
+        }
+    }
 
     public bool isGameStarted()
     {
@@ -174,8 +174,6 @@ public class MP_GameCoordinator : NetworkBehaviour
         Network.RemoveRPCs(player);
         Network.DestroyPlayerObjects(player);
     }
-
-
     public bool GetQuitStatus()
     {
         return MP_GameCoordinator.IQUIT;

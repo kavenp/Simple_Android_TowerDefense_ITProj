@@ -8,20 +8,23 @@ public class GoMPWOne : MonoBehaviour {
 	// Go to multiplayer scene when clicked
 	public void OnClick()
 	{
+		GameObject[] replayManagers = GameObject.FindGameObjectsWithTag("RM");
+        GameObject[] playerBases = GameObject.FindGameObjectsWithTag("PB");
+
+		foreach(GameObject r in replayManagers)
+		{
+            Destroy(r);
+        }
+
+		foreach(GameObject p in playerBases)
+		{
+            Destroy(p);
+        }
+
 		SceneManager.LoadScene("Multiplayer_W1", LoadSceneMode.Single);
 		if(GameObject.FindGameObjectWithTag("NetworkManager") == null)
 		{
 			Instantiate(GameObject.FindGameObjectWithTag("NetworkManager"));
 		}
-
-		if(GameObject.FindGameObjectWithTag("RM") != null)
-		{
-            Destroy(GameObject.FindGameObjectWithTag("RM"));
-        }
-
-		if(GameObject.FindGameObjectWithTag("PB") != null)
-		{
-            Destroy(GameObject.FindGameObjectWithTag("PB"));
-        }
 	}
 }
