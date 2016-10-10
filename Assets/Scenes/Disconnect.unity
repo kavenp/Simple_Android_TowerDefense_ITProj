@@ -449,7 +449,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Unfortunately, the player hosting the game has disconnected.
+  m_Text: Unfortunately, someone has left the game :(
 --- !u!222 &1644869811
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -36,6 +36,12 @@ TagManager:
   - TowerLevelDisplay
   - ChatBox
   - NetworkManager
+  - CreateRoomButton
+  - QUIT
+  - qo
+  - RM
+  - PB
+  - DCC
   layers:
   - Default
   - TransparentFX
