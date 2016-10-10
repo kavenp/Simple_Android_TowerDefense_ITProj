@@ -14,6 +14,10 @@ public class MP_LeaveRoom : MonoBehaviour
         nm = NetworkManager.singleton;
     }
 
+    IEnumerator Waiting()
+    {
+        yield return new WaitForSecondsRealtime(3);
+    }
     public void LeaveRoom()
     {
         MatchInfo matchInfo = nm.matchInfo;
@@ -25,7 +29,10 @@ public class MP_LeaveRoom : MonoBehaviour
         MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
         mgc.Disconnect(clientConnection);
 
-        //nm.matchMaker.DestroyMatch(matchInfo.networkId, 0, OnMatchDestroy);
+        // Wait for cmd sync
+        StartCoroutine(Waiting());
+
+        nm.matchMaker.DestroyMatch(matchInfo.networkId, 0, OnMatchDestroy);
         //Network.Disconnect();
         //MasterServer.UnregisterHost();
         //clientConnection.End();
@@ -33,7 +40,7 @@ public class MP_LeaveRoom : MonoBehaviour
      public static void OnMatchDestroy(bool success, string extendedInfo)
      {
         //Debug.Log("Match Destroyed" + extendedInfo);
-        //NetworkManager.singleton.StopHost();
+        NetworkManager.singleton.StopHost();
         //Destroy(GameObject.Find("NetworkManager"));
         //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }

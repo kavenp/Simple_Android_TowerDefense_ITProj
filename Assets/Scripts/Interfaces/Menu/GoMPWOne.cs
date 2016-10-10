@@ -9,9 +9,19 @@ public class GoMPWOne : MonoBehaviour {
 	public void OnClick()
 	{
 		SceneManager.LoadScene("Multiplayer_W1", LoadSceneMode.Single);
-		if(GameObject.Find("NetworkManager") == null)
+		if(GameObject.FindGameObjectWithTag("NetworkManager") == null)
 		{
-			Instantiate(GameObject.Find("NetworkManager"));
+			Instantiate(GameObject.FindGameObjectWithTag("NetworkManager"));
 		}
+
+		if(GameObject.FindGameObjectWithTag("RM") != null)
+		{
+            Destroy(GameObject.FindGameObjectWithTag("RM"));
+        }
+
+		if(GameObject.FindGameObjectWithTag("PB") != null)
+		{
+            Destroy(GameObject.FindGameObjectWithTag("PB"));
+        }
 	}
 }
