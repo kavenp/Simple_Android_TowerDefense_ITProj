@@ -139,7 +139,7 @@ public class MP_GameCoordinator : NetworkBehaviour
             for(int i = 0; i < notifyPlayers.Length; i += 1)
             {
                 mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
-                mpc.CmdLoadDisconnectedScene();
+                mpc.CmdQuitObject();
             }
 
         }
@@ -150,7 +150,7 @@ public class MP_GameCoordinator : NetworkBehaviour
             for(int i = 0; i < notifyPlayers.Length; i += 1)
             {
                 mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
-                mpc.CmdLoadDisconnectedScene();
+                mpc.CmdQuitObject();
             }
         }
         else
@@ -159,7 +159,7 @@ public class MP_GameCoordinator : NetworkBehaviour
             for(int i = 0; i < notifyPlayers.Length; i += 1)
             {
                 mpc = notifyPlayers[i].GetComponent<MP_PlayerController>();
-                mpc.CmdLoadDisconnectedScene();
+                mpc.CmdQuitObject();
             }
         }
     }

@@ -21,18 +21,20 @@ public class MP_LeaveRoom : MonoBehaviour
     public void LeaveRoom()
     {
         MatchInfo matchInfo = nm.matchInfo;
+        MP_PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<MP_PlayerController>();
+        pc.CmdQuitObject();
         //MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
         //mgc.QUIT();
         //MP_EndGame eg = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_EndGame>();
         //eg.SpawnQuitObject();
 
-        MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
-        mgc.Disconnect(clientConnection);
+        //MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
+        //mgc.Disconnect(clientConnection);
 
         // Wait for cmd sync
         //StartCoroutine(Waiting());
 
-        nm.matchMaker.DestroyMatch(matchInfo.networkId, 0, OnMatchDestroy);
+        //nm.matchMaker.DestroyMatch(matchInfo.networkId, 0, OnMatchDestroy);
         //Network.Disconnect();
         //MasterServer.UnregisterHost();
         //clientConnection.End();

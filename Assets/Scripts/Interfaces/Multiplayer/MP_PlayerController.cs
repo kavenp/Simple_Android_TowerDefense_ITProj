@@ -87,6 +87,7 @@ public class MP_PlayerController : NetworkBehaviour
             return;
         }
 
+        // CheckDC();
         // Movement
         // DebugMove(); /// Used for keyboard testing
         ButtonActions();
@@ -96,8 +97,6 @@ public class MP_PlayerController : NetworkBehaviour
             UpdateGold();
             goldDisplay.text = "Shared Gold: " + playerGold;
         }
-
-        //CheckDC();
     }
 
 
@@ -258,6 +257,11 @@ public class MP_PlayerController : NetworkBehaviour
         if (vc.DownButtonPressed())
         {
             ButtonTranslate(backward);
+        }
+
+        if (vc.DisconnectButtonPressed())
+        {
+            CmdQuitObject();
         }
     }
 
@@ -462,14 +466,12 @@ public class MP_PlayerController : NetworkBehaviour
         }
     }
 
-    [Command]
-    public void CmdLoadDisconnectedScene()
+    public void LoadDisconnectedScene()
     {
         SceneManager.LoadScene("Disconnect", LoadSceneMode.Single);
     }
 
-    [Command]
-    public void CmdLoadOopsScene()
+    public void LoadOopsScene()
     {
         SceneManager.LoadScene("Oops", LoadSceneMode.Single);
     }
@@ -477,6 +479,25 @@ public class MP_PlayerController : NetworkBehaviour
     public void SetDisconnectCanvas()
     {
         CmdSetDisconnectCanvas();
+    }
+
+    [Command]
+    public void CmdQuitObject()
+    {
+        LoadDisconnectedScene();
+        RpcLoadDisconnectedScene();
+
+        // GameObject quit = Resources.Load("QUIT") as GameObject;
+        // var quitObj = (GameObject) Instantiate (quit, Vector3.zero, Quaternion.identity);
+        // NetworkServer.Spawn (quitObj);
+    }
+
+    [ClientRpc]
+    void RpcLoadDisconnectedScene()
+    {
+        Network.Disconnect();
+        MasterServer.UnregisterHost();
+        LoadDisconnectedScene();
     }
 
     [Command]
@@ -523,11 +544,10 @@ public class MP_PlayerController : NetworkBehaviour
         //     LoadDisconnectedScene();
         // }
 
-        // if(GameObject.FindGameObjectsWithTag("QUIT").Length > 0)
-        // {
-        //     LoadDisconnectedScene();
-        // }
-
+        if(GameObject.FindGameObjectsWithTag("QUIT").Length > 0)
+        {
+            LoadDisconnectedScene();
+        }
 
 
         // if (GameObject.FindGameObjectsWithTag("GameController").Length == 0)

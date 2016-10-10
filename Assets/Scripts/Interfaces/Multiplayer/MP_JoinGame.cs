@@ -130,7 +130,7 @@ public class MP_JoinGame : MonoBehaviour
         mp_background.SetActive(false);
         hostgame_ui.SetActive(false);
         joingame_ui.SetActive(false);
-}
+    }
 
     // Join match was successful
     public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo)

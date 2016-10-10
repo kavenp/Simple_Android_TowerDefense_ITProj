@@ -1818,6 +1818,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000012967995226, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224000011797660696, guid: 4f7286ee769ab164ebdab6008e56bdaf,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -1916,6 +1921,31 @@ Prefab:
         type: 2}
       propertyPath: m_Text
       value: Disconnect
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012967995226, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1126715952}
+    - target: {fileID: 114000012967995226, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LeaveRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012967995226, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012967995226, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012967995226, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f7286ee769ab164ebdab6008e56bdaf, type: 2}
@@ -8126,6 +8156,18 @@ Transform:
   m_PrefabParentObject: {fileID: 4000014179257910, guid: b99d7368d53912841bf3ef39772f1c35,
     type: 2}
   m_PrefabInternal: {fileID: 1124073520}
+--- !u!114 &1126715952 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000010828141268, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+    type: 2}
+  m_PrefabInternal: {fileID: 225091745}
+  m_Script: {fileID: 11500000, guid: 0cf0c36d2bd1f3745819b931c8517130, type: 3}
+--- !u!114 &1126715954 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000013104585646, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+    type: 2}
+  m_PrefabInternal: {fileID: 225091745}
+  m_Script: {fileID: 11500000, guid: 4adebd6f7b6118c4a83d9c8d787bdd54, type: 3}
 --- !u!1 &1135520964
 GameObject:
   m_ObjectHideFlags: 0
@@ -15871,6 +15913,58 @@ Transform:
   - {fileID: 1271811947}
   m_Father: {fileID: 271147989}
   m_RootOrder: 4
+--- !u!1 &2066336214 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011634461702, guid: 4f7286ee769ab164ebdab6008e56bdaf,
+    type: 2}
+  m_PrefabInternal: {fileID: 225091745}
+--- !u!114 &2066336215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2066336214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1126715954}
+          m_MethodName: DisconnectButtonOn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1126715954}
+          m_MethodName: DisconnectButtonOff
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &2067145450 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000012155252844, guid: b99d7368d53912841bf3ef39772f1c35,

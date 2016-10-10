@@ -21,6 +21,12 @@ public class GoMPWOne : MonoBehaviour {
             Destroy(p);
         }
 
+		// Purge all active connections
+		Network.Disconnect();
+        MasterServer.UnregisterHost();
+		MasterServer.ClearHostList();
+
+
 		SceneManager.LoadScene("Multiplayer_W1", LoadSceneMode.Single);
 		if(GameObject.FindGameObjectWithTag("NetworkManager") == null)
 		{
