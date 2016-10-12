@@ -62,7 +62,7 @@ public class MP_GameCoordinator : NetworkBehaviour
             SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
 
-        CheckDC(concurrentPlayers, playable);
+        //CheckDC(concurrentPlayers, playable);
     }
 
     IEnumerator SpawnEnemyWave(float seconds)

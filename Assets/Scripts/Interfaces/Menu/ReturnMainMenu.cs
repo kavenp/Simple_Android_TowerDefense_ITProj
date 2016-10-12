@@ -9,6 +9,5 @@ public class ReturnMainMenu : MonoBehaviour
 	public void OnClick()
 	{
 		SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-        Destroy(GameObject.FindGameObjectWithTag("NetworkManager"));
     }
 }

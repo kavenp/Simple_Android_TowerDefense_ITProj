@@ -51,6 +51,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013543575300}
+  - 114: {fileID: 114000013506636064}
   m_Layer: 0
   m_Name: PathNodes
   m_TagString: Untagged
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11561235636e95f4f8837661c8f7f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeNumber: 0
   nextNode: {fileID: 1000014188581418}
 --- !u!114 &114000011361040780
 MonoBehaviour:
@@ -212,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11561235636e95f4f8837661c8f7f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeNumber: 0
   nextNode: {fileID: 1000010018356006}
 --- !u!114 &114000011765906238
 MonoBehaviour:
@@ -224,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11561235636e95f4f8837661c8f7f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeNumber: 0
   nextNode: {fileID: 1000012815593946}
 --- !u!114 &114000012186701412
 MonoBehaviour:
@@ -236,7 +240,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11561235636e95f4f8837661c8f7f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeNumber: 0
   nextNode: {fileID: 1000014167964002}
+--- !u!114 &114000013506636064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011601506314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 152
+    i1: 219
+    i2: 133
+    i3: 6
+    i4: 195
+    i5: 179
+    i6: 226
+    i7: 116
+    i8: 201
+    i9: 51
+    i10: 72
+    i11: 33
+    i12: 112
+    i13: 154
+    i14: 198
+    i15: 154
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114000013918401876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -248,4 +285,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11561235636e95f4f8837661c8f7f162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeNumber: 0
   nextNode: {fileID: 0}

@@ -468,7 +468,14 @@ public class MP_PlayerController : NetworkBehaviour
 
     public void LoadDisconnectedScene()
     {
-        SceneManager.LoadScene("Disconnect", LoadSceneMode.Single);
+        CmdServerChangeScene();
+        //SceneManager.LoadScene("Disconnect", LoadSceneMode.Single);
+    }
+
+    [Command]
+    public void CmdServerChangeScene()
+    {
+        NetworkManager.singleton.ServerChangeScene("Disconnect");
     }
 
     public void LoadOopsScene()
@@ -546,7 +553,7 @@ public class MP_PlayerController : NetworkBehaviour
 
         if(GameObject.FindGameObjectsWithTag("QUIT").Length > 0)
         {
-            LoadDisconnectedScene();
+            //LoadDisconnectedScene();
         }
 
 

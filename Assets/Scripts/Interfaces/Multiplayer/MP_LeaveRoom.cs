@@ -22,7 +22,8 @@ public class MP_LeaveRoom : MonoBehaviour
     {
         MatchInfo matchInfo = nm.matchInfo;
         MP_PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<MP_PlayerController>();
-        pc.CmdQuitObject();
+        //pc.CmdQuitObject();
+        pc.CmdServerChangeScene();
         //MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
         //mgc.QUIT();
         //MP_EndGame eg = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_EndGame>();

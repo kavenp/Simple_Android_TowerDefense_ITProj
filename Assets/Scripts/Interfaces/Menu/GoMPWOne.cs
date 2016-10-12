@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using UnityEngine.Networking.Match;
 using UnityEngine.UI;
 
 public class GoMPWOne : MonoBehaviour {
@@ -10,8 +12,9 @@ public class GoMPWOne : MonoBehaviour {
 	{
 		GameObject[] replayManagers = GameObject.FindGameObjectsWithTag("RM");
         GameObject[] playerBases = GameObject.FindGameObjectsWithTag("PB");
+        GameObject[] networkMan = GameObject.FindGameObjectsWithTag("NetworkManager");
 
-		foreach(GameObject r in replayManagers)
+        foreach (GameObject r in replayManagers)
 		{
             Destroy(r);
         }
@@ -21,16 +24,21 @@ public class GoMPWOne : MonoBehaviour {
             Destroy(p);
         }
 
-		// Purge all active connections
-		Network.Disconnect();
-        MasterServer.UnregisterHost();
-		MasterServer.ClearHostList();
+        // Purge all active connections
+        //Network.Disconnect();
+        //MasterServer.UnregisterHost();
+        //MasterServer.ClearHostList();
+        //NetworkManager nm = NetworkManager.singleton;
 
+        foreach (GameObject n in networkMan)
+        {
+            Destroy(n);
+        }
 
 		SceneManager.LoadScene("Multiplayer_W1", LoadSceneMode.Single);
-		if(GameObject.FindGameObjectWithTag("NetworkManager") == null)
-		{
-			Instantiate(GameObject.FindGameObjectWithTag("NetworkManager"));
-		}
+		//if(GameObject.FindGameObjectWithTag("NetworkManager") == null)
+		//{
+		//	Instantiate(GameObject.FindGameObjectWithTag("NetworkManager"));
+		//}
 	}
 }
