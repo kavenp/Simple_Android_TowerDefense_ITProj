@@ -1,0 +1,15 @@
+diff a/Assets/Scripts/GameOver/DisplayScore.cs b/Assets/Scripts/GameOver/DisplayScore.cs	(rejected hunks)
+@@ -1,12 +1,10 @@
+ ﻿using UnityEngine;
+ using UnityEngine.UI;
+ 
+-// Displays the score or
+-// displays "Game Over" if the game was lost.
++// Displays the score.
+ // Score is the number of lives remaining, times 100.
+ public class DisplayScore : MonoBehaviour
+ {
+-    // Text UI to display the score
+     public Text scoreDisplay;
+ 
+     void Start()
