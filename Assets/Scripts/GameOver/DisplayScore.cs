@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-// Displays the score.
+// Displays the score or
+// displays "Game Over" if the game was lost.
 // Score is the number of lives remaining, times 100.
 public class DisplayScore : MonoBehaviour
 {
+    // Text UI to display the score
     public Text scoreDisplay;
 
     void Start()
@@ -22,6 +24,9 @@ public class DisplayScore : MonoBehaviour
         {
             scoreDisplay.text = "Game Over";
         }
+		
+		// Destroy the Player Base so it doesn't remain
+		// in future scenes
 		Destroy(playerBase);
     }
 }
