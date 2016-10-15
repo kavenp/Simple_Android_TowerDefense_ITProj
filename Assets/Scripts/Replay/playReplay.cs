@@ -66,7 +66,6 @@ public class playReplay : MonoBehaviour {
 			    updateTower();
 				break;
 			case 9:  //Sets the gold value
-			    Debug.Log("Gold test");
 			    int gold = BitConverter.ToInt32(replay,replayIndex);
 				replayIndex+=4;
 				goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay").GetComponent<Text>();
@@ -148,8 +147,7 @@ public class playReplay : MonoBehaviour {
 		enemies = new GameObject[]{};
 		
 		nodes = new Dictionary<int,GameObject>();
-		
-		
+
 		// Instantiate the nodes to their respective values
 		foreach(GameObject i in GameObject.FindGameObjectsWithTag("Node")){
 		    nodes.Add(i.GetComponent<NodeScript>().nodeNumber,i);

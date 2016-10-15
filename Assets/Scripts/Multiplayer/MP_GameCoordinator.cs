@@ -26,7 +26,7 @@ public class MP_GameCoordinator : NetworkBehaviour
     bool isSpawning = false;
     bool isWave = false;
 
-    int playable = 2;
+    int playable = 1;
 
     bool gameStarted = false;
 
