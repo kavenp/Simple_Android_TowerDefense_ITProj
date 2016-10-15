@@ -1,14 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using System;
-using System.Text;
-using Newtonsoft.Json;
 
 public class MP_HostGame : MonoBehaviour
 {
-	//public GameObject chatbox;
-	//public GameObject canvas;
     [SerializeField]
     private uint roomSize = 2;
     private NetworkManager nm;
@@ -17,14 +12,10 @@ public class MP_HostGame : MonoBehaviour
     private GameObject mp_background;
     private GameObject hostgame_ui;
 
-	//private ClientConnection clientConnection = ClientConnection.GetInstance();
-
     private GameObject joingame_ui;
 
     private GameObject goldDisplay;
     private GameObject livesDisplay;
-
-    //private string receivedRoom = "";
 
     void Start()
     {
@@ -44,27 +35,14 @@ public class MP_HostGame : MonoBehaviour
         hostgame_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
         joingame_ui = GameObject.FindGameObjectWithTag("JoinGameCanvas");
     }
-
+	
 	void Update()
 	{
-		//instantiate a chatbox once we have received room info
-		//from ack packet and set roomID for chatBox
-		// if (this.receivedRoom != "") {
-		// 	GameObject newChat =
-		// 		(GameObject)Instantiate (chatbox, chatbox.transform.position, chatbox.transform.rotation);
-		// 	newChat.transform.SetParent (canvas.transform,false);
-		// 	ChatBoxFunctions chatFuncs = newChat.GetComponent<ChatBoxFunctions> ();
-		// 	chatFuncs.SetRoom(this.receivedRoom);
-		// 	//reset to null once ack is over
-		// 	//so we don't keep instantiating new chatboxes
-		// 	this.receivedRoom = "";
-		// }
-
-		if(Application.loadedLevelName == "Replay"){
+	    if(Application.loadedLevelName == "GameOver"){
 				Destroy(gameObject);
 			}
 	}
-
+	
     public void CreateRoom()
     {
         string room = theRoomName.text;
@@ -77,18 +55,6 @@ public class MP_HostGame : MonoBehaviour
         if (room != "" && room != null)
         {
             Debug.Log("Creating Room: " + room + " with room for " + roomSize + " players");
-			// RoomInfo roomInfo = new RoomInfo ();
-			// roomInfo.senderID = SystemInfo.deviceUniqueIdentifier;
-			// roomInfo.roomName = room;
-
-			// // Serialize and send room name to chat server
-			// string initConMsg = JsonConvert.SerializeObject(roomInfo);
-			// clientConnection.OpenSocket ();
-			// clientConnection.Send (initConMsg);
-			// //After initial send start waiting for return ack from server
-			// clientConnection.BeginReceiveWrapper(
-			// 	new AsyncCallback(ReceiveAck));
-
 
             // Set network message to nothing
             nwMessage.text = "";
@@ -101,18 +67,5 @@ public class MP_HostGame : MonoBehaviour
             hostgame_ui.SetActive(false);
             joingame_ui.SetActive(false);
         }
-    }
-
-	// public void ReceiveAck (IAsyncResult asyncResult) {
-	// 	clientConnection.EndReceiveWrapper (asyncResult);
-	// 	byte[] received = clientConnection.GetData ();
-	// 	string convertData = Encoding.UTF8.GetString (received);
-	// 	MessageInfo receivedMsg = JsonConvert.DeserializeObject<MessageInfo> (convertData);
-	// 	this.receivedRoom = receivedMsg.roomID;
-	// }
-
-    public uint GetRoomSize()
-    {
-        return this.roomSize;
     }
 }

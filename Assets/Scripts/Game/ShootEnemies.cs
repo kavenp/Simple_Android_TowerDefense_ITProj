@@ -46,7 +46,7 @@ public class ShootEnemies : NetworkBehaviour
             this.additionalDamage = 23;
         }
 
-        level = 0;
+        level = 1;
     }
 
     void OnEnemyDestroy(GameObject enemy)
@@ -176,6 +176,15 @@ public class ShootEnemies : NetworkBehaviour
     {
         this.additionalDamage += damage;
     }
+	
+	public int getAdditionalDamage()
+	{
+	    return this.additionalDamage;
+	}
+	
+	public float getLastShotTime(){
+	    return this.lastShotTime;
+	}
 
 
     //	void OnTriggerStay (Collider other) {

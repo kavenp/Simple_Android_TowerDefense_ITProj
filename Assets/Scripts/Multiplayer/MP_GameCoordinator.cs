@@ -1,10 +1,9 @@
-﻿// Unused, will be deleted
-
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class replayGameCoordinator : MonoBehaviour
+public class MP_GameCoordinator : NetworkBehaviour
 {
     public GameObject enemy;
     public Vector3 spawnValues;
@@ -13,6 +12,12 @@ public class replayGameCoordinator : MonoBehaviour
     public int numberOfEnemiesPerWave;
     public float spawnWait;
     public float waveWait;
+
+    private int waveMultiplier = 2;
+
+    private const int creepHealthAdditive = 30;
+    private const float creepDamageRed = 0.1f;
+
 
     // Number of players
     int concurrentPlayers;
@@ -26,7 +31,7 @@ public class replayGameCoordinator : MonoBehaviour
         concurrentPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
 
         // If 2 players haven't connected wait for connection
-        if (concurrentPlayers < 2)
+        if (concurrentPlayers < 1)
         {
             return;
         }
@@ -48,14 +53,27 @@ public class replayGameCoordinator : MonoBehaviour
             numberOfEnemiesPerWave == 0 &&
             GameObject.FindWithTag("Enemy") == null)
         {
-            SceneManager.LoadScene("ReplayOver", LoadSceneMode.Single);
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
     }
 
     IEnumerator SpawnEnemyWave(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        //Instantiate(enemy, spawnPosition, spawnRotation);
+
+        Vector3 spawnPosition = new Vector3(spawnValues.x, spawnValues.y, spawnValues.z);
+        Quaternion spawnRotation = Quaternion.identity;
+        var createdEnemy = (GameObject)Instantiate(enemy, spawnPosition, spawnRotation);
+
+        if(numberOfWaves % waveMultiplier == 0)
+        {
+            // Add more health / dmg red to creeps
+            EnemyHealth creepHealth = createdEnemy.GetComponent<EnemyHealth>();
+            creepHealth.AddToMaXHealth(creepHealthAdditive);
+            creepHealth.IncreaseDamageReduction(creepDamageRed);
+        }
+
+        NetworkServer.Spawn(createdEnemy);
 
         isSpawning = false;
         numberOfEnemiesPerWave -= 1;

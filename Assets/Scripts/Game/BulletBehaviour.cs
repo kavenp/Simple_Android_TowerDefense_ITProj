@@ -30,6 +30,8 @@ public class BulletBehaviour : NetworkBehaviour
     //private int maxTime = 5;
 
     // Use this for initialization
+	
+	
     void Start ()
     {
         startTime = Time.time;
@@ -120,5 +122,9 @@ public class BulletBehaviour : NetworkBehaviour
     {
         this.speed += speed;
     }
+	
+	public int getDamage(){
+	    return this.damage;
+	}
 
 }

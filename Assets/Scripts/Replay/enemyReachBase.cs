@@ -49,9 +49,6 @@ public class enemyReachBase : MonoBehaviour
         }
 		
 		reached.Add(other.gameObject);
-		
-		GameObject.FindGameObjectWithTag("Replay").GetComponent<playReplay>().count2+=1;
-		
     }
 	
 	void OnTriggerExit(Collider other)
