@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 using System.Collections;
 
 public class MP_PlayerController : NetworkBehaviour
 {
+    // Type of game
+    const bool isMultiplayerMode = true;
+
     // Game boundaries
     const int worldHeightMin = 10;
     const int worldHeightMax = 80;
@@ -18,9 +22,12 @@ public class MP_PlayerController : NetworkBehaviour
     public float turningSpeed;
     public float movingSpeed;
 
+    // Gameplay variables
     private const int upgradeCost = 30;
 
-    int playerGold = 500;
+    private bool gameStarted = false;
+    private bool serverLoaded = false;
+    int playerGold = 100;
 
     int previousNumTower1 = 0;
     int previousNumTower2 = 0;
@@ -46,12 +53,12 @@ public class MP_PlayerController : NetworkBehaviour
     Dictionary<string, int> towerCostDict = new Dictionary<string, int>();
     Dictionary<string, int> towerRefundDict = new Dictionary<string, int>();
 
-    private const int upgradeLimit = 5;
-    private int currentUpgradeLimit = 0;
-
     // Total number of upgrades made
     private int totalTowerLevel = 0;
 
+    GameObject disconnectCanvas;
+
+    /// Instantiate all prefabs and dictionaries
     void Start()
     {
         // Initialise values for Towers
@@ -62,6 +69,7 @@ public class MP_PlayerController : NetworkBehaviour
         towerCostDict.Add("Tower3", 60);
         towerRefundDict.Add("Tower3", 30);
 
+
         // Get buttons
         buttons = GameObject.FindGameObjectWithTag("Buttons");
         vc = buttons.GetComponent<ViewController>();
@@ -70,6 +78,7 @@ public class MP_PlayerController : NetworkBehaviour
         goldDisplay = GameObject.FindGameObjectWithTag("GoldDisplay").GetComponent<Text>();
     }
 
+    // Update gameplay on button actions and UI display
     void Update()
     {
         // Check that is local player
@@ -78,8 +87,9 @@ public class MP_PlayerController : NetworkBehaviour
             return;
         }
 
+        // CheckDC();
         // Movement
-        //DebugMove();
+        // DebugMove(); /// Used for keyboard testing
         ButtonActions();
 
         if (goldDisplay != null)
@@ -88,13 +98,9 @@ public class MP_PlayerController : NetworkBehaviour
             goldDisplay.text = "Shared Gold: " + playerGold;
         }
     }
-	
-	public bool isLocal()
-	{
-	    return isLocalPlayer;
-	}
 
 
+    /// Call MP_BuildableTower to build a tower
     [Command]
     public void CmdConstructTower(string tower)
     {
@@ -122,6 +128,7 @@ public class MP_PlayerController : NetworkBehaviour
         }
     }
 
+    /// Call MP_BuildableTower to sell a tower
     [Command]
     public void CmdSellTower()
     {
@@ -149,6 +156,7 @@ public class MP_PlayerController : NetworkBehaviour
         }
     }
 
+    /// Call MP_BuildableTower to upgrade a tower
     [Command]
     public void CmdUpgradeTower()
     {
@@ -176,6 +184,7 @@ public class MP_PlayerController : NetworkBehaviour
         }
     }
 
+    /// Move the player with the keyboard
     void DebugMove()
     {
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * turningSpeed;
@@ -183,8 +192,8 @@ public class MP_PlayerController : NetworkBehaviour
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
 
-        // Hit build button
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Actions
+        if (Input.GetKeyDown(KeyCode.B))
         {
             CmdConstructTower("Tower");
         }
@@ -193,10 +202,17 @@ public class MP_PlayerController : NetworkBehaviour
         {
             CmdSellTower();
         }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            CmdUpgradeTower();
+        }
     }
 
+    /// Each update poll ViewController for button presses
     public void ButtonActions()
     {
+        // Tower buttons pressed
         if (vc.BuildButtonPressed())
         {
             CmdConstructTower("Tower");
@@ -224,22 +240,10 @@ public class MP_PlayerController : NetworkBehaviour
         if (vc.UpgradeButtonPressed())
         {
             vc.UpgradeButtonOff();
-            if (currentUpgradeLimit < upgradeLimit)
-            {
-                CmdUpgradeTower();
-
-                // Increase upgrade limit and tell playe
-                // tower has been upgraded
-                currentUpgradeLimit += 1;
-            }
-            else
-            {
-                Debug.Log("Current upgrade limit reached for this tower");
-            }
-
+            CmdUpgradeTower();
         }
 
-        // Perform state analysis
+        // Movement buttons pressed
         if (vc.RotateButtonPressed())
         {
             ButtonRotate(backward);
@@ -254,8 +258,14 @@ public class MP_PlayerController : NetworkBehaviour
         {
             ButtonTranslate(backward);
         }
+
+        if (vc.DisconnectButtonPressed())
+        {
+            CmdQuitObject();
+        }
     }
 
+    /// Check for game boundaries when moving the player
     public void ButtonTranslate(float verticalInput)
     {
         var z = verticalInput * Time.deltaTime * movingSpeed;
@@ -280,34 +290,62 @@ public class MP_PlayerController : NetworkBehaviour
         }
     }
 
+    /// Rotate player object
     public void ButtonRotate(float horizontalInput)
     {
         var x = horizontalInput * Time.deltaTime * turningSpeed;
         gameObject.transform.Rotate(0, x, 0);
     }
 
+    /// When a player is disconnected from the server, load the disconnect scene
+    void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        // Game is hosting and not using unity services
+        if(isMultiplayerMode == true && Network.isServer)
+        {
+            Debug.Log("Local server connection disconnected");
+            SceneManager.LoadScene("Oops", LoadSceneMode.Single);
+        }
+        // Game has lost connection
+        else if (info == NetworkDisconnection.LostConnection)
+        {
+            Debug.Log("Lost connection to the server");
+            SceneManager.LoadScene("Disconnect", LoadSceneMode.Single);
+        }
+        else
+        {
+            Debug.Log("Successfully diconnected from the server");
+            SceneManager.LoadScene("Disconnect", LoadSceneMode.Single);
+        }
+    }
+
+    /// Colour the player a different colour when loaded into the game
     public override void OnStartLocalPlayer()
     {
         Color orange = new Color(178 / 255.0f, 115 / 255.0f, 0, 1);
         GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", orange);
     }
 
+    /// Add gold to all players
     public void AddGold(int amount)
     {
         this.playerGold += amount;
     }
 
+    /// Get the current amount of gold
     public int GetGold()
     {
         return this.playerGold;
     }
 
+    /// Update gold to all players
     public void UpdateGold()
     {
         UpdateBaseTowerGold();
         DeductUpgradeCost();
     }
 
+    /// When a tower is built, player will calculate the gold remaning
     void UpdateBaseTowerGold()
     {
         // Tower1
@@ -374,7 +412,7 @@ public class MP_PlayerController : NetworkBehaviour
         }
     }
 
-    // Update gold on tower upgrades.
+    //// When a upgrade is built, player will calculate the gold remaning
     private void DeductUpgradeCost()
     {
         int i;
@@ -427,4 +465,136 @@ public class MP_PlayerController : NetworkBehaviour
             totalTowerLevel = newTowerLevel;
         }
     }
+
+    public void LoadDisconnectedScene()
+    {
+        CmdServerChangeScene();
+        //SceneManager.LoadScene("Disconnect", LoadSceneMode.Single);
+    }
+
+    [Command]
+    public void CmdServerChangeScene()
+    {
+        NetworkManager.singleton.ServerChangeScene("Disconnect");
+    }
+
+    public void LoadOopsScene()
+    {
+        SceneManager.LoadScene("Oops", LoadSceneMode.Single);
+    }
+
+    public void SetDisconnectCanvas()
+    {
+        CmdSetDisconnectCanvas();
+    }
+
+    [Command]
+    public void CmdQuitObject()
+    {
+        LoadDisconnectedScene();
+        RpcLoadDisconnectedScene();
+
+        // GameObject quit = Resources.Load("QUIT") as GameObject;
+        // var quitObj = (GameObject) Instantiate (quit, Vector3.zero, Quaternion.identity);
+        // NetworkServer.Spawn (quitObj);
+    }
+
+    [ClientRpc]
+    void RpcLoadDisconnectedScene()
+    {
+        Network.Disconnect();
+        MasterServer.UnregisterHost();
+        LoadDisconnectedScene();
+    }
+
+    [Command]
+    public void CmdSetDisconnectCanvas()
+    {
+        GameObject dc = Resources.Load("DisconnectCanvas") as GameObject;
+        disconnectCanvas = (GameObject) Instantiate(dc, Vector3.zero, Quaternion.identity);
+        NetworkServer.Spawn(disconnectCanvas);
+
+        RpcSetDisconnectCanvas(disconnectCanvas);
+    }
+
+    [ClientRpc]
+    void RpcSetDisconnectCanvas(GameObject DisconnectCanvas)
+    {
+        DisconnectCanvas = (GameObject) Instantiate(Resources.Load("DisconnectCanvas") as GameObject, Vector3.zero, Quaternion.identity);
+    }
+
+    public void CheckDC()
+    {
+        // NetworkClient nc = new NetworkClient();
+        // Debug.Log("nc = " + nc.isConnected + " gs = " + gameStarted + " nc = " + Network.connections.Length);
+
+        // if(GameObject.FindGameObjectsWithTag("Player").Length > 1)
+        // {
+        //     gameStarted = true;
+        // }
+
+        // if(GameObject.FindGameObjectsWithTag("Buttons").Length > 0)
+        // {
+        //     serverLoaded = true;
+        // }
+
+        // if (GameObject.FindGameObjectsWithTag("Player").Length <= 1 && gameStarted)
+        // {
+        //     //Network.CloseConnection(Network.connections[0], true);
+        //     CmdLoadDisconnectedScene();
+        // }
+
+        // Debug.Log("serverLoaded = " + serverLoaded + "gameStarted = " + gameStarted);
+
+        // if(GameObject.FindGameObjectWithTag("Buttons") == null && serverLoaded && gameStarted)
+        // {
+        //     LoadDisconnectedScene();
+        // }
+
+        if(GameObject.FindGameObjectsWithTag("QUIT").Length > 0)
+        {
+            //LoadDisconnectedScene();
+        }
+
+
+        // if (GameObject.FindGameObjectsWithTag("GameController").Length == 0)
+        // {
+        //     //Network.CloseConnection(Network.connections[0], true);
+        //     LoadDisconnectedScene();
+        // }
+
+
+        // if(nc.isConnected == false && gameStarted == true && Network.connections.Length < 2)
+        // {
+        //     //Debug.Log("nc = " + nc.isConnected + " gs = " + gameStarted + " nc = " + Network.connections.Length);
+
+        //     LoadOopsScene();
+        // }
+
+
+
+        // MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
+        // if(mgc.isGameStarted() == true)
+        // {
+        //     if(mgc.GetQuitStatus() == true && Network.isClient)
+        //     {
+        //         LoadDisconnectedScene();
+        //     }
+        // }
+        // MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
+        // if (mgc.isGameStarted() == true)
+        // {
+        //     if (Network.connections.Length == 1)
+        //     {
+        //         Network.CloseConnection(Network.connections[0], true);
+        //         LoadDisconnectedScene();
+        //     }
+        // }
+    }
+	
+	public bool isLocal(){
+	    return isLocalPlayer;
+	}
+
+
 }
