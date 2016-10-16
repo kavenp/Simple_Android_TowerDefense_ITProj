@@ -6,6 +6,11 @@ public class MessageFunctions : MonoBehaviour {
 
 	[SerializeField] Text text;
 
+	void Start() {
+		//Destroys the message after 2 seconds if it's not already destroyed
+		Destroy (gameObject, 2.0f);
+	}
+
 	public void ShowMessage (string message) {
 		text.text = message;
 	}

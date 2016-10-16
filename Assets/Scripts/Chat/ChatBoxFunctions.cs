@@ -52,6 +52,7 @@ public class ChatBoxFunctions : MonoBehaviour {
 		MessageInfo msgInfo = new MessageInfo ();
 		msgInfo.senderID = SystemInfo.deviceUniqueIdentifier;
 		msgInfo.message = this.message;
+		msgInfo.type = "message";
 		msgInfo.roomID = this.roomID;
 		string chatMsg = JsonConvert.SerializeObject (msgInfo);
 		//Reopen socket and send message

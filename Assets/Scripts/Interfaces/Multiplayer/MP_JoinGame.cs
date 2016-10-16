@@ -10,12 +10,12 @@ using Newtonsoft.Json;
 
 public class MP_JoinGame : MonoBehaviour
 {
-	//public GameObject chatbox;
-	//public GameObject canvas;
+	public GameObject chatbox;
+	public GameObject canvas;
 
 	private NetworkManager nm;
 
-	//private ClientConnection clientConnection = ClientConnection.GetInstance();
+	private ClientConnection clientConnection = ClientConnection.GetInstance();
 
     [SerializeField]
     private Text status;
@@ -31,7 +31,7 @@ public class MP_JoinGame : MonoBehaviour
     private GameObject hostgame_ui;
     private GameObject joingame_ui;
 
-	//private string receivedRoom = "";
+	private string receivedRoom = "";
 
     private MatchInfoSnapshot theCurrentMatchInfo = null;
     void Start()
@@ -56,16 +56,16 @@ public class MP_JoinGame : MonoBehaviour
 	void Update() {
 		//instantiate a chatbox once we have received room info
 		//from ack packet and set roomID for chatBox
-		// if (this.receivedRoom != "") {
-		// 	GameObject newChat =
-		// 		(GameObject)Instantiate (chatbox, chatbox.transform.position, chatbox.transform.rotation);
-		// 	newChat.transform.SetParent (canvas.transform,false);
-		// 	ChatBoxFunctions chatFuncs = newChat.GetComponent<ChatBoxFunctions> ();
-		// 	chatFuncs.SetRoom(this.receivedRoom);
-		// 	//reset to null once ack is over
-		// 	//so we don't keep instantiating new chatboxes
-		// 	this.receivedRoom = "";
-		// }
+		 if (this.receivedRoom != "") {
+		 	GameObject newChat =
+			(GameObject)Instantiate (chatbox, chatbox.transform.position, chatbox.transform.rotation);
+		 	newChat.transform.SetParent (canvas.transform,false);
+		 	ChatBoxFunctions chatFuncs = newChat.GetComponent<ChatBoxFunctions> ();
+		 	chatFuncs.SetRoom(this.receivedRoom);
+		 	//reset to null once ack is over
+		 	//so we don't keep instantiating new chatboxes
+		 	this.receivedRoom = "";
+		 }
 	}
 
     public void RefreshRoomList()
@@ -139,31 +139,32 @@ public class MP_JoinGame : MonoBehaviour
         {
 
 
-            // MatchInfoSnapshot cm = getCurrentMatchInfo();
+         	MatchInfoSnapshot cm = getCurrentMatchInfo();
 
-            // RoomInfo roomInfo = new RoomInfo ();
-            // roomInfo.senderID = SystemInfo.deviceUniqueIdentifier;
-            // roomInfo.roomName = cm.name;
+            RoomInfo roomInfo = new RoomInfo ();
+			 
+            roomInfo.senderID = SystemInfo.deviceUniqueIdentifier;
+			roomInfo.type = "roomInfo";
+			roomInfo.roomName = cm.name;
 
-            // //serialize and send room information to chat server
-            // string initConMsg = JsonConvert.SerializeObject(roomInfo);
-            // clientConnection.OpenSocket ();
-            // clientConnection.Send (initConMsg);
-            // //After initial send start waiting for return ack from server
-            // clientConnection.BeginReceiveWrapper(
-            //     new AsyncCallback(ReceiveAck));
-
+            //serialize and send room information to chat server
+            string initConMsg = JsonConvert.SerializeObject(roomInfo);
+            clientConnection.OpenSocket ();
+            clientConnection.Send (initConMsg);
+            //After initial send start waiting for return ack from server
+            clientConnection.BeginReceiveWrapper(
+            	new AsyncCallback(ReceiveAck));
 
         }
     }
 
-	// public void ReceiveAck (IAsyncResult asyncResult) {
-	// 	clientConnection.EndReceiveWrapper (asyncResult);
-	// 	byte[] received = clientConnection.GetData ();
-	// 	string convertData = Encoding.UTF8.GetString (received);
-	// 	MessageInfo receivedMsg = JsonConvert.DeserializeObject<MessageInfo> (convertData);
-	// 	this.receivedRoom = receivedMsg.roomID;
-	// }
+	 public void ReceiveAck (IAsyncResult asyncResult) {
+	 	clientConnection.EndReceiveWrapper (asyncResult);
+	 	byte[] received = clientConnection.GetData ();
+	 	string convertData = Encoding.UTF8.GetString (received);
+	 	MessageInfo receivedMsg = JsonConvert.DeserializeObject<MessageInfo> (convertData);
+	 	this.receivedRoom = receivedMsg.roomID;
+	}
 
     public void setCurrentMatchInfo(MatchInfoSnapshot match)
     {

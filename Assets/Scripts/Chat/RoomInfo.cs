@@ -2,6 +2,7 @@
 
 public class RoomInfo
 {
+	public string type;
 	public string senderID;
 	public string roomName;
 }
