@@ -18,7 +18,11 @@ public class ChatServer {
 		if(roomConnections.containsKey(roomName)) {
 			//if room already exists in map
 			Tuple<String, InetAddress, Integer> newConn = new Tuple<String, InetAddress, Integer> (userID, ipAddress, port);
-			roomConnections.get(roomName).add(newConn);
+			ArrayList<Tuple<String, InetAddress, Integer>> conns = roomConnections.get(roomName);
+			if(!conns.contains(newConn)) {
+				//only add connection to room if it is unique
+				roomConnections.get(roomName).add(newConn);
+			} 
 		} else {
 			//new room
 			ArrayList<Tuple<String, InetAddress, Integer>> connList = new ArrayList<Tuple<String, InetAddress, Integer>>();
