@@ -40,7 +40,7 @@ public class ChatBoxFunctions : MonoBehaviour {
 	}
 
 	public void ShowReceivedMessage() {
-		ShowMessage ("received: " + receivedString);
+		ShowMessage (receivedString);
 		//reset to empty after showing
 		this.receivedString = "";
 	}

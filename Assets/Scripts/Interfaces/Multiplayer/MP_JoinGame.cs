@@ -126,6 +126,20 @@ public class MP_JoinGame : MonoBehaviour
         ClearRoomList();
         status.text = "JOINING...";
 
+		RoomInfo roomInfo = new RoomInfo ();
+
+		roomInfo.senderID = SystemInfo.deviceUniqueIdentifier;
+		roomInfo.type = "roomInfo";
+		roomInfo.roomName = _match.name;
+
+		//serialize and send room information to chat server
+		string initConMsg = JsonConvert.SerializeObject(roomInfo);
+		clientConnection.OpenSocket ();
+		clientConnection.Send (initConMsg);
+		//After initial send start waiting for return ack from server
+		clientConnection.BeginReceiveWrapper(
+			new AsyncCallback(ReceiveAck));
+
         // Disable networking overlay
         mp_background.SetActive(false);
         hostgame_ui.SetActive(false);
@@ -139,26 +153,14 @@ public class MP_JoinGame : MonoBehaviour
         {
 
 
-         	MatchInfoSnapshot cm = getCurrentMatchInfo();
+         	//MatchInfoSnapshot cm = getCurrentMatchInfo();
 
-            RoomInfo roomInfo = new RoomInfo ();
-			 
-            roomInfo.senderID = SystemInfo.deviceUniqueIdentifier;
-			roomInfo.type = "roomInfo";
-			roomInfo.roomName = cm.name;
-
-            //serialize and send room information to chat server
-            string initConMsg = JsonConvert.SerializeObject(roomInfo);
-            clientConnection.OpenSocket ();
-            clientConnection.Send (initConMsg);
-            //After initial send start waiting for return ack from server
-            clientConnection.BeginReceiveWrapper(
-            	new AsyncCallback(ReceiveAck));
+           
 
         }
     }
 
-	 public void ReceiveAck (IAsyncResult asyncResult) {
+	public void ReceiveAck (IAsyncResult asyncResult) {
 	 	clientConnection.EndReceiveWrapper (asyncResult);
 	 	byte[] received = clientConnection.GetData ();
 	 	string convertData = Encoding.UTF8.GetString (received);
