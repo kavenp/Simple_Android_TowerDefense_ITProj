@@ -6,10 +6,12 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 
 /**
  * Manages the user information on the
@@ -28,12 +30,16 @@ public class MainServer {
     /** Socket for sending and receiving packets. */
     DatagramSocket serverSocket = null;
     
+    /** Manages in-game chat */
+    ChatServer chatServer;
+    
     /**
      * Creates a new MainServer object.
      */
     public MainServer() {
         dbConnection = DBConnection.GetInstance();
         scoreServer = new ScoreServer();
+        chatServer = new ChatServer();
         
         try {
             serverSocket = new DatagramSocket(9876);
@@ -109,13 +115,70 @@ public class MainServer {
             } else if (type.equals("GetScores")) {
                 sendScores(userID, ipAddress, port);
                 
+            } else if (type.equals("roomInfo")) {
+                // roomInfo acknowledgement
+            	String roomName = (String)jsonObject.get("roomName");
+            	chatServer.addConnection(userID, roomName, ipAddress, port);
+            	sendRoomAck(roomName, ipAddress, port);
+            } else if (type.equals("message")) {
+            	// a chat message
+            	String room = (String)jsonObject.get("roomID");
+            	ArrayList<Tuple<String, InetAddress, Integer>> conns = chatServer.getConnections(room);
+	            if(conns != null) {
+	            	//a check to make sure that connections list is not null
+            		for(Tuple<String, InetAddress, Integer> temp : conns) {
+	            		//sends the received message to all connections in the room
+	            		sendChatMessage(message, temp.y, temp.z.intValue());
+	            	}
+	            } 	
             } else {
-                // Chat
+            	//some unexpected type
             }
             
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * Sends JSON message that contains the roomName as an acknowledgement from chat server
+     * stating that the room has already been created
+     * @param roomName the chat room name
+     * @param ipAddress IP address of the original sender
+     * @param port Port used by sender to send packet
+     */
+    private void sendRoomAck(String roomName, InetAddress ipAddress, int port) {
+    	byte[] ackData = new byte[1024];
+    	JSONObject obj = new JSONObject();
+		obj.put("senderID", "server");
+		obj.put("roomID", roomName);
+		obj.put("message","");
+		ackData = obj.toJSONString().getBytes();
+		DatagramPacket ackPacket =
+				new DatagramPacket(ackData, ackData.length, ipAddress, port);
+		try {
+			serverSocket.send(ackPacket);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /**
+     * Sends JSON chat message to the given ipAddress and port
+     * @param message Message containing all necessary details for chat
+     * @param ipAddress IP address of recipient
+     * @param port Port for recipient's packet
+     */
+    private void sendChatMessage(String message, InetAddress ipAddress, int port) {
+    	byte[] sendData = new byte[1024];
+    	sendData = message.getBytes();
+    	DatagramPacket sendPacket =
+                new DatagramPacket(sendData, sendData.length, ipAddress, port);
+    	 try {
+             serverSocket.send(sendPacket);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
     }
     
     /**
