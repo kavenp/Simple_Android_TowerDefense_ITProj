@@ -12,6 +12,7 @@ public class ViewController : MonoBehaviour
     private bool sellButton;
     private bool upgradeButton;
     private bool disconnectButton;
+    private bool leaveButton;
 
     void Start ()
 	{
@@ -24,6 +25,12 @@ public class ViewController : MonoBehaviour
 		this.sellButton = false;
         this.upgradeButton = false;
         this.disconnectButton = false;
+        this.leaveButton = false;
+    }
+
+    public bool LeaveButtonPressed ()
+    {
+        return this.leaveButton;
     }
 
 	public bool UpButtonPressed ()
@@ -69,6 +76,16 @@ public class ViewController : MonoBehaviour
 	public bool DisconnectButtonPressed ()
 	{
         return this.disconnectButton;
+    }
+
+    public void LeaveButtonOn ()
+    {
+        leaveButton = true;
+    }
+
+    public void LeaveButtonOff ()
+    {
+        leaveButton = false;
     }
 
 	public void UpButtonOn ()

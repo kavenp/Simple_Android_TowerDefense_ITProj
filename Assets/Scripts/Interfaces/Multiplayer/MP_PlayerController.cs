@@ -259,7 +259,8 @@ public class MP_PlayerController : NetworkBehaviour
             ButtonTranslate(backward);
         }
 
-        if (vc.DisconnectButtonPressed())
+        // Leave button invoked
+        if (vc.LeaveButtonPressed())
         {
             CmdQuitObject();
         }
