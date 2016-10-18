@@ -59,7 +59,9 @@ public class MP_GameCoordinator : NetworkBehaviour
                  numberOfEnemiesPerWave == 0 &&
                  GameObject.FindWithTag("Enemy") == null)
         {
-            SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+		    NetworkManager nm = NetworkManager.singleton;
+			nm.ServerChangeScene("GameOver");
+            //SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
         }
 
         //CheckDC(concurrentPlayers, playable);
