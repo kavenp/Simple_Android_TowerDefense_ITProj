@@ -27,6 +27,10 @@ public class enemyReachBase : MonoBehaviour
     {
         livesDisplay.text = "Lives: " + numLives;
 		reached = new List<GameObject>();
+		if (FindObjectsOfType(GetType()).Length > 1)
+         {
+             Destroy(gameObject);
+         }
     }
 	
 	void Update()

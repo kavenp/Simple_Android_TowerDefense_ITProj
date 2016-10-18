@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class playReplay : MonoBehaviour {
 
     // Filename for the temporary file to hold the replay
-    private string fileName;
+    public string fileName = "empty";
 	//const string fileName = "Example Replays\MPReplay.dat";
 	
 	public GameObject tower; // For spawning towers
@@ -103,13 +103,23 @@ public class playReplay : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+	    GameObject test = GameObject.Find("EventCoordinator");
+		
+		
 	    // Get the correct file path depending on device running the game
-	    #if UNITY_ANDROID
-	    fileName = Application.persistentDataPath + "/tempReplay.dat";
-	    #else
-	    fileName = "tempReplay.dat";
-	    #endif
+		if(test == null){
+			#if UNITY_ANDROID
+			fileName = Application.persistentDataPath + "/tempReplay.dat";
+			#else
+			fileName = "tempReplay.dat";
+			#endif
+		}else{
+		    #if UNITY_ANDROID
+			fileName = Application.persistentDataPath + "/saveReplay.dat";
+			#else
+			fileName = "saveReplay.dat";
+			#endif
+		}
 	
 	    buttons = GameObject.FindGameObjectWithTag("Buttons");
         vc = buttons.GetComponent<replayViewController>();
@@ -445,14 +455,14 @@ public class playReplay : MonoBehaviour {
 			GameObject play = (GameObject)Instantiate(player,playerPosition,playerRotation);
 			play.GetComponent<MP_PlayerController>().enabled = false;
 		    if(id == 1){
-                play.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", orange);
+                //play.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", orange);
 		    }
 		}else{
 		    GameObject movePlayer = currentPlayers[currentPlayers.Length-1];
 			movePlayer.transform.position = playerPosition;
 			movePlayer.transform.rotation = playerRotation;
 		    if(id == 1){
-                movePlayer.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", orange);
+                //movePlayer.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", orange);
 		    }
 		// Remove any moved players so they don't get moved again
 		currentPlayers = removeObject(currentPlayers.Length-1,currentPlayers);

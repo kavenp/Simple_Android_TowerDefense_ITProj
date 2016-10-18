@@ -3155,8 +3155,8 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: -59}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -265, y: -59}
+  m_SizeDelta: {x: 80, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478984541
 MonoBehaviour:
@@ -9988,8 +9988,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 202, y: -59}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 265, y: -59}
+  m_SizeDelta: {x: 80, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1459555075
 MonoBehaviour:
@@ -11776,6 +11776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be022a82b19294d48bdf7327f30f58f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileName: empty
   tower: {fileID: 1000010761437714, guid: 3264555665b90ea4aaa295798c82bad8, type: 2}
   tower2: {fileID: 1000010761437714, guid: 7c8bf05f135e10d47b1cbdb8841b665d, type: 2}
   tower3: {fileID: 1000010078198604, guid: acf72da90fe2fc64a8ce27ec59a7fe8b, type: 2}
