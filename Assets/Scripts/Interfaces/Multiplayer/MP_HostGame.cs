@@ -5,21 +5,24 @@ using Newtonsoft.Json;
 using System;
 using System.Text;
 
+/// Class that allows the player to create a game
 public class MP_HostGame : MonoBehaviour
 {
+    // Hosting fields
     [SerializeField]
     private uint roomSize = 2;
     private NetworkManager nm;
     private InputField theRoomName;
     private Text nwMessage;
+
+    // Ui fields
     private GameObject mp_background;
     private GameObject hostgame_ui;
-
     private GameObject joingame_ui;
-
     private GameObject goldDisplay;
     private GameObject livesDisplay;
 
+    // Connection fields
 	private ClientConnection clientConnection = ClientConnection.GetInstance();
 	public GameObject chatbox;
 	public GameObject canvas;
@@ -43,7 +46,7 @@ public class MP_HostGame : MonoBehaviour
         hostgame_ui = GameObject.FindGameObjectWithTag("HostGameCanvas");
         joingame_ui = GameObject.FindGameObjectWithTag("JoinGameCanvas");
     }
-	
+
 	void Update()
 	{
 		//instantiate a chatbox once we have received room info
@@ -62,16 +65,19 @@ public class MP_HostGame : MonoBehaviour
 				Destroy(gameObject);
 			}
 	}
-	
+
     public void CreateRoom()
     {
+        // Get the room name
         string room = theRoomName.text;
 
+        // If room name is empty, send message
         if(room == "" || room == null)
         {
             nwMessage.text = "The room name cannot be empty";
         }
 
+        // Room name is not empty
         if (room != "" && room != null)
         {
             Debug.Log("Creating Room: " + room + " with room for " + roomSize + " players");
@@ -82,17 +88,19 @@ public class MP_HostGame : MonoBehaviour
             // Start match
             nm.matchMaker.CreateMatch(room, roomSize, true, "", "", "", 0, 0, nm.OnMatchCreate);
 
+            // Get room info
 			RoomInfo roomInfo = new RoomInfo ();
 
 			roomInfo.senderID = SystemInfo.deviceUniqueIdentifier;
 			roomInfo.type = "roomInfo";
 			roomInfo.roomName = room;
 
-			//serialize and send room information to chat server
+			// Serialize and send room information to chat server
 			string initConMsg = JsonConvert.SerializeObject(roomInfo);
 			clientConnection.OpenSocket ();
 			clientConnection.Send (initConMsg);
-			//After initial send start waiting for return ack from server
+
+            //After initial send start waiting for return ack from server
 			clientConnection.BeginReceiveWrapper(
 				new AsyncCallback(ReceiveAck));
 
@@ -103,6 +111,7 @@ public class MP_HostGame : MonoBehaviour
         }
     }
 
+    // Receive acknowledgement
 	public void ReceiveAck (IAsyncResult asyncResult) {
 		clientConnection.EndReceiveWrapper (asyncResult);
 		byte[] received = clientConnection.GetData ();

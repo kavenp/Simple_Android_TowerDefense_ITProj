@@ -2,8 +2,10 @@
 using UnityEngine.Networking;
 using System.Collections;
 
+/// End game scene
 public class MP_EndGame : NetworkBehaviour
 {
+	// Find the quit object
     GameObject quitObject;
     void Start ()
 	{

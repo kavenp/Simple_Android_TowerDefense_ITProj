@@ -4,8 +4,10 @@ using UnityEngine.Networking.Match;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+/// Class that allows the player to leave a game
 public class MP_LeaveRoom : MonoBehaviour
 {
+    // Networking fields
     private NetworkManager nm;
 	private ClientConnection clientConnection = ClientConnection.GetInstance();
 
@@ -14,16 +16,23 @@ public class MP_LeaveRoom : MonoBehaviour
         nm = NetworkManager.singleton;
     }
 
+    // Wait period
     IEnumerator Waiting()
     {
         yield return new WaitForSecondsRealtime(3);
     }
+
+    // Leave room calls this function
     public void LeaveRoom()
     {
+        // Get the player object and call it to change the scene
         MatchInfo matchInfo = nm.matchInfo;
         MP_PlayerController pc = GameObject.FindGameObjectWithTag("Player").GetComponent<MP_PlayerController>();
-        //pc.CmdQuitObject();
         pc.CmdServerChangeScene();
+
+        /// Alternative way of handling leaving the game
+
+        //pc.CmdQuitObject();
         //MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
         //mgc.QUIT();
         //MP_EndGame eg = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_EndGame>();
@@ -40,8 +49,10 @@ public class MP_LeaveRoom : MonoBehaviour
         //MasterServer.UnregisterHost();
         //clientConnection.End();
     }
-     public static void OnMatchDestroy(bool success, string extendedInfo)
-     {
+
+    // Callback when match is destroyed
+    public static void OnMatchDestroy(bool success, string extendedInfo)
+    {
         //Debug.Log("Match Destroyed" + extendedInfo);
         NetworkManager.singleton.StopHost();
         //Destroy(GameObject.Find("NetworkManager"));

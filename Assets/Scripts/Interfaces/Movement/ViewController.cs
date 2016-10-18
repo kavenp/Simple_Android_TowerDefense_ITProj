@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+/// Class that updates the status of all the buttons on screen
 public class ViewController : MonoBehaviour
 {
 	// States
@@ -14,6 +15,7 @@ public class ViewController : MonoBehaviour
     private bool disconnectButton;
     private bool leaveButton;
 
+	// Set button states to false
     void Start ()
 	{
 		this.upButton = false;
@@ -28,57 +30,15 @@ public class ViewController : MonoBehaviour
         this.leaveButton = false;
     }
 
+	/// When a button is pressed down, set it to true. When up, set it to false
+
+	// Leave button
     public bool LeaveButtonPressed ()
     {
         return this.leaveButton;
     }
 
-	public bool UpButtonPressed ()
-	{
-		return this.upButton;
-	}
-
-	public bool DownButtonPressed ()
-	{
-		return this.downButton;
-	}
-
-	public bool RotateButtonPressed ()
-	{
-		return (this.leftButton);
-	}
-
-	public bool BuildButtonPressed ()
-	{
-		return this.buildButton;
-	}
-
-	public bool BuildButton2Pressed ()
-	{
-		return this.buildButton2;
-	}
-
-	public bool BuildButton3Pressed ()
-	{
-		return this.buildButton3;
-	}
-
-	public bool UpgradeButtonPressed ()
-	{
-		return this.upgradeButton;
-	}
-
-	public bool SellButtonPressed ()
-	{
-		return this.sellButton;
-	}
-
-	public bool DisconnectButtonPressed ()
-	{
-        return this.disconnectButton;
-    }
-
-    public void LeaveButtonOn ()
+	public void LeaveButtonOn ()
     {
         leaveButton = true;
     }
@@ -88,6 +48,12 @@ public class ViewController : MonoBehaviour
         leaveButton = false;
     }
 
+	// Up button
+	public bool UpButtonPressed ()
+	{
+		return this.upButton;
+	}
+
 	public void UpButtonOn ()
 	{
 		upButton = true;
@@ -96,6 +62,12 @@ public class ViewController : MonoBehaviour
 	public void UpButtonOff ()
 	{
 		upButton = false;
+	}
+
+	// Down button
+	public bool DownButtonPressed ()
+	{
+		return this.downButton;
 	}
 
 	public void DownButtonOn ()
@@ -108,6 +80,12 @@ public class ViewController : MonoBehaviour
 		downButton = false;
 	}
 
+	// Rotate button
+	public bool RotateButtonPressed ()
+	{
+		return (this.leftButton);
+	}
+
 	public void LeftButtonOn ()
 	{
 		leftButton = true;
@@ -118,14 +96,10 @@ public class ViewController : MonoBehaviour
 		leftButton = false;
 	}
 
-	public void SellButtonOn ()
+	// Build button
+	public bool BuildButtonPressed ()
 	{
-		sellButton = true;
-	}
-
-	public void SellButtonOff ()
-	{
-		sellButton = false;
+		return this.buildButton;
 	}
 
 	public void BuildButtonOn ()
@@ -138,6 +112,12 @@ public class ViewController : MonoBehaviour
 		buildButton = false;
 	}
 
+	// Build 2 button
+	public bool BuildButton2Pressed ()
+	{
+		return this.buildButton2;
+	}
+
 	public void BuildButton2On ()
 	{
 		buildButton2 = true;
@@ -146,6 +126,12 @@ public class ViewController : MonoBehaviour
 	public void BuildButton2Off ()
 	{
 		buildButton2 = false;
+	}
+
+	// Build 3  button
+	public bool BuildButton3Pressed ()
+	{
+		return this.buildButton3;
 	}
 
 	public void BuildButton3On ()
@@ -158,6 +144,12 @@ public class ViewController : MonoBehaviour
 		buildButton3 = false;
 	}
 
+	// Upgrade button
+	public bool UpgradeButtonPressed ()
+	{
+		return this.upgradeButton;
+	}
+
 	public void UpgradeButtonOn ()
 	{
 		upgradeButton = true;
@@ -167,6 +159,28 @@ public class ViewController : MonoBehaviour
 	{
 		upgradeButton = false;
 	}
+
+	// Sell button
+	public bool SellButtonPressed ()
+	{
+		return this.sellButton;
+	}
+
+	public void SellButtonOn ()
+	{
+		sellButton = true;
+	}
+
+	public void SellButtonOff ()
+	{
+		sellButton = false;
+	}
+
+	// Disconnect button
+	public bool DisconnectButtonPressed ()
+	{
+        return this.disconnectButton;
+    }
 
 	public void DisconnectButtonOn ()
 	{

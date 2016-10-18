@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Networking.Match;
 
+/// Class that allows the player to join a game by clicking on the room listed
 public class MP_RoomListItem : MonoBehaviour
 {
 	// Want to join match - join room delegate

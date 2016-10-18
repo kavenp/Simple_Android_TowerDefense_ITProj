@@ -8,21 +8,21 @@ using System.Text;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
+/// Class that allows the player to join a game
 public class MP_JoinGame : MonoBehaviour
 {
+    // Networking fields
+	private NetworkManager nm;
+	private ClientConnection clientConnection = ClientConnection.GetInstance();
+
+    // UI fields
 	public GameObject chatbox;
 	public GameObject canvas;
 
-	private NetworkManager nm;
-
-	private ClientConnection clientConnection = ClientConnection.GetInstance();
-
     [SerializeField]
     private Text status;
-
     [SerializeField]
     private GameObject roomListItemPrefab;
-
     [SerializeField]
     private Transform roomListParent;
 
@@ -30,7 +30,6 @@ public class MP_JoinGame : MonoBehaviour
     private GameObject mp_background;
     private GameObject hostgame_ui;
     private GameObject joingame_ui;
-
 	private string receivedRoom = "";
 
     private MatchInfoSnapshot theCurrentMatchInfo = null;
@@ -68,6 +67,7 @@ public class MP_JoinGame : MonoBehaviour
 		 }
 	}
 
+    // Refresh button calls this functino
     public void RefreshRoomList()
     {
         ClearRoomList();
@@ -75,6 +75,7 @@ public class MP_JoinGame : MonoBehaviour
         status.text = "Loading...";
     }
 
+    // List matches
     public void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matchList)
     {
         status.text = "";
@@ -109,6 +110,7 @@ public class MP_JoinGame : MonoBehaviour
         }
     }
 
+    // Clear room list on refresh
     void ClearRoomList()
     {
         for (int i = 0; i < roomList.Count; i += 1)
@@ -119,6 +121,7 @@ public class MP_JoinGame : MonoBehaviour
         roomList.Clear();
     }
 
+    // Join room
     public void JoinRoom(MatchInfoSnapshot _match)
     {
         // Try to join match
@@ -151,15 +154,11 @@ public class MP_JoinGame : MonoBehaviour
     {
         if(success == true)
         {
-
-
          	//MatchInfoSnapshot cm = getCurrentMatchInfo();
-
-           
-
         }
     }
 
+    // Receive acknowledgement
 	public void ReceiveAck (IAsyncResult asyncResult) {
 	 	clientConnection.EndReceiveWrapper (asyncResult);
 	 	byte[] received = clientConnection.GetData ();
@@ -168,12 +167,14 @@ public class MP_JoinGame : MonoBehaviour
 	 	this.receivedRoom = receivedMsg.roomID;
 	}
 
+    // Set match information
     public void setCurrentMatchInfo(MatchInfoSnapshot match)
     {
         this.theCurrentMatchInfo = match;
     }
 
-     public MatchInfoSnapshot getCurrentMatchInfo()
+    // Get match informatino
+    public MatchInfoSnapshot getCurrentMatchInfo()
     {
         return this.theCurrentMatchInfo;
     }

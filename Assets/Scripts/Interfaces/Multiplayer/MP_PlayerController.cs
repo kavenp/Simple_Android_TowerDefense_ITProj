@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using System.Collections;
 
+/// Class that controls behavior for each player's character
 public class MP_PlayerController : NetworkBehaviour
 {
     // Type of game
@@ -25,14 +26,15 @@ public class MP_PlayerController : NetworkBehaviour
     // Gameplay variables
     private const int upgradeCost = 30;
 
+    // Game states
     private bool gameStarted = false;
     private bool serverLoaded = false;
-    int playerGold = 100;
 
+    // Gameplay states
+    int playerGold = 100;
     int previousNumTower1 = 0;
     int previousNumTower2 = 0;
     int previousNumTower3 = 0;
-
     bool upgradedTower = false;
 
     // Current buildable tile
@@ -56,6 +58,7 @@ public class MP_PlayerController : NetworkBehaviour
     // Total number of upgrades made
     private int totalTowerLevel = 0;
 
+    // Disconnect canvas - Alternative method
     GameObject disconnectCanvas;
 
     /// Instantiate all prefabs and dictionaries
@@ -68,7 +71,6 @@ public class MP_PlayerController : NetworkBehaviour
         towerRefundDict.Add("Tower2", 20);
         towerCostDict.Add("Tower3", 60);
         towerRefundDict.Add("Tower3", 30);
-
 
         // Get buttons
         buttons = GameObject.FindGameObjectWithTag("Buttons");
@@ -87,11 +89,12 @@ public class MP_PlayerController : NetworkBehaviour
             return;
         }
 
+        /// Debug mode - allowing keyboard controls
         // CheckDC();
-        // Movement
         // DebugMove(); /// Used for keyboard testing
         ButtonActions();
 
+        // Update gold display
         if (goldDisplay != null)
         {
             UpdateGold();
@@ -99,11 +102,11 @@ public class MP_PlayerController : NetworkBehaviour
         }
     }
 
-
     /// Call MP_BuildableTower to build a tower
     [Command]
     public void CmdConstructTower(string tower)
     {
+        // Get player's current position
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
         Ray ray = new Ray(transform.position, down);
@@ -132,6 +135,7 @@ public class MP_PlayerController : NetworkBehaviour
     [Command]
     public void CmdSellTower()
     {
+        // Get player's current position
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
         Ray ray = new Ray(transform.position, down);
@@ -160,6 +164,7 @@ public class MP_PlayerController : NetworkBehaviour
     [Command]
     public void CmdUpgradeTower()
     {
+        // Get player's current position
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
         Ray ray = new Ray(transform.position, down);
@@ -467,39 +472,48 @@ public class MP_PlayerController : NetworkBehaviour
         }
     }
 
+    /// Load disconnected scene
     public void LoadDisconnectedScene()
     {
         CmdServerChangeScene();
+        /// Alternative method
         //SceneManager.LoadScene("Disconnect", LoadSceneMode.Single);
     }
 
+    /// Call the network manager to change the current scene
     [Command]
     public void CmdServerChangeScene()
     {
         NetworkManager.singleton.ServerChangeScene("Disconnect");
     }
 
+    // Load oops scene
     public void LoadOopsScene()
     {
         SceneManager.LoadScene("Oops", LoadSceneMode.Single);
     }
 
+    // Set disconnect canvas - Alternative method
     public void SetDisconnectCanvas()
     {
         CmdSetDisconnectCanvas();
     }
 
+    // Create a quit object
     [Command]
     public void CmdQuitObject()
     {
+        // Get the host and the client to load the disconnect scene
         LoadDisconnectedScene();
         RpcLoadDisconnectedScene();
 
+        /// Alternative method
         // GameObject quit = Resources.Load("QUIT") as GameObject;
         // var quitObj = (GameObject) Instantiate (quit, Vector3.zero, Quaternion.identity);
         // NetworkServer.Spawn (quitObj);
     }
 
+    // Client load disconenct scene
     [ClientRpc]
     void RpcLoadDisconnectedScene()
     {
@@ -508,6 +522,7 @@ public class MP_PlayerController : NetworkBehaviour
         LoadDisconnectedScene();
     }
 
+    // Alternative method for disconnection
     [Command]
     public void CmdSetDisconnectCanvas()
     {
@@ -518,12 +533,14 @@ public class MP_PlayerController : NetworkBehaviour
         RpcSetDisconnectCanvas(disconnectCanvas);
     }
 
+    // Alternative method for disconnection
     [ClientRpc]
     void RpcSetDisconnectCanvas(GameObject DisconnectCanvas)
     {
         DisconnectCanvas = (GameObject) Instantiate(Resources.Load("DisconnectCanvas") as GameObject, Vector3.zero, Quaternion.identity);
     }
 
+    // Alternative method to check for dc
     public void CheckDC()
     {
         // NetworkClient nc = new NetworkClient();
@@ -552,11 +569,10 @@ public class MP_PlayerController : NetworkBehaviour
         //     LoadDisconnectedScene();
         // }
 
-        if(GameObject.FindGameObjectsWithTag("QUIT").Length > 0)
-        {
-            //LoadDisconnectedScene();
-        }
-
+        // if(GameObject.FindGameObjectsWithTag("QUIT").Length > 0)
+        // {
+        //     LoadDisconnectedScene();
+        // }
 
         // if (GameObject.FindGameObjectsWithTag("GameController").Length == 0)
         // {
@@ -564,15 +580,12 @@ public class MP_PlayerController : NetworkBehaviour
         //     LoadDisconnectedScene();
         // }
 
-
         // if(nc.isConnected == false && gameStarted == true && Network.connections.Length < 2)
         // {
         //     //Debug.Log("nc = " + nc.isConnected + " gs = " + gameStarted + " nc = " + Network.connections.Length);
 
         //     LoadOopsScene();
         // }
-
-
 
         // MP_GameCoordinator mgc = GameObject.FindGameObjectWithTag("GameController").GetComponent<MP_GameCoordinator>();
         // if(mgc.isGameStarted() == true)
@@ -592,10 +605,9 @@ public class MP_PlayerController : NetworkBehaviour
         //     }
         // }
     }
-	
+
+    // Check if the player is the local player
 	public bool isLocal(){
 	    return isLocalPlayer;
 	}
-
-
 }

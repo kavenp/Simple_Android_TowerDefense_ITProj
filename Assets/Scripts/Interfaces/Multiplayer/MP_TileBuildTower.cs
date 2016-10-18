@@ -3,11 +3,14 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+/// Class that allows the player to build/sell/upgrade a tower
 public class MP_TileBuildTower :NetworkBehaviour
 {
+	// Tile states
 	private bool isFree = true;
 	private GameObject createdTower = null;
 
+	// Tower states
 	private string towerType;
 	private int owner;
     private const int damageIncrease = 5;
@@ -15,6 +18,7 @@ public class MP_TileBuildTower :NetworkBehaviour
     // Need to make this a list of towers
     Dictionary<string, GameObject> towerBuildDict = new Dictionary<string, GameObject>();
 
+	// Tower limits
     private const int upgradeLimit = 5;
     private int currentUpgradeLimit = 0;
 
@@ -30,6 +34,7 @@ public class MP_TileBuildTower :NetworkBehaviour
 		setTowerType (null);
 	}
 
+	/// Build a tower
 	public void BuildTower (int playerID, string _towerType, Dictionary<string,int> towerDict, int playerGold)
 	{
 		// Get cost of tower
@@ -73,6 +78,7 @@ public class MP_TileBuildTower :NetworkBehaviour
 		}
     }
 
+	/// Sell a tower
 	public void SellTower (int playerID, Dictionary<string,int> towerDict)
 	{
 		if(this.towerType != null)
@@ -105,6 +111,7 @@ public class MP_TileBuildTower :NetworkBehaviour
 		}
 	}
 
+	/// Upgrade a tower
 	public void UpgradeTower (int playerID, ref bool upgradedTower)
 	{
 		if(this.towerType != null)
@@ -134,21 +141,25 @@ public class MP_TileBuildTower :NetworkBehaviour
 		}
 	}
 
+	// Set owner of tower
 	private void setOwner (int newOwner)
 	{
 		this.owner = newOwner;
 	}
 
+	// Set type of tower
 	private void setTowerType (string towerType)
 	{
 		this.towerType = towerType;
 	}
 
+	// Set status of tile
 	private void setTileFree (bool flag)
 	{
 		this.isFree = flag;
 	}
 
+	// Check status of tile
 	private bool isTileFree ()
 	{
 		return this.isFree;
