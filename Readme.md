@@ -64,12 +64,6 @@ in order to play multiplayer.
     10. If in portrait mode, press left Ctrl + F12 for Windows,
         Fn + Ctrl + F12 for Mac, to switch to landscape
 
-* To run on a desktop
-    1. Select Standalone, choose the relevant Target Platform for your computer
-    2. Press Build And Run, save the file
-    3. Set the Screen resolution to a 16:9 aspect ratio
-    4. Tick the Windowed option and press Play!
-
 * To run in Unity
     1. Set the aspect ratio to 16:9 in the Game tab
     2. Press the play button
