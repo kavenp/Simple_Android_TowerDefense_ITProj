@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Author: Matthew Eldridge (695350)
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,7 +144,7 @@ public class recordReplay : MonoBehaviour {
 		
 		
 		// If it's been more than a second since last updating the enemies, update again
-		if((Time.time - timeInterval) > 0.1){
+		if((Time.time - timeInterval) > 0){
 		    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 			
 			// Record each enemy
@@ -268,6 +270,8 @@ public class recordReplay : MonoBehaviour {
 			recordEnemy(stream,i);
 		}
 		
+		currentTowers = new List<TowerPos>();
+		
 		// Record each tower
 		GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
 		fullRecordTowers(stream,1,towers);
@@ -340,6 +344,8 @@ public class recordReplay : MonoBehaviour {
 			    writeByte(stream,25);
 				recordPosition(stream,j);
 			}
+			
+			currentTowers.Add(new TowerPos(i,i.transform.position.x,i.transform.position.z));
 			
 		}
 	}
