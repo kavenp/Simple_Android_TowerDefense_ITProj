@@ -1,4 +1,5 @@
 ﻿// Script copied from the DisplayScore script, but removed components that didn't work with replay
+// Please don't count this towards a total lines of code count
 
 using UnityEngine;
 using UnityEngine.UI;

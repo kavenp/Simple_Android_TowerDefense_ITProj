@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// Script copied from the ShootEnemies script, but removed components that didn't work with replay
+// Please don't count this towards a total lines of code count
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 

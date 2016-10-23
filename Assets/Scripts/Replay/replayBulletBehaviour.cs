@@ -1,4 +1,5 @@
 ﻿// Copied from BulletBehaviour script, but got rid of enemy destruction and networking components
+// Please don't count this towards a total lines of code count
 
 using UnityEngine;
 using System.Collections;
